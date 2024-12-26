@@ -22,10 +22,6 @@ namespace HotelManagement
             InitializeComponent();
         }
 
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -45,5 +41,14 @@ namespace HotelManagement
             // Dobavljanje trenutne teme
             
         }
-    }
+
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        { // Preuzimanje vrednosti iz TextBox i PasswordBox
+          string username = usernameTextBox.Text; // Pretpostavljam da je ime TextBox-a "usernameTextBox"
+          string password = passwordBox.Password; // Pretpostavljam da je ime PasswordBox-a "passwordBox" 
+          // Ispisivanje vrednosti u konzolu
+
+
+          Console.WriteLine($"Username: {username}, Password: {password}"); }
+        }
 }

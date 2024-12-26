@@ -70,13 +70,13 @@
 
                 <StackPanel Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="296" >
                     <TextBlock Text="Log In." FontSize="28" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" Margin="20,20,20,20" FontFamily="../Resources/GothamBold.otf#Gotham Light"/>
-                    <TextBox Width="250" Margin="0,20,0,0" Style="{StaticResource MaterialDesignOutlinedTextBox}" FontSize="15">
+                    <TextBox x:Name="usernameTextBox" Width="250" Margin="0,20,0,0" Style="{StaticResource MaterialDesignOutlinedTextBox}" FontSize="15">
                         <materialDesign:HintAssist.Hint>Username</materialDesign:HintAssist.Hint>
                         <TextBox.Foreground>#b3b3b3</TextBox.Foreground>
                         <TextBox.BorderBrush>#b3b3b3</TextBox.BorderBrush>
                         <TextBox.Background>Transparent</TextBox.Background>
                     </TextBox>
-                    <PasswordBox Width="250" Margin="20" Style="{StaticResource MaterialDesignOutlinedPasswordBox}" FontSize="15">
+                    <PasswordBox x:Name="passwordBox" Width="250" Margin="20" Style="{StaticResource MaterialDesignOutlinedPasswordBox}" FontSize="15">
                         <materialDesign:HintAssist.Hint>Password</materialDesign:HintAssist.Hint>
                         <materialDesign:TextFieldAssist.HasClearButton>True</materialDesign:TextFieldAssist.HasClearButton>
                         <PasswordBox.Foreground>#b3b3b3</PasswordBox.Foreground>
@@ -84,7 +84,7 @@
                         <PasswordBox.Background>Transparent</PasswordBox.Background>
                     </PasswordBox>
 
-                    <Button Width="100" Content="Login" Margin="20,0,20,20" Background="#e1ece3" BorderThickness="1.5" FontFamily="../Resources/GothamLight.otf#Gotham Light" FontSize="17" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Style="{StaticResource MaterialDesignPaperDarkButton}" ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+                    <Button Width="100" Content="Login" Margin="20,0,20,20" Background="#e1ece3" BorderThickness="1.5" FontFamily="../Resources/GothamLight.otf#Gotham Light" FontSize="17" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Style="{StaticResource MaterialDesignPaperDarkButton}" ToolTip="Resource name: MaterialDesignPaperDarkButton" Click="LoginButton_Click"/>
                 </StackPanel>
             </Grid>
         </Grid>
