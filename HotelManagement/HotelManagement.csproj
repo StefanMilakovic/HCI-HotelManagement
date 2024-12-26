@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\font.otf" />
+    <None Remove="Resources\GothamBold.otf" />
+    <None Remove="Resources\GothamLight.otf" />
+    <None Remove="Resources\hotelIcon.ico" />
+    <None Remove="Resources\hotelIcon.png" />
+    <None Remove="Resources\loginLogo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="5.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\GothamBold.otf" />
+    <Resource Include="Resources\GothamLight.otf" />
+    <Resource Include="Resources\hotelIcon.ico" />
+    <Resource Include="Resources\hotelIcon.png" />
+    <Resource Include="Resources\loginLogo.png" />
+  </ItemGroup>
+
+</Project>
