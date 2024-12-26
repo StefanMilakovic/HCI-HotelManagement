@@ -6,10 +6,11 @@
         xmlns:local="clr-namespace:HotelManagement"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="420" Width="750"
+        Title="LoginWindow" Height="420" Width="750"
         MouseDown="Window_MouseDown"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent"
-        Icon="../Resources/hotelIcon.ico">
+        Icon="../Resources/hotelIcon.ico"
+        WindowStartupLocation="CenterScreen">
 
 
 
@@ -53,7 +54,7 @@
                     HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
 
 
-                <Border Grid.Column="1" Width="2" Height="380" Background="#b3b3b3" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="2" />
+                <Border Grid.Column="1" Width="2" Height="370" Background="#b3b3b3" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="2" />
 
                 <Button Grid.Column="2"
                     Width="40" Height="40"
