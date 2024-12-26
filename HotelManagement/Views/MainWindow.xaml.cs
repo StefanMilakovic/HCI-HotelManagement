@@ -27,6 +27,19 @@ namespace HotelManagement
 
         }
 
+        private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
+        }
+
+        private void CloseWindow(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
         private void ThemeToggleButton_Click(object sender, RoutedEventArgs e)
         {
             // Dobavljanje trenutne teme

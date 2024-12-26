@@ -7,10 +7,13 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MainWindow" Height="420" Width="750"
+        MouseDown="Window_MouseDown"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent"
         Icon="../Resources/hotelIcon.ico">
 
-    <!-- druga boja je #212121, #007777 -->
+
+
+        <!-- druga boja je #212121, #007777 -->
     <Border Background="#212121" CornerRadius="10" BorderBrush="#007777" BorderThickness="2">
         <Grid>
             <Button x:Name="CloseButton" 
@@ -20,7 +23,7 @@
                     Background="Transparent"
                     Command="{Binding CloseCommand}"
                     Style="{StaticResource MaterialDesignFlatButton}"
-                    Click="CloseButton_Click"
+                    Click="CloseWindow"
                     Margin="10" Padding="0">
                 <materialDesign:PackIcon Kind="Close" Foreground="#b3b3b3" Width="20" Height="20"/>
             </Button>
