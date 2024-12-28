@@ -1,4 +1,4 @@
-﻿<Window x:Class="HotelManagement.MainWindow"
+﻿<Window x:Class="HotelManagement.LoginView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -70,7 +70,7 @@
                 </Button>
 
                 <StackPanel Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="296" >
-                    <TextBlock Text="Log In." FontSize="28" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" Margin="20,20,20,20" FontFamily="../Resources/GothamBold.otf#Gotham Light"/>
+                    <TextBlock Text="Log In" FontSize="28" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" Margin="20,20,20,20" FontFamily="../Resources/GothamBold.otf#Gotham Light"/>
                     <TextBox x:Name="usernameTextBox" Width="250" Margin="0,20,0,0" Style="{StaticResource MaterialDesignOutlinedTextBox}" FontSize="15">
                         <materialDesign:HintAssist.Hint>Username</materialDesign:HintAssist.Hint>
                         <TextBox.Foreground>#b3b3b3</TextBox.Foreground>

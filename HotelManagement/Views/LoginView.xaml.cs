@@ -12,12 +12,10 @@ using System.Windows.Shapes;
 
 namespace HotelManagement
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+
+    public partial class LoginView : Window
     {
-        public MainWindow()
+        public LoginView()
         {
             InitializeComponent();
         }
@@ -43,11 +41,9 @@ namespace HotelManagement
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
-        { // Preuzimanje vrednosti iz TextBox i PasswordBox
-          string username = usernameTextBox.Text; // Pretpostavljam da je ime TextBox-a "usernameTextBox"
-          string password = passwordBox.Password; // Pretpostavljam da je ime PasswordBox-a "passwordBox" 
-          // Ispisivanje vrednosti u konzolu
-
+        { 
+          string username = usernameTextBox.Text;
+          string password = passwordBox.Password; 
 
           Console.WriteLine($"Username: {username}, Password: {password}"); }
         }
