@@ -14,7 +14,7 @@
 
 
 
-        <!-- druga boja je #212121, #007777 -->
+        <!-- boje #212121, #007777 -->
     <Border Background="#212121" CornerRadius="10" BorderBrush="#007777" BorderThickness="2">
         <Grid>
             <Button x:Name="CloseButton" 

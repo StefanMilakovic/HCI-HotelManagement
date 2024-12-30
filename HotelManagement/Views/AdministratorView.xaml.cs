@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelManagement.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace HotelManagement.Views
         public AdministratorView()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
         }
 
         private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -35,6 +37,12 @@ namespace HotelManagement.Views
         private void CloseWindow(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void ThemeToggleButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Dobavljanje trenutne teme
+
         }
     }
 }
