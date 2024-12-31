@@ -28,7 +28,7 @@ namespace HotelManagement.Models
 
     public enum Role
     {
-        Admin,
+        Administrator,
         Receptionist
     }
 }

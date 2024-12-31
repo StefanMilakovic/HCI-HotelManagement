@@ -9,10 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:HotelManagement.Views"
-             xmlns:viewModels="clr-namespace:HotelManagement.ViewModels"
-             >
-
-    
+             xmlns:viewModels="clr-namespace:HotelManagement.ViewModels">
 
     <Grid>
         <TabControl Margin="0">
@@ -33,57 +30,39 @@
 
             <TabItem Header="Add User">
                 <StackPanel Margin="20">
-                    <!-- First Name -->
+                    
                     <TextBox x:Name="FirstNameTextBox" Width="200" Foreground="White" Margin="15"
                              materialDesign:HintAssist.HelperText="First name must not be empty"
                              materialDesign:HintAssist.Hint="First Name"
                              Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <!-- Last Name -->
                     <TextBox x:Name="LastNameTextBox" Width="200" Foreground="White" Margin="15"
                              materialDesign:HintAssist.HelperText="Last name must not be empty"
                              materialDesign:HintAssist.Hint="Last Name"
                              Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <!-- Username -->
                     <TextBox x:Name="UsernameTextBox" Width="200" Foreground="White" Margin="15"
                              materialDesign:HintAssist.HelperText="Username must not be empty"
                              materialDesign:HintAssist.Hint="Username"
                              Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
-
-                    <!-- Password -->
-                    <!--
-                    <PasswordBox x:Name="PasswordBox" Width="200" Foreground="White" Margin="15"
-                                 materialDesign:HintAssist.HelperText="Password must not be empty"
-                                 materialDesign:HintAssist.Hint="Password"
-                                 Password="{Binding PasswordHash, UpdateSourceTrigger=PropertyChanged}" />
-                    -->
 
                     <TextBox x:Name="PasswordBox" Width="200" Foreground="White" Margin="15"
                              materialDesign:HintAssist.HelperText="Password must not be empty"
                              materialDesign:HintAssist.Hint="Password"
                              Text="{Binding PasswordHash, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <!-- Role Dropdown (ComboBox) -->
-
                     <ComboBox x:Name="RoleComboBox" Width="200" Foreground="White" Margin="15"
                             materialDesign:HintAssist.HelperText="Select a role"
-                            materialDesign:HintAssist.Hint="Role">
-                            <ComboBox.Items>
-                                <ComboBoxItem Content="Administrator" />
-                                <ComboBoxItem Content="Receptionist" />
-                        </ComboBox.Items>
+                            materialDesign:HintAssist.Hint="Role"
+                            SelectedItem="{Binding Role, UpdateSourceTrigger=PropertyChanged}"
+                            ItemsSource="{Binding Roles}">
                     </ComboBox>
 
-
-
-
-                    <!-- Add User Button -->
                     <Button
                         Width="100"
                         Content="Create"
                         Margin="20"
-
+                        Command="{Binding AddUserCommand}"
                         Style="{StaticResource MaterialDesignFlatSecondaryDarkBgButton}" 
                         ToolTip="Add User" />
 

@@ -39,7 +39,7 @@ public class RelayCommand : ICommand
 
     public bool CanExecute(object parameter)
     {
-        return _canExecute?.Invoke(parameter) ?? true;  // Ako _canExecute nije null, poziva ga; inače, uvek vraća true
+        return _canExecute?.Invoke(parameter) ?? true;
     }
 
     public void Execute(object parameter) => _execute(parameter);
@@ -49,12 +49,6 @@ public class RelayCommand : ICommand
         add { CommandManager.RequerySuggested += value; }
         remove { CommandManager.RequerySuggested -= value; }
     }
-
-    /*
-    public void RaiseCanExecuteChanged()
-    {
-        CommandManager.InvalidateRequerySuggested();
-    }*/
 }
 
 

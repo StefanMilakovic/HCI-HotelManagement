@@ -1,18 +1,11 @@
 ﻿using HotelManagement.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace HotelManagement.ViewModels
 {
-    
     public class UsersViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<User> _users;
@@ -34,6 +27,9 @@ namespace HotelManagement.ViewModels
         public string PasswordHash { get; set; }
         public Role? Role { get; set; }
 
+        public IEnumerable<Role> Roles => Enum.GetValues(typeof(Role)).Cast<Role>();
+
+
         public UsersViewModel()
         {
             AddUserCommand = new RelayCommand(AddUser, CanAddUser);
@@ -44,14 +40,12 @@ namespace HotelManagement.ViewModels
         {
             using (var context = new HotelManagementContext())
             {
-                // Load users from the database
                 Users = new ObservableCollection<User>(context.Users.ToList());
             }
         }
 
         private bool CanAddUser(object parameter)
         {
-            // Ensure that all required fields are filled before allowing the user to be added
             return !string.IsNullOrEmpty(FirstName) &&
                    !string.IsNullOrEmpty(LastName) &&
                    !string.IsNullOrEmpty(Username) &&
@@ -63,7 +57,6 @@ namespace HotelManagement.ViewModels
         {
             using (var context = new HotelManagementContext())
             {
-                // Create new User object and populate it
                 var newUser = new User
                 {
                     FirstName = this.FirstName,
@@ -73,12 +66,22 @@ namespace HotelManagement.ViewModels
                     Role = this.Role
                 };
 
-                // Add to the database
                 context.Users.Add(newUser);
                 context.SaveChanges();
 
-                // Add to the ObservableCollection to reflect changes in the UI
                 Users.Add(newUser);
+
+                FirstName = string.Empty;
+                LastName = string.Empty;
+                Username = string.Empty;
+                PasswordHash = string.Empty;
+                Role = null;
+
+                OnPropertyChanged(nameof(FirstName));
+                OnPropertyChanged(nameof(LastName));
+                OnPropertyChanged(nameof(Username));
+                OnPropertyChanged(nameof(PasswordHash));
+                OnPropertyChanged(nameof(Role));
             }
         }
 
