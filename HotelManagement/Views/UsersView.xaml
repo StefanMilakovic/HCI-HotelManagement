@@ -60,7 +60,7 @@
 
                     <Button
                         Width="100"
-                        Content="Create"
+                        Content="Add"
                         Margin="20"
                         Command="{Binding AddUserCommand}"
                         Style="{StaticResource MaterialDesignFlatSecondaryDarkBgButton}" 
@@ -70,7 +70,36 @@
             </TabItem>
 
             <TabItem Header="Edit Users">
-                <TextBlock Margin="8" Text="SecondaryMid Tab 3" />
+                <Border Grid.Row="0" Margin="20">
+                    <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="False" SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding Users}" >
+                        
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding UserId}" Header="User ID" IsReadOnly="True" />
+                            <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" />
+                            <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" />
+                            <DataGridTextColumn Binding="{Binding Username}" Header="Username" />
+                            <DataGridTextColumn Binding="{Binding PasswordHash}" Header="Password Hash" />
+                            <DataGridTextColumn Binding="{Binding Role}" Header="Role" IsReadOnly="True"/>
+
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Command="{Binding DataContext.DeleteUserCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding}" 
+                                            Style="{StaticResource MaterialDesignFlatButton}"
+                                            ToolTip="Delete User" Height="20"
+                                            Foreground="#C70000"
+                                            Margin="0" Padding="0">
+                                            <Button.Content>
+                                                <materialDesign:PackIcon Kind="Delete" Width="16" Height="16" />
+                                            </Button.Content>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
             </TabItem>
         </TabControl>
     </Grid>

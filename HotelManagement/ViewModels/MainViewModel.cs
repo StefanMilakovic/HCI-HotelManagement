@@ -38,7 +38,7 @@ namespace HotelManagement.ViewModels
         {
             ShowUsersViewCommand = new RelayCommand(o => CurrentView = new UsersViewModel());
             ShowRoomsViewCommand = new RelayCommand(o => CurrentView = new RoomsViewModel());
-            ShowItemsViewCommand = new RelayCommand(o => CurrentView = new ItemsViewModel());
+            ShowItemsViewCommand = new RelayCommand(o => CurrentView = new ServicesViewModel());
             ShowReportsViewCommand = new RelayCommand(o => CurrentView = new ReportsViewModel());
 
             CloseCommand = new RelayCommand(o => Application.Current.Shutdown());

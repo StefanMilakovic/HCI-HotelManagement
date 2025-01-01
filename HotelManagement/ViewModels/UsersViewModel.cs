@@ -20,6 +20,7 @@ namespace HotelManagement.ViewModels
         }
 
         public ICommand AddUserCommand { get; }
+        public ICommand DeleteUserCommand { get; }
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -33,6 +34,8 @@ namespace HotelManagement.ViewModels
         public UsersViewModel()
         {
             AddUserCommand = new RelayCommand(AddUser, CanAddUser);
+
+            DeleteUserCommand = new RelayCommand(DeleteUser, CanDeleteUser);
             LoadUsers();
         }
 
@@ -90,6 +93,25 @@ namespace HotelManagement.ViewModels
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void DeleteUser(object parameter)
+        {
+            var userToDelete = parameter as User;
+            if (userToDelete == null) return;
+
+            using (var context = new HotelManagementContext())
+            {
+                context.Users.Remove(userToDelete);
+                context.SaveChanges();
+            }
+
+            Users.Remove(userToDelete);
+        }
+
+        private bool CanDeleteUser(object parameter)
+        {
+            return parameter is User;  // Ensure that there is a valid user to delete
         }
     }
     

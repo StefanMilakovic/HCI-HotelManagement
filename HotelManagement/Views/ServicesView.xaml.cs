@@ -18,9 +18,9 @@ namespace HotelManagement.Views
     /// <summary>
     /// Interaction logic for ItemsView.xaml
     /// </summary>
-    public partial class ItemsView : UserControl
+    public partial class ServicesView : UserControl
     {
-        public ItemsView()
+        public ServicesView()
         {
             InitializeComponent();
         }

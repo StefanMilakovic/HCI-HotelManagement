@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="HotelManagement.Views.ServicesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HotelManagement.Views" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             FontFamily="/Resources/GothamLight.otf#Gotham Light"
+             FontSize="15"
+             d:DesignHeight="450" d:DesignWidth="800"
+             xmlns:viewModels="clr-namespace:HotelManagement.ViewModels">
+    <Grid>
+        <TabControl Margin="0">
+            <TabItem Header="View Services">
+                <Border Grid.Row="0" Margin="20">
+                    <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding Services}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding ServiceId}" Header="Service ID" />
+                            <DataGridTextColumn Binding="{Binding Name}" Header="Service Name" />
+                            <DataGridTextColumn Binding="{Binding Price, StringFormat='{}{0} €'}" Header="Price" />
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+            </TabItem>
+
+            <TabItem Header="Add Service">
+                <StackPanel Margin="20">
+                    <TextBox x:Name="NameTextBox" Width="200" Foreground="White" Margin="15"
+                             materialDesign:HintAssist.HelperText="Service name must not be empty"
+                             materialDesign:HintAssist.Hint="Service Name"
+                             Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBox x:Name="PriceTextBox" Width="200" Foreground="White" Margin="15"
+                             materialDesign:HintAssist.HelperText="Price must not be empty"
+                             materialDesign:HintAssist.Hint="Price"
+                             Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <Button
+                        Width="100"
+                        Content="Add"
+                        Margin="20"
+                        Command="{Binding AddServiceCommand}"
+                        Style="{StaticResource MaterialDesignFlatSecondaryDarkBgButton}" 
+                        ToolTip="Add Service" />
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Edit Services">
+                <Border Grid.Row="0" Margin="20">
+                    <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="False" SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding Services}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding ServiceId}" Header="Service ID" IsReadOnly="True" />
+                            <DataGridTextColumn Binding="{Binding Name}" Header="Service Name" />
+                            <DataGridTextColumn Binding="{Binding Price}" Header="Price" />
+
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Command="{Binding DataContext.DeleteServiceCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding}" 
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                ToolTip="Delete Service" Height="20"
+                                                Foreground="#C70000"
+                                                Margin="0" Padding="0">
+                                            <Button.Content>
+                                                <materialDesign:PackIcon Kind="Delete" Width="16" Height="16" />
+                                            </Button.Content>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

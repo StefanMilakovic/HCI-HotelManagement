@@ -17,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace HotelManagement.Views
 {
-    /// <summary>
-    /// Interaction logic for UsersView.xaml
-    /// </summary>
     public partial class UsersView : UserControl
     {
         public UsersView()

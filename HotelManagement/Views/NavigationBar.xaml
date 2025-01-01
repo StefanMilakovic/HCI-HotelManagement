@@ -70,7 +70,7 @@
         <Button
             Grid.Column="4"
             Margin="10"
-            Content="Items"
+            Content="Services"
             Command="{Binding DataContext.ShowItemsViewCommand, RelativeSource={RelativeSource AncestorType=Window}}"
             VerticalAlignment="Center"
             Style="{StaticResource CustomButtonStyle}">

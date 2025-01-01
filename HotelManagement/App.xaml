@@ -24,8 +24,8 @@
                 <views:RoomsView />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewModels:ItemsViewModel}">
-                <views:ItemsView />
+            <DataTemplate DataType="{x:Type viewModels:ServicesViewModel}">
+                <views:ServicesView />
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModels:ReportsViewModel}">
