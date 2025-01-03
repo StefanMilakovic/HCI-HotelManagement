@@ -31,7 +31,7 @@ namespace HotelManagement
 
         public ReservationsViewModel()
         {
-            AddReservationCommand = new RelayCommand(AddReservation, CanAddReservation);
+            //AddReservationCommand = new RelayCommand(AddReservation, CanAddReservation);
             DeleteReservationCommand = new RelayCommand(DeleteReservation, CanDeleteReservation);
 
             LoadReservations();
@@ -54,6 +54,9 @@ namespace HotelManagement
                    CheckInDate < CheckOutDate; // Validacija: Check-in pre Check-out
         }
 
+
+
+        /*
         private void AddReservation(object parameter)
         {
             using (var context = new HotelManagementContext())
@@ -71,7 +74,6 @@ namespace HotelManagement
 
                 Reservations.Add(newReservation);
 
-                // Reset unosa
                 CheckInDate = default;
                 CheckOutDate = default;
                 NumberOfGuests = 0;
@@ -83,6 +85,8 @@ namespace HotelManagement
                 OnPropertyChanged(nameof(RoomID));
             }
         }
+        */
+
 
         private void DeleteReservation(object parameter)
         {

@@ -69,7 +69,7 @@
         <Button
             Grid.Column="4"
             Margin="10"
-            Content="Invoices"
+            Content="Services"
             
             VerticalAlignment="Center"
             Style="{StaticResource CustomButtonStyle}">

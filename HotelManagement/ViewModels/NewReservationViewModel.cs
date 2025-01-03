@@ -18,19 +18,21 @@ using System.Collections.Generic;
 using System.Linq;
 
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelManagement.ViewModels
 {
     public class NewReservationViewModel : INotifyPropertyChanged
     {
-        // Properties for binding
         private Guest _selectedGuest;
         private RoomType _selectedRoomType;
         private DateTime? _checkInDate;
         private DateTime? _checkOutDate;
         private Room _selectedRoom;
-        private ObservableCollection<Reservation> _reservations;
 
+
+
+        private ObservableCollection<Reservation> _reservations;
         public ObservableCollection<Guest> Guests { get; set; }
         public ObservableCollection<RoomType> RoomTypes { get; set; }
         public ObservableCollection<Room> AvailableRooms { get; set; }
@@ -63,6 +65,7 @@ namespace HotelManagement.ViewModels
             {
                 _checkInDate = value;
                 OnPropertyChanged(nameof(CheckInDate));
+                UpdateAvailableRooms();//--------------------------------------------------------------------------
             }
         }
 
@@ -73,6 +76,7 @@ namespace HotelManagement.ViewModels
             {
                 _checkOutDate = value;
                 OnPropertyChanged(nameof(CheckOutDate));
+                UpdateAvailableRooms();//--------------------------------------------------------------------------
             }
         }
 
@@ -105,67 +109,97 @@ namespace HotelManagement.ViewModels
             // Initialize collections
             //Guests = new ObservableCollection<Guest>();
             Guests = new GuestsViewModel().Guests;
-            
+
             RoomTypes = new ObservableCollection<RoomType>(Enum.GetValues(typeof(RoomType)).Cast<RoomType>());
             AvailableRooms = new RoomsViewModel().Rooms;
             //Reservations = new ObservableCollection<Reservation>();
             //Reservations = new ReservationsViewModel().Reservations;
+            LoadReservations();
 
-          
+
             AddReservationCommand = new RelayCommand(AddReservation, CanAddReservation);
             DeleteReservationCommand = new RelayCommand(DeleteReservation, CanDeleteReservation);
         }
 
-        public void RefreshData()
-        {
-            Guests = new GuestsViewModel().Guests;
-        }
 
-        
 
         private void UpdateAvailableRooms()
         {
-            // Filter rooms by the selected room type (this is a sample; replace with actual filtering logic)
-            if (SelectedRoomType != null)
+            if (SelectedRoomType != null && CheckInDate.HasValue && CheckOutDate.HasValue)
             {
-                var filteredRooms = AvailableRooms.Where(room => room.RoomType == SelectedRoomType).ToList();
-                AvailableRooms.Clear();
-                foreach (var room in filteredRooms)
+                using (var context = new HotelManagementContext())
                 {
-                    AvailableRooms.Add(room);
+                    var availableRooms = context.Rooms
+                        .Where(room => room.RoomType == SelectedRoomType)
+                        .Where(room => !context.Reservations.Any(reservation =>
+                            reservation.RoomID == room.RoomID &&
+                            ((CheckInDate.Value >= reservation.CheckInDate && CheckInDate.Value < reservation.CheckOutDate) ||
+                             (CheckOutDate.Value > reservation.CheckInDate && CheckOutDate.Value <= reservation.CheckOutDate))))
+                        .ToList();
+
+                    AvailableRooms.Clear();
+                    foreach (var room in availableRooms)
+                    {
+                        AvailableRooms.Add(room);
+                    }
                 }
+            }
+            else
+            {
+                AvailableRooms.Clear();
             }
         }
 
         private bool CanAddReservation(object parameter)
         {
-            // Validate input fields
             return SelectedGuest != null && SelectedRoomType != null && CheckInDate.HasValue && CheckOutDate.HasValue && SelectedRoom != null;
         }
 
         private void AddReservation(object parameter)
         {
-            // Add new reservation
-            var newReservation = new Reservation
+            
+            using (var context = new HotelManagementContext())
             {
-                ReservationID = Reservations.Count + 1,
-                GuestID = SelectedGuest.GuestId,
-                RoomID = SelectedRoom.RoomID,
-                CheckInDate = CheckInDate.Value,
-                CheckOutDate = CheckOutDate.Value,
-                NumberOfGuests = 1 // Placeholder; replace with actual logic
-            };
+                var newReservation = new Reservation
+                {
+                    GuestID = SelectedGuest.GuestId,
+                    RoomID = SelectedRoom.RoomID,
+                    CheckInDate = CheckInDate.Value,
+                    CheckOutDate = CheckOutDate.Value,
+                    NumberOfGuests = 2,//-----------------------------------------------------------------------------------POPRAVITI
+                    UserID = 3//--------------------------------------------------------------------------------------------POPRAVITI
+                };
 
-            Reservations.Add(newReservation);
+                context.Reservations.Add(newReservation);
+                context.SaveChanges();
 
-            // Clear fields after adding
-            SelectedGuest = null;
-            SelectedRoomType = default;
-            CheckInDate = null;
-            CheckOutDate = null;
-            SelectedRoom = null;
+                Reservations.Add(newReservation);
 
-            MessageBox.Show("Reservation added successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                OnPropertyChanged(nameof(Reservations));
+
+                SelectedGuest = null;
+                SelectedRoomType = default;
+                CheckInDate = null;
+                CheckOutDate = null;
+                SelectedRoom = null;
+
+                OnPropertyChanged(nameof(CheckInDate));
+                OnPropertyChanged(nameof(CheckOutDate));
+                OnPropertyChanged(nameof(SelectedGuest));
+                OnPropertyChanged(nameof(SelectedRoomType));
+                OnPropertyChanged(nameof(SelectedRoom));
+            }
+
+        }
+        
+
+
+        private void LoadReservations()
+        {
+            using (var context = new HotelManagementContext())
+            {
+                Reservations = new ObservableCollection<Reservation>(context.Reservations.ToList());
+            }
         }
 
         private bool CanDeleteReservation(object parameter)
@@ -178,12 +212,9 @@ namespace HotelManagement.ViewModels
             if (parameter is Reservation reservation)
             {
                 Reservations.Remove(reservation);
-                MessageBox.Show("Reservation deleted successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
         
-
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName)
