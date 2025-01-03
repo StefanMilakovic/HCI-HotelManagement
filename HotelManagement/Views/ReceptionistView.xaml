@@ -1,4 +1,4 @@
-﻿<Window x:Class="HotelManagement.Views.AdministratorView"
+﻿<Window x:Class="HotelManagement.Views.ReceptionistView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -19,6 +19,8 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
+
+
             <Button x:Name="CloseButton" 
                 Width="30" Height="30"
                 HorizontalAlignment="Right"
@@ -29,7 +31,7 @@
                 Click="CloseWindow"
                 Margin="0" Padding="0"
                 Grid.Row="0">
-                    <materialDesign:PackIcon Kind="Close" Foreground="#b3b3b3" Width="20" Height="20"/>
+                <materialDesign:PackIcon Kind="Close" Foreground="#b3b3b3" Width="20" Height="20"/>
             </Button>
 
             <Button Grid.Row="0"
@@ -54,14 +56,15 @@
                 </materialDesign:PackIcon>
             </Button>
 
-            <materialDesign:Chip Content="Administrator" Foreground="White" Background="#535353" Margin="5,5,5,5" IsEnabled="False"/>
+            <materialDesign:Chip Content="Receptionist" Foreground="White" Background="#535353" Margin="5,5,5,5" IsEnabled="False"/>
 
-            <views:AdminNavigationBar Grid.Row="1"/>
 
+
+            <views:NavigationBar Grid.Row="1"/>
             <Grid Grid.Row="2">
                 <ContentControl Content="{Binding CurrentView}" />
             </Grid>
         </Grid>
     </Border>
-    
+
 </Window>

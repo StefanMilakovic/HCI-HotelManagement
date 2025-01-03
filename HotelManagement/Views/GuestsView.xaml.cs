@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelManagement.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,11 +16,12 @@ using System.Windows.Shapes;
 
 namespace HotelManagement.Views
 {
-    public partial class NavigationBar : UserControl
+    public partial class GuestsView : UserControl
     {
-        public NavigationBar()
+        public GuestsView()
         {
             InitializeComponent();
+            this.DataContext = new GuestsViewModel();
         }
     }
 }

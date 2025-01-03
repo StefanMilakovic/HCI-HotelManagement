@@ -13,6 +13,7 @@ namespace HotelManagement.Models
         public DbSet<Service> Services { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<Guest> Guests { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -230,6 +231,45 @@ namespace HotelManagement.Models
                     .HasConstraintName("FK_Invoice_Guest");
                 */
             });
+
+
+            modelBuilder.Entity<Guest>(entity =>
+            {
+                entity.HasKey(e => e.GuestId).HasName("PRIMARY");
+
+                entity.ToTable("Guest");
+
+                entity.Property(e => e.GuestId)
+                    .HasColumnName("GuestID")
+                    .HasColumnType("INT")
+                    .IsRequired();
+
+                entity.Property(e => e.FirstName)
+                    .HasColumnName("First_Name")
+                    .HasColumnType("VARCHAR(45)")
+                    .IsRequired(false);
+
+                entity.Property(e => e.LastName)
+                    .HasColumnName("Last_Name")
+                    .HasColumnType("VARCHAR(45)")
+                    .IsRequired(false);
+
+                entity.Property(e => e.PassportNumber)
+                    .HasColumnName("Passport_Number")
+                    .HasColumnType("VARCHAR(45)")
+                    .IsRequired(false);
+
+                entity.Property(e => e.Email)
+                    .HasColumnName("Email")
+                    .HasColumnType("VARCHAR(100)")
+                    .IsRequired(false);
+
+                entity.Property(e => e.PhoneNumber)
+                    .HasColumnName("Phone_Number")
+                    .HasColumnType("VARCHAR(20)")
+                    .IsRequired(false);
+            });
+
 
 
         }

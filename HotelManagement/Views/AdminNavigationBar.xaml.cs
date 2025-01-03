@@ -15,9 +15,12 @@ using System.Windows.Shapes;
 
 namespace HotelManagement.Views
 {
-    public partial class NavigationBar : UserControl
+    /// <summary>
+    /// Interaction logic for AdminNavigationBar.xaml
+    /// </summary>
+    public partial class AdminNavigationBar : UserControl
     {
-        public NavigationBar()
+        public AdminNavigationBar()
         {
             InitializeComponent();
         }

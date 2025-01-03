@@ -1,46 +1,61 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows;
+using HotelManagement.Views;
+
 
 namespace HotelManagement.ViewModels
 {
-    /*
     public class AdministratorViewModel : INotifyPropertyChanged
     {
-        private string _selectedView = "Users"; // Default view
+        private object _currentView;
 
-        public string SelectedView
+        public object CurrentView
         {
-            get => _selectedView;
+            get { return _currentView; }
             set
             {
-                _selectedView = value;
-                OnPropertyChanged(nameof(SelectedView));
+                if (_currentView != value)
+                {
+                    _currentView = value;
+                    OnPropertyChanged(nameof(CurrentView));
+                }
             }
         }
 
         public ICommand ShowUsersViewCommand { get; }
         public ICommand ShowRoomsViewCommand { get; }
-        public ICommand ShowItemsViewCommand { get; }
+        public ICommand ShowServicesViewCommand { get; }
         public ICommand ShowReportsViewCommand { get; }
+        public ICommand ShowGuestsViewCommand { get; }
+        public ICommand CloseCommand { get; }
 
         public AdministratorViewModel()
         {
-            ShowUsersViewCommand = new RelayCommand(_ => SelectedView = "Users");
-            ShowRoomsViewCommand = new RelayCommand(_ => SelectedView = "Rooms");
-            ShowItemsViewCommand = new RelayCommand(_ => SelectedView = "Items");
-            ShowReportsViewCommand = new RelayCommand(_ => SelectedView = "Reports");
+            ShowUsersViewCommand = new RelayCommand(o => CurrentView = new UsersViewModel());
+            ShowRoomsViewCommand = new RelayCommand(o => CurrentView = new RoomsViewModel());
+            ShowServicesViewCommand = new RelayCommand(o => CurrentView = new ServicesViewModel());
+            ShowReportsViewCommand = new RelayCommand(o => CurrentView = new ReportsViewModel());
+            //ShowGuestsViewCommand = new RelayCommand(o => CurrentView = new GuestsViewModel());
+            ShowGuestsViewCommand = new RelayCommand(o => CurrentView = new GuestsView());
+
+            CloseCommand = new RelayCommand(o => Application.Current.Shutdown());
+
+            CurrentView = new UsersViewModel();
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
+
+        protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-    */
 }

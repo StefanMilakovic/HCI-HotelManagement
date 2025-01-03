@@ -13,17 +13,11 @@ namespace HotelManagement.Models
     {
         [Key]
         public int UserId { get; set; }
-
         public string FirstName { get; set; }
-
         public string LastName { get; set; }
-
-
         public string Username { get; set; }
-
         public string PasswordHash { get; set; }
-
-        public Role? Role { get; set; }  // ENUM tip (admin, receptionist)
+        public Role? Role { get; set; }
     }
 
     public enum Role

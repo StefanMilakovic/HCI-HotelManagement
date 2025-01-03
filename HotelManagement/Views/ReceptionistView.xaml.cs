@@ -15,15 +15,12 @@ using System.Windows.Shapes;
 
 namespace HotelManagement.Views
 {
-    /// <summary>
-    /// Interaction logic for test.xaml
-    /// </summary>
-    public partial class AdministratorView : Window
+    public partial class ReceptionistView : Window
     {
-        public AdministratorView()
+        public ReceptionistView()
         {
             InitializeComponent();
-            DataContext = new AdministratorViewModel();
+            DataContext = new ReceptionistViewModel();
         }
 
         private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -44,5 +41,7 @@ namespace HotelManagement.Views
             // Dobavljanje trenutne teme
 
         }
+
+        
     }
 }

@@ -1,0 +1,93 @@
+﻿<UserControl x:Class="HotelManagement.Views.GuestsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             FontFamily="/Resources/GothamLight.otf#Gotham Light"
+             FontSize="15"
+             d:DesignHeight="450" d:DesignWidth="800"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:HotelManagement.Views"
+             xmlns:viewModels="clr-namespace:HotelManagement.ViewModels"
+             xmlns:views="clr-namespace:HotelManagement.Views">
+
+    <Grid>
+        <TabControl Margin="0">
+
+            <TabItem Header="Add Guest">
+                <StackPanel Margin="20">
+
+                    <TextBox x:Name="FirstNameTextBox" Width="200" Foreground="White" Margin="15"
+       materialDesign:HintAssist.HelperText="First name must not be empty"
+       materialDesign:HintAssist.Hint="First Name"
+Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBox x:Name="LastNameTextBox" Width="200" Foreground="White" Margin="15"
+materialDesign:HintAssist.HelperText="Last name must not be empty"
+materialDesign:HintAssist.Hint="Last Name"
+Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBox x:Name="PassportNumberTextBox" Width="200" Foreground="White" Margin="15"
+materialDesign:HintAssist.HelperText="Passport number must not be empty"
+materialDesign:HintAssist.Hint="Passport Number"
+Text="{Binding PassportNumber, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBox x:Name="EmailTextBox" Width="200" Foreground="White" Margin="15"
+materialDesign:HintAssist.HelperText="Email must not be empty"
+materialDesign:HintAssist.Hint="Email"
+Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBox x:Name="PhoneNumberTextBox" Width="200" Foreground="White" Margin="15"
+materialDesign:HintAssist.HelperText="Phone number must not be empty"
+materialDesign:HintAssist.Hint="Phone Number"
+Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <Button
+       Width="100"
+       Content="Add"
+       Margin="20"
+       Command="{Binding AddGuestCommand}"
+       Style="{StaticResource MaterialDesignFlatSecondaryDarkBgButton}" 
+       ToolTip="Add Guest" />
+
+                </StackPanel>
+
+            </TabItem>
+            <TabItem Header="View Guests">
+                <Border Grid.Row="0" Margin="20">
+                    <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding Guests}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding GuestId}" Header="Guest ID" IsReadOnly="True" />
+                            <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" />
+                            <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" />
+                            <DataGridTextColumn Binding="{Binding PassportNumber}" Header="Passport Number" />
+                            <DataGridTextColumn Binding="{Binding Email}" Header="Email" />
+                            <DataGridTextColumn Binding="{Binding PhoneNumber}" Header="Phone Number" />
+
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Command="{Binding DataContext.DeleteGuestCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding}" 
+                                            Style="{StaticResource MaterialDesignFlatButton}"
+                                            ToolTip="Delete Guest" Height="20"
+                                            Foreground="#C70000"
+                                            Margin="0" Padding="0">
+                                            <Button.Content>
+                                                <materialDesign:PackIcon Kind="Delete" Width="16" Height="16" />
+                                            </Button.Content>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+            </TabItem>
+
+
+            
+        </TabControl>
+    </Grid>
+</UserControl>

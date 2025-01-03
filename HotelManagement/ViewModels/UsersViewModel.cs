@@ -111,7 +111,7 @@ namespace HotelManagement.ViewModels
 
         private bool CanDeleteUser(object parameter)
         {
-            return parameter is User;  // Ensure that there is a valid user to delete
+            return parameter is User;
         }
     }
     

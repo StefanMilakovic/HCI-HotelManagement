@@ -8,7 +8,7 @@ namespace HotelManagement.ViewModels
 {
     public class RoomsViewModel : INotifyPropertyChanged
     {
-        private ObservableCollection<Room> _rooms;
+        public ObservableCollection<Room> _rooms;
         public ObservableCollection<Room> Rooms
         {
             get => _rooms;

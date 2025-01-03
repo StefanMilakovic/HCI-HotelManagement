@@ -12,6 +12,13 @@ namespace HotelManagement.Models
         public int RoomNumber { get; set; }
         public int Floor { get; set; }
         public RoomType RoomType { get; set; }
+
+
+
+        public override string ToString()
+        {
+            return $"{RoomNumber}";
+        }
     }
 
     public enum RoomType
@@ -22,5 +29,8 @@ namespace HotelManagement.Models
         DeluxeRoom,
         FamilyRoom 
     }
+
+
+
 
 }

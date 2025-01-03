@@ -1,0 +1,130 @@
+﻿<UserControl 
+    x:Class="HotelManagement.Views.NewReservationView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    mc:Ignorable="d" 
+    FontFamily="/Resources/GothamLight.otf#Gotham Light"
+    FontSize="15"
+    d:DesignHeight="450" d:DesignWidth="800"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:local="clr-namespace:HotelManagement.Views"
+    xmlns:viewModels="clr-namespace:HotelManagement.ViewModels"
+    xmlns:views="clr-namespace:HotelManagement.Views">
+
+
+
+    <Grid>
+        <TabControl Margin="0">
+
+            <TabItem Header="New Reservation" FontSize="15" x:Name="NewReservationTab">
+                <Grid Margin="20">
+
+                    <!-- StackPanel for Reservation Form -->
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center" >
+
+                        <!-- Guest Label and ComboBox in same row -->
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBlock Text="Guest:" Foreground="White" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Width="150"/>
+
+                            <!-- ComboBox za odabir gosta -->
+                            <ComboBox
+                                Width="200"
+                                Foreground="White"
+                                SelectedItem="{Binding SelectedGuest}"
+                                ItemsSource="{Binding Guests}"
+                                materialDesign:HintAssist.Hint="Select a Guest"
+                                materialDesign:HintAssist.HelperText="Choose a guest from the list"
+                                Margin="10,0,0,0" />
+
+                            <!-- Okruglo dugme za dodavanje novog gosta -->
+                            <Button
+                                Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}"
+                                Padding="0" Margin="20,0,0,0"
+                                Width="30" Height="30"
+                                ToolTip="MaterialDesignFloatingActionSecondaryDarkButton"
+                                Command="{Binding DataContext.ShowGuestsViewCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                >
+
+                                <materialDesign:PackIcon Width="20" Height="20" Kind="Add" />
+                            </Button>
+
+                        </StackPanel>
+
+                        <!-- Room Type Label and ComboBox in same row -->
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBlock Text="Room Type:" Foreground="White" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Width="150"/>
+                            <ComboBox
+                                Width="200"
+                                Foreground="White"
+                                SelectedItem="{Binding SelectedRoomType}"
+                                ItemsSource="{Binding RoomTypes}"
+                                materialDesign:HintAssist.Hint="Select Room Type"
+                                materialDesign:HintAssist.HelperText="Choose the room type"
+                                Margin="10,0,0,0" />
+                        </StackPanel>
+
+                        <!-- Check-In Date Label and DatePicker in same row -->
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBlock Text="Check-In Date:" Foreground="White" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Width="150"/>
+                            <DatePicker
+                                Width="200"
+                                Foreground="White"
+                                SelectedDate="{Binding CheckInDate}"
+                                materialDesign:HintAssist.Hint="Select Check-In Date"
+                                materialDesign:HintAssist.HelperText="Choose check-in date"
+                                Margin="10,0,0,0" />
+                        </StackPanel>
+
+                        <!-- Check-Out Date Label and DatePicker in same row -->
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBlock Text="Check-Out Date:" Foreground="White" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Width="150"/>
+                            <DatePicker
+                                Width="200"
+                                Foreground="White"
+                                SelectedDate="{Binding CheckOutDate}"
+                                materialDesign:HintAssist.Hint="Select Check-Out Date"
+                                materialDesign:HintAssist.HelperText="Choose check-out date"
+                                Margin="10,0,0,0" />
+                        </StackPanel>
+
+                        <!-- Available Room Label and ComboBox in same row -->
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBlock Text="Available Room:" Foreground="White" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Width="150"/>
+                            <ComboBox
+                                Width="200"
+                                Foreground="White"
+                                SelectedItem="{Binding SelectedRoom}"
+                                ItemsSource="{Binding AvailableRooms}"
+                                materialDesign:HintAssist.Hint="Select Available Room"
+                                materialDesign:HintAssist.HelperText="Choose an available room"
+                                Margin="10,0,0,0" />
+                        </StackPanel>
+
+                        <!-- Add Button -->
+                        <Button
+                            Width="100"
+                            Content="Add"
+                            Command="{Binding AddReservationCommand}"
+                            Style="{StaticResource MaterialDesignFlatSecondaryDarkBgButton}"
+                            ToolTip="Add Reservation"
+                            HorizontalAlignment="Center"
+                            Margin="0,20,0,0" />
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+
+
+
+
+
+            <TabItem Header="Reservations">
+                <!--radi, ignorisati error-->
+                <views:ReservationView/>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</UserControl>

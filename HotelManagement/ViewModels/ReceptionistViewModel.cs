@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -8,15 +7,15 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
 using HotelManagement.Views;
-
+using HotelManagement.Models;
+using System.Collections.ObjectModel;
 
 namespace HotelManagement.ViewModels
 {
-    /*
-    public class MainViewModel : INotifyPropertyChanged
+    internal class ReceptionistViewModel : INotifyPropertyChanged
     {
         private object _currentView;
-
+       
         public object CurrentView
         {
             get { return _currentView; }
@@ -30,25 +29,19 @@ namespace HotelManagement.ViewModels
             }
         }
 
-        public ICommand ShowUsersViewCommand { get; }
-        public ICommand ShowRoomsViewCommand { get; }
-        public ICommand ShowServicesViewCommand { get; }
-        public ICommand ShowReportsViewCommand { get; }
+        public ICommand ShowNewReservationCommand { get; }
         public ICommand ShowGuestsViewCommand { get; }
         public ICommand CloseCommand { get; }
 
-        public MainViewModel()
+        public ReceptionistViewModel()
         {
-            ShowUsersViewCommand = new RelayCommand(o => CurrentView = new UsersViewModel());
-            ShowRoomsViewCommand = new RelayCommand(o => CurrentView = new RoomsViewModel());
-            ShowServicesViewCommand = new RelayCommand(o => CurrentView = new ServicesViewModel());
-            ShowReportsViewCommand = new RelayCommand(o => CurrentView = new ReportsViewModel());
-            //ShowGuestsViewCommand = new RelayCommand(o => CurrentView = new GuestsViewModel());
             ShowGuestsViewCommand = new RelayCommand(o => CurrentView = new GuestsView());
+            ShowNewReservationCommand = new RelayCommand(o => CurrentView = new NewReservationView());
 
             CloseCommand = new RelayCommand(o => Application.Current.Shutdown());
 
-            CurrentView = new UsersViewModel();
+            CurrentView = new GuestsView();
+            //Reservations = new ObservableCollection<Reservation>();
 
         }
 
@@ -59,5 +52,4 @@ namespace HotelManagement.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-    */
 }

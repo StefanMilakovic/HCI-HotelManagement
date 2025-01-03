@@ -8,12 +8,13 @@
 
     
 
-    StartupUri="../Views/AdministratorView.xaml">
+    StartupUri="../Views/ReceptionistView.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <materialDesign:BundledTheme BaseTheme="Dark" PrimaryColor="Cyan" SecondaryColor="Lime"/>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
             </ResourceDictionary.MergedDictionaries>
             
             <DataTemplate DataType="{x:Type viewModels:UsersViewModel}">
