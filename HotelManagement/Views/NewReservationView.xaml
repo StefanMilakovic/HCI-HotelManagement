@@ -122,7 +122,7 @@
 
             <TabItem Header="Reservations">
                 <!--radi, ignorisati error-->
-                <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding Reservations}">
+                <DataGrid  Margin="20" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding Reservations}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ReservationID}" Header="Reservation ID" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding CheckInDate, StringFormat='dd.MM.yyyy'}" Header="Check-in Date" />

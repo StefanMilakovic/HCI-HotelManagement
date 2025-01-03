@@ -209,12 +209,21 @@ namespace HotelManagement.ViewModels
 
         private void DeleteReservation(object parameter)
         {
-            if (parameter is Reservation reservation)
+            var reservationToDelete = parameter as Reservation;
+            if (reservationToDelete == null) return;
+
+            using (var context = new HotelManagementContext())
             {
-                Reservations.Remove(reservation);
+                // Remove the reservation from the context
+                context.Reservations.Remove(reservationToDelete);
+                context.SaveChanges(); // Commit the deletion to the database
             }
+
+            // Remove the reservation from the local ObservableCollection (UI update)
+            Reservations.Remove(reservationToDelete);
         }
-        
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName)

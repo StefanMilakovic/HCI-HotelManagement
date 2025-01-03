@@ -70,7 +70,7 @@
             Grid.Column="4"
             Margin="10"
             Content="Services"
-            
+            Command="{Binding DataContext.ShowServiceReservationCommand, RelativeSource={RelativeSource AncestorType=Window}}"
             VerticalAlignment="Center"
             Style="{StaticResource CustomButtonStyle}">
         </Button>

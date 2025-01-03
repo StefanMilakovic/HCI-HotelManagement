@@ -20,10 +20,10 @@
                     <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding Reservations}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding ReservationID}" Header="Reservation ID" IsReadOnly="True" />
-                            <DataGridTextColumn Binding="{Binding CheckInDate}" Header="Check-in Date" />
-                            <DataGridTextColumn Binding="{Binding CheckOutDate}" Header="Check-out Date" />
+                            <DataGridTextColumn Binding="{Binding CheckInDate, StringFormat='dd.MM.yyyy'}" Header="Check-in Date" />
+                            <DataGridTextColumn Binding="{Binding CheckOutDate, StringFormat='dd.MM.yyyy'}" Header="Check-out Date" />
                             <DataGridTextColumn Binding="{Binding NumberOfGuests}" Header="Number of Guests" />
-                            <DataGridTextColumn Binding="{Binding GuestID}" Header="Guest ID" />
+                            <DataGridTextColumn Binding="{Binding GuestName}" Header="ck" />
                             <DataGridTextColumn Binding="{Binding RoomID}" Header="Room ID" />
                             <DataGridTextColumn Binding="{Binding UserID}" Header="User ID" />
 

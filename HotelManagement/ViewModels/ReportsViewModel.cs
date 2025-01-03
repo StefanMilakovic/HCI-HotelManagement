@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace HotelManagement.ViewModels
 {
@@ -35,11 +36,36 @@ namespace HotelManagement.ViewModels
             }
         }
 
+        public ICommand DeleteReservationCommand { get; }
+        
         public ReportsViewModel()
         {
             LoadReservations();
             LoadInvoices();
+            DeleteReservationCommand = new RelayCommand(DeleteReservation, CanDeleteReservation);
         }
+
+        private bool CanDeleteReservation(object parameter)
+        {
+            return parameter is Reservation;
+        }
+
+        private void DeleteReservation(object parameter)
+        {
+            var reservationToDelete = parameter as Reservation;
+            if (reservationToDelete == null) return;
+
+            using (var context = new HotelManagementContext())
+            {
+                // Remove the reservation from the context
+                context.Reservations.Remove(reservationToDelete);
+                context.SaveChanges(); // Commit the deletion to the database
+            }
+
+            // Remove the reservation from the local ObservableCollection (UI update)
+            Reservations.Remove(reservationToDelete);
+        }
+
 
         private void LoadReservations()
         {
@@ -63,14 +89,6 @@ namespace HotelManagement.ViewModels
                 Invoices = new ObservableCollection<Invoice>(context.Invoices.ToList());
             }
         }
-
-        /*
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        */
+        
     }
 }

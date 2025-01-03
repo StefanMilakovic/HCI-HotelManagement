@@ -17,6 +17,20 @@ namespace HotelManagement.Models
         public int GuestID { get; set; }
         public int RoomID { get; set; }
         public int UserID { get; set; }
-        
+
+
+        //novo 
+        public string GuestName
+        {
+            get
+            {
+                using (var context = new HotelManagementContext())
+                {
+                    var guest = context.Guests.FirstOrDefault(g => g.GuestId == GuestID);
+                    return guest != null ? $"{guest.FirstName} {guest.LastName}" : "Unknown";
+                }
+            }
+        }
+
     }
 }

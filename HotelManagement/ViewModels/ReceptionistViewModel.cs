@@ -31,12 +31,14 @@ namespace HotelManagement.ViewModels
 
         public ICommand ShowNewReservationCommand { get; }
         public ICommand ShowGuestsViewCommand { get; }
+        public ICommand ShowServiceReservationCommand { get; }
         public ICommand CloseCommand { get; }
 
         public ReceptionistViewModel()
         {
             ShowGuestsViewCommand = new RelayCommand(o => CurrentView = new GuestsView());
             ShowNewReservationCommand = new RelayCommand(o => CurrentView = new NewReservationView());
+            ShowServiceReservationCommand = new RelayCommand(o => CurrentView = new ServiceReservationView());
 
             CloseCommand = new RelayCommand(o => Application.Current.Shutdown());
 
