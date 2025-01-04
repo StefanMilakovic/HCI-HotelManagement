@@ -1,24 +1,7 @@
 ﻿using HotelManagement.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
-
-
-
-using System;
-using System.Collections.Generic;
-
-using System.Linq;
-
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace HotelManagement.ViewModels
 {
@@ -106,14 +89,12 @@ namespace HotelManagement.ViewModels
 
         public NewReservationViewModel()
         {
-            // Initialize collections
             //Guests = new ObservableCollection<Guest>();
             Guests = new GuestsViewModel().Guests;
 
             RoomTypes = new ObservableCollection<RoomType>(Enum.GetValues(typeof(RoomType)).Cast<RoomType>());
             AvailableRooms = new RoomsViewModel().Rooms;
-            //Reservations = new ObservableCollection<Reservation>();
-            //Reservations = new ReservationsViewModel().Reservations;
+
             LoadReservations();
 
 
@@ -192,8 +173,6 @@ namespace HotelManagement.ViewModels
 
         }
         
-
-
         private void LoadReservations()
         {
             using (var context = new HotelManagementContext())
@@ -214,12 +193,9 @@ namespace HotelManagement.ViewModels
 
             using (var context = new HotelManagementContext())
             {
-                // Remove the reservation from the context
                 context.Reservations.Remove(reservationToDelete);
-                context.SaveChanges(); // Commit the deletion to the database
+                context.SaveChanges();
             }
-
-            // Remove the reservation from the local ObservableCollection (UI update)
             Reservations.Remove(reservationToDelete);
         }
 

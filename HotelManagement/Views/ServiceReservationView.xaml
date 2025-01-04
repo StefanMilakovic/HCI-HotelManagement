@@ -10,11 +10,12 @@
     FontFamily="/Resources/GothamLight.otf#Gotham Light"
     FontSize="15"
     d:DesignHeight="450" d:DesignWidth="800"
+    Foreground="White"
     xmlns:viewModels="clr-namespace:HotelManagement.ViewModels">
 
 
-    <TabControl Margin="0">
-        <TabItem Header="Select Reservation">
+    <TabControl Margin="0" x:Name="tabControl">
+        <TabItem Header="Select Reservation" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -67,7 +68,7 @@
                     <TextBlock Text="{Binding SelectedReservation.ReservationID}" Foreground="White" VerticalAlignment="Center" />
                 </StackPanel>
 
-                <Button Width="80"
+                <Button Width="110"
                         Content="Next"
                         IsEnabled="{Binding IsNextButtonEnabled}"
                         Style="{StaticResource MaterialDesignFlatSecondaryDarkBgButton}"
@@ -75,11 +76,12 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
                         Margin="20,10,30,10" Padding="0"
-                        Grid.Row="1" />
+                        Grid.Row="1" 
+                        Click="NextButton_Click"/>
             </Grid>
         </TabItem>
 
-        <TabItem Header="Select Service">
+        <TabItem Header="Select Service" IsEnabled="{Binding IsNextButtonEnabled}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -126,21 +128,33 @@
                     </ScrollViewer>
                 </Border>
 
-                <!-- Selected Service Display -->
                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="30,10,30,10">
                     <TextBlock FontWeight="Bold" Text="Selected Service (ID):" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0"/>
                     <TextBlock Text="{Binding SelectedService.ServiceId}" Foreground="White" VerticalAlignment="Center" />
                 </StackPanel>
 
-                <Button Width="80"
-                Content="Next"
-                IsEnabled="{Binding IsNextButtonEnabled}"
+
+                <TextBlock Grid.Row="1" Text="Quantity: " VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,225,0"/>
+                <ComboBox Grid.Row="1" Width="60" Margin="0,0,160,0" HorizontalAlignment="Right" 
+                    
+                    IsEditable="False"
+                    ItemsSource="{Binding QuantityList}">
+                    <ComboBox.Text>
+                        <Binding Mode="TwoWay" Path="SelectedQuantity" UpdateSourceTrigger="PropertyChanged">
+                        </Binding>
+                    </ComboBox.Text>
+                </ComboBox>
+
+                <Button Width="110"
+                Content="Add Service"
+                IsEnabled="{Binding IsAddServiceButtonEnabled}"
                 Style="{StaticResource MaterialDesignFlatSecondaryDarkBgButton}"
                 ToolTip="MaterialDesignFlatSecondaryDarkBgButton"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 Margin="20,10,30,10" Padding="0"
-                Grid.Row="1" />
+                Grid.Row="1" Click="AddService_Click" 
+                Command="{Binding AddServiceCommand}"/>
             </Grid>
         </TabItem>
 

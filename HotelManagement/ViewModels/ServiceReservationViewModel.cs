@@ -13,6 +13,31 @@ namespace HotelManagement.ViewModels
         private Service _selectedService;
         private ObservableCollection<Service> _services;
         private bool _isNextButtonEnabled;
+        private bool _isAddServiceButtonEnabled;
+        private ObservableCollection<int> _quantityList;
+        private int _selectedQuantity;
+
+
+
+        public ObservableCollection<int> QuantityList
+        {
+            get => _quantityList;
+            set
+            {
+                _quantityList = value;
+                OnPropertyChanged(nameof(QuantityList));
+            }
+        }
+
+        public int SelectedQuantity
+        {
+            get => _selectedQuantity;
+            set
+            {
+                _selectedQuantity = value;
+                OnPropertyChanged(nameof(SelectedQuantity));
+            }
+        }
 
         public ObservableCollection<Reservation> Reservations
         {
@@ -45,15 +70,56 @@ namespace HotelManagement.ViewModels
             }
         }
 
+        public bool IsAddServiceButtonEnabled
+        {
+            get => _isAddServiceButtonEnabled;
+            set
+            {
+                _isAddServiceButtonEnabled = value;
+                OnPropertyChanged(nameof(IsAddServiceButtonEnabled));
+            }
+        }
+
         public ICommand SelectReservationCommand { get; }
         public ICommand SelectServiceCommand { get; }
+        public ICommand AddServiceCommand { get; }
+
 
         public ServiceReservationViewModel()
         {
             SelectReservationCommand = new RelayCommand<Reservation>(SelectReservation);
             SelectServiceCommand = new RelayCommand<Service>(SelectService);
+            AddServiceCommand = new RelayCommand(AddService);
+
+
+            QuantityList = new ObservableCollection<int> {1,2,3,4,5,6};
+            SelectedQuantity = 1; // Postavi podrazumijevanu vrijednost
+
+
             LoadReservations();
             LoadServices();
+        }
+
+        private void AddService(object parameter)
+        {
+            if (SelectedReservation == null || SelectedService == null || SelectedQuantity <= 0)
+                return;
+
+            using (var context = new HotelManagementContext())
+            {
+                var reservationHasService = new ReservationHasService
+                {
+                    ReservationId = SelectedReservation.ReservationID,
+                    ServiceId = SelectedService.ServiceId,
+                    Quantity = SelectedQuantity,
+
+                };
+
+                context.Add(reservationHasService);
+                context.SaveChanges();
+            }
+
+            System.Windows.MessageBox.Show("Service added to reservation successfully!", "Success", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
         }
 
         private void SelectReservation(Reservation reservation)
@@ -86,7 +152,7 @@ namespace HotelManagement.ViewModels
             {
                 _selectedService = value;
                 OnPropertyChanged(nameof(SelectedService));
-                IsNextButtonEnabled = _selectedService != null;
+                IsAddServiceButtonEnabled = _selectedService != null;
             }
         }
 

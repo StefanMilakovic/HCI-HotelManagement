@@ -14,6 +14,7 @@ namespace HotelManagement.Models
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Guest> Guests { get; set; }
+        public DbSet<ReservationHasService> ReservationHasServices { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -27,9 +28,6 @@ namespace HotelManagement.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Ignore<Guest>();
-
 
             modelBuilder.Entity<User>(entity =>
             {
@@ -270,7 +268,53 @@ namespace HotelManagement.Models
                     .IsRequired(false);
             });
 
+            modelBuilder.Entity<ReservationHasService>(entity =>
+            {
+                entity.HasKey(rh => rh.ReservationHasServiceId).HasName("PRIMARY");
 
+                entity.ToTable("Reservation_Has_Service");
+
+                entity.Property(rh => rh.ReservationHasServiceId)
+                    .HasColumnName("ReservationHasServiceId")
+                    .HasColumnType("INT")
+                    .IsRequired();
+
+                entity.Property(rh => rh.Quantity)
+                    .HasColumnName("Quantity")
+                    .HasColumnType("INT")
+                    .IsRequired();
+
+                entity.Property(rh => rh.ServiceId)
+                    .HasColumnName("ServiceId")
+                    .HasColumnType("INT")
+                    .IsRequired();
+
+                entity.Property(rh => rh.ReservationId)
+                    .HasColumnName("ReservationId")
+                    .HasColumnType("INT")
+                    .IsRequired();
+
+                entity.Property(rh => rh.TotalPrice)
+                    .HasColumnName("Total_Price")
+                    .HasColumnType("DECIMAL(10,2)")
+                    .IsRequired();
+
+                /*
+                // Define relationships
+                entity.HasOne<Service>()
+                    .WithMany()
+                    .HasForeignKey(rh => rh.ServiceId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_ReservationHasService_Service");
+
+                entity.HasOne<Reservation>()
+                    .WithMany()
+                    .HasForeignKey(rh => rh.ReservationId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_ReservationHasService_Reservation");
+
+                */
+            });
 
         }
 
