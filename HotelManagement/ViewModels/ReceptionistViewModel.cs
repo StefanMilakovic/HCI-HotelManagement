@@ -32,6 +32,7 @@ namespace HotelManagement.ViewModels
         public ICommand ShowNewReservationCommand { get; }
         public ICommand ShowGuestsViewCommand { get; }
         public ICommand ShowServiceReservationCommand { get; }
+        public ICommand ShowInvoicesViewCommand { get; }
         public ICommand CloseCommand { get; }
 
         public ReceptionistViewModel()
@@ -39,6 +40,7 @@ namespace HotelManagement.ViewModels
             ShowGuestsViewCommand = new RelayCommand(o => CurrentView = new GuestsView());
             ShowNewReservationCommand = new RelayCommand(o => CurrentView = new NewReservationView());
             ShowServiceReservationCommand = new RelayCommand(o => CurrentView = new ServiceReservationView());
+            ShowInvoicesViewCommand = new RelayCommand(o => CurrentView = new InvoicesView());
 
             CloseCommand = new RelayCommand(o => Application.Current.Shutdown());
 

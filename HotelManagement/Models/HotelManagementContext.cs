@@ -15,6 +15,7 @@ namespace HotelManagement.Models
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Guest> Guests { get; set; }
         public DbSet<ReservationHasService> ReservationHasServices { get; set; }
+        public DbSet<RoomType> RoomTypes { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -87,9 +88,9 @@ namespace HotelManagement.Models
                     .HasColumnType("INT")
                     .IsRequired();
 
-                entity.Property(r => r.RoomType)
-                    .HasColumnName("Room_Type")
-                    .HasColumnType("ENUM('SingleRoom', 'DoubleRoom', 'Suite', 'DeluxeRoom', 'FamilyRoom')")
+                entity.Property(r => r.RoomTypeId)
+                    .HasColumnName("RoomTypeId")
+                    .HasColumnType("INT")
                     .IsRequired();
             });
 
@@ -136,11 +137,13 @@ namespace HotelManagement.Models
                     .HasColumnName("Check_Out_Date")
                     .HasColumnType("DATETIME")
                     .IsRequired();
+                
 
                 entity.Property(r => r.NumberOfGuests)
                     .HasColumnName("Number_Of_Guests")
                     .HasColumnType("INT")
                     .IsRequired();
+                
 
                 entity.Property(r => r.GuestID)
                     .HasColumnName("GuestID")
@@ -314,6 +317,34 @@ namespace HotelManagement.Models
                     .HasConstraintName("FK_ReservationHasService_Reservation");
 
                 */
+            });
+
+
+            modelBuilder.Entity<RoomType>(entity =>
+            {
+                entity.HasKey(rt => rt.RoomTypeId).HasName("PRIMARY");
+
+                entity.ToTable("Room_Type");
+
+                entity.Property(rt => rt.RoomTypeId)
+                    .HasColumnName("RoomTypeId")
+                    .HasColumnType("INT")
+                    .IsRequired();
+
+                entity.Property(rt => rt.Name)
+                    .HasColumnName("Name")
+                    .HasColumnType("VARCHAR(45)")
+                    .IsRequired();
+
+                entity.Property(rt => rt.PricePerNight)
+                    .HasColumnName("PricePerNight")
+                    .HasColumnType("DECIMAL(10, 2)")
+                    .IsRequired();
+
+                entity.Property(rt => rt.MaxNumOfGuests)
+                    .HasColumnName("MaxNumOfGuests")
+                    .HasColumnType("INT")
+                    .IsRequired();
             });
 
         }

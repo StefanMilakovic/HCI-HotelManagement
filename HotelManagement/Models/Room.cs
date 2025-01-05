@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelManagement.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,9 +12,18 @@ namespace HotelManagement.Models
         public int RoomID { get; set; }
         public int RoomNumber { get; set; }
         public int Floor { get; set; }
-        public RoomType RoomType { get; set; }
+        public int RoomTypeId { get; set; }
 
 
+        //novo 
+        public string RoomTypeName
+        {
+            get
+            {
+                return new RoomsViewModel().RoomTypes
+                    .FirstOrDefault(rt => rt.RoomTypeId == RoomTypeId)?.Name ?? "Unknown";
+            }
+        }
 
         public override string ToString()
         {
@@ -21,14 +31,8 @@ namespace HotelManagement.Models
         }
     }
 
-    public enum RoomType
-    {
-        SingleRoom,
-        DoubleRoom,
-        Suite,
-        DeluxeRoom,
-        FamilyRoom 
-    }
+
+
 
 
 

@@ -1,0 +1,155 @@
+﻿<UserControl 
+    x:Class="HotelManagement.Views.InvoicesView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:HotelManagement.Views" 
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    mc:Ignorable="d"
+    FontFamily="/Resources/GothamLight.otf#Gotham Light"
+    FontSize="15"
+    d:DesignHeight="450" d:DesignWidth="800"
+    Foreground="White"
+    xmlns:viewModels="clr-namespace:HotelManagement.ViewModels">
+
+
+
+    <TabControl Margin="0">
+        <TabItem Header="Select Reservation" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Border BorderThickness="1" BorderBrush="#535353" Margin="20,20,20,0" Padding="10" CornerRadius="10" Grid.Row="0">
+                    <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
+                        <ItemsControl ItemsSource="{Binding Reservations}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" ItemWidth="270" ItemHeight="Auto" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <materialDesign:Card Width="210" Style="{StaticResource MaterialDesignOutlinedCard}" Margin="25">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <StackPanel Grid.Row="0" Margin="8">
+                                                <TextBlock FontWeight="Bold" Text="Reservation ID:" Foreground="White"/>
+                                                <TextBlock Text="{Binding ReservationID}" Foreground="White"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Row="1" Margin="8">
+                                                <TextBlock FontWeight="Bold" Text="Guest Name:" Foreground="White"/>
+                                                <TextBlock Text="{Binding GuestName}" Foreground="White"/>
+                                            </StackPanel>
+                                            <Button Grid.Row="0"
+                                            Margin="0,0,12,-20"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Bottom"
+                                            Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryButton}"
+                                            Command="{Binding DataContext.SelectReservationCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding}">
+                                                <materialDesign:PackIcon Kind="Add" />
+                                            </Button>
+                                        </Grid>
+                                    </materialDesign:Card>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Border>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="30,10,30,10">
+                    <TextBlock FontWeight="Bold" Text="Selected Reservation (ID):" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Text="{Binding SelectedReservation.ReservationID}" Foreground="White" VerticalAlignment="Center" />
+                </StackPanel>
+
+                <Button Width="140"
+                Content="Generate Invoice"
+                IsEnabled="{Binding IsGenerateButtonEnabled}"
+                Command="{Binding GenerateInvoiceCommand}"
+                Style="{StaticResource MaterialDesignFlatSecondaryDarkBgButton}"
+                ToolTip="MaterialDesignFlatSecondaryDarkBgButton"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Margin="20,10,30,10" Padding="0"
+                Grid.Row="1" 
+                />
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="View Invoices">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Border BorderThickness="1" BorderBrush="#535353" Margin="20" Padding="10" CornerRadius="10" Grid.Row="0">
+                    <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
+                        <ItemsControl ItemsSource="{Binding Invoices}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" ItemWidth="270" ItemHeight="Auto" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <materialDesign:Card Width="210" Style="{StaticResource MaterialDesignOutlinedCard}" Margin="25">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+
+                                            <!-- Invoice ID -->
+                                            <StackPanel Grid.Row="0" Margin="8">
+                                                <TextBlock FontWeight="Bold" Text="Invoice ID:" Foreground="White"/>
+                                                <TextBlock Text="{Binding InvoiceID}" Foreground="White"/>
+                                            </StackPanel>
+
+                                            <!-- Guest Name -->
+                                            <StackPanel Grid.Row="1" Margin="8">
+                                                <TextBlock FontWeight="Bold" Text="Guest Name:" Foreground="White"/>
+                                                <TextBlock Text="{Binding GuestName}" Foreground="White"/>
+                                            </StackPanel>
+
+                                            <!-- Issue Date -->
+                                            <StackPanel Grid.Row="2" Margin="8">
+                                                <TextBlock FontWeight="Bold" Text="Issue Date:" Foreground="White"/>
+                                                <TextBlock Text="{Binding IssuedDate, StringFormat='dd.MM.yyyy'}" Foreground="White"/>
+                                            </StackPanel>
+
+                                            <!-- Reservation ID -->
+                                            <StackPanel Grid.Row="3" Margin="8">
+                                                <TextBlock FontWeight="Bold" Text="Reservation ID:" Foreground="White"/>
+                                                <TextBlock Text="{Binding ReservationID}" Foreground="White"/>
+                                            </StackPanel>
+
+                                            <StackPanel Grid.Row="4" Margin="8">
+                                                <TextBlock FontWeight="Bold" Text="Total Amount:" Foreground="White"/>
+                                                <TextBlock Text="{Binding TotalAmount, StringFormat='€ #,0.00'}" Foreground="White"/>
+                                                <!-- Currency format -->
+                                            </StackPanel>
+                                        </Grid>
+                                    </materialDesign:Card>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+
+                </Border>
+            </Grid>
+        </TabItem>
+
+
+    </TabControl>
+</UserControl>

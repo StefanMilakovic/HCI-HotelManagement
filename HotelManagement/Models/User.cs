@@ -18,6 +18,11 @@ namespace HotelManagement.Models
         public string Username { get; set; }
         public string PasswordHash { get; set; }
         public Role? Role { get; set; }
+
+        public override string ToString()
+        {
+            return $"{FirstName} {LastName}";
+        }
     }
 
     public enum Role
@@ -25,4 +30,6 @@ namespace HotelManagement.Models
         Administrator,
         Receptionist
     }
+
+
 }

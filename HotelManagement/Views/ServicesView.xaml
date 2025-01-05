@@ -18,7 +18,7 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding ServiceId}" Header="Service ID" />
                             <DataGridTextColumn Binding="{Binding Name}" Header="Service Name" />
-                            <DataGridTextColumn Binding="{Binding Price, StringFormat='{}{0} €'}" Header="Price" />
+                            <DataGridTextColumn Binding="{Binding Price, StringFormat='€ #,0.00'}" Header="Price" />
 
                         </DataGrid.Columns>
                     </DataGrid>
@@ -53,7 +53,7 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding ServiceId}" Header="Service ID" IsReadOnly="True" />
                             <DataGridTextColumn Binding="{Binding Name}" Header="Service Name" />
-                            <DataGridTextColumn Binding="{Binding Price}" Header="Price" />
+                            <DataGridTextColumn Binding="{Binding Price,StringFormat='€ #,0.00'}" Header="Price" />
 
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>

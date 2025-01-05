@@ -22,10 +22,9 @@
                             <DataGridTextColumn Binding="{Binding ReservationID}" Header="Reservation ID" IsReadOnly="True" />
                             <DataGridTextColumn Binding="{Binding CheckInDate, StringFormat='dd.MM.yyyy'}" Header="Check-in Date" />
                             <DataGridTextColumn Binding="{Binding CheckOutDate, StringFormat='dd.MM.yyyy'}" Header="Check-out Date" />
-                            <DataGridTextColumn Binding="{Binding NumberOfGuests}" Header="Number of Guests" />
-                            <DataGridTextColumn Binding="{Binding GuestName}" Header="ck" />
+                            <DataGridTextColumn Binding="{Binding GuestName}" Header="Guest Name" />
                             <DataGridTextColumn Binding="{Binding RoomID}" Header="Room ID" />
-                            <DataGridTextColumn Binding="{Binding UserID}" Header="User ID" />
+                            <DataGridTextColumn Binding="{Binding UserID}" Header="Receptionist" />
 
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
@@ -54,8 +53,8 @@
                     <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding Invoices}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding InvoiceID}" Header="Invoice ID" IsReadOnly="True" />
-                            <DataGridTextColumn Binding="{Binding TotalAmount}" Header="Total Amount" />
-                            <DataGridTextColumn Binding="{Binding IssuedDate}" Header="Issued Date" />
+                            <DataGridTextColumn Binding="{Binding TotalAmount,StringFormat='€ #,0.00'}" Header="Total Amount" />
+                            <DataGridTextColumn Binding="{Binding IssuedDate,StringFormat='dd.MM.yyyy'}" Header="Issued Date" />
                             <DataGridTextColumn Binding="{Binding GuestID}" Header="Guest ID" />
                             <DataGridTextColumn Binding="{Binding ReservationID}" Header="Reservation ID" />
                             

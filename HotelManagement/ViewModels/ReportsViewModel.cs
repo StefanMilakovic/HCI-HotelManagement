@@ -37,12 +37,33 @@ namespace HotelManagement.ViewModels
         }
 
         public ICommand DeleteReservationCommand { get; }
-        
+        public ICommand DeleteInvoiceCommand { get; }
+
         public ReportsViewModel()
         {
             LoadReservations();
             LoadInvoices();
             DeleteReservationCommand = new RelayCommand(DeleteReservation, CanDeleteReservation);
+            DeleteInvoiceCommand = new RelayCommand(DeleteInvoice, CanDeleteInvoice);
+        }
+
+        private void DeleteInvoice(object parameter)
+        {
+            var invoiceToDelete = parameter as Invoice;
+            if (invoiceToDelete == null) return;
+
+            using (var context = new HotelManagementContext())
+            {
+                context.Invoices.Remove(invoiceToDelete);
+                context.SaveChanges();
+            }
+
+            Invoices.Remove(invoiceToDelete);
+        }
+
+        private bool CanDeleteInvoice(object parameter)
+        {
+            return parameter is Invoice; // Osiguraj da je validan parametar
         }
 
         private bool CanDeleteReservation(object parameter)
@@ -57,12 +78,10 @@ namespace HotelManagement.ViewModels
 
             using (var context = new HotelManagementContext())
             {
-                // Remove the reservation from the context
                 context.Reservations.Remove(reservationToDelete);
-                context.SaveChanges(); // Commit the deletion to the database
+                context.SaveChanges();
             }
 
-            // Remove the reservation from the local ObservableCollection (UI update)
             Reservations.Remove(reservationToDelete);
         }
 

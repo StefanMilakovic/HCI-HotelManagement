@@ -9,6 +9,7 @@ namespace HotelManagement.ViewModels
     public class RoomsViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Room> _rooms;
+        public ObservableCollection<RoomType> _roomTypes;
         public ObservableCollection<Room> Rooms
         {
             get => _rooms;
@@ -19,14 +20,23 @@ namespace HotelManagement.ViewModels
             }
         }
 
+        public ObservableCollection<RoomType> RoomTypes
+        {
+            get => _roomTypes;
+            set
+            {
+                _roomTypes = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ICommand AddRoomCommand { get; }
         public ICommand DeleteRoomCommand { get; }
 
         public int RoomNumber { get; set; }
         public int Floor { get; set; }
-        public RoomType? RoomType { get; set; }
 
-        public IEnumerable<RoomType> RoomTypes => Enum.GetValues(typeof(RoomType)).Cast<RoomType>();
+        public RoomType SelectedRoomType { get; set; }
         public IEnumerable<int> Floors { get; } = Enumerable.Range(1, 10);
 
         public RoomsViewModel()
@@ -35,8 +45,10 @@ namespace HotelManagement.ViewModels
 
             DeleteRoomCommand = new RelayCommand(DeleteRoom, CanDeleteRoom);
             LoadRooms();
+            LoadRoomTypes();
         }
 
+        
         private void LoadRooms()
         {
             using (var context = new HotelManagementContext())
@@ -45,11 +57,21 @@ namespace HotelManagement.ViewModels
             }
         }
 
+
+        private void LoadRoomTypes()
+        {
+            using (var context = new HotelManagementContext())
+            {
+                RoomTypes = new ObservableCollection<RoomType>(context.RoomTypes.ToList());
+            }
+        }
+
+
         private bool CanAddRoom(object parameter)
         {
             return RoomNumber > 0 &&
                    Floor > 0 &&
-                   RoomType.HasValue;
+                   SelectedRoomType != null;
         }
 
         private void AddRoom(object parameter)
@@ -60,7 +82,7 @@ namespace HotelManagement.ViewModels
                 {
                     RoomNumber = this.RoomNumber,
                     Floor = this.Floor,
-                    RoomType = this.RoomType.Value
+                    RoomTypeId = this.SelectedRoomType.RoomTypeId
                 };
 
                 context.Rooms.Add(newRoom);
@@ -70,11 +92,11 @@ namespace HotelManagement.ViewModels
 
                 RoomNumber = 0;
                 Floor = 0;
-                RoomType = null;
+                SelectedRoomType = null;
 
                 OnPropertyChanged(nameof(RoomNumber));
                 OnPropertyChanged(nameof(Floor));
-                OnPropertyChanged(nameof(RoomType));
+                OnPropertyChanged(nameof(SelectedRoomType));
             }
         }
 
@@ -101,7 +123,7 @@ namespace HotelManagement.ViewModels
 
         private bool CanDeleteRoom(object parameter)
         {
-            return parameter is Room;  // Ensure that there is a valid room to delete
+            return parameter is Room;
         }
     }
 }

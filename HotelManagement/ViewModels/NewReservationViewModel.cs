@@ -1,6 +1,7 @@
 ﻿using HotelManagement.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace HotelManagement.ViewModels
@@ -16,9 +17,22 @@ namespace HotelManagement.ViewModels
 
 
         private ObservableCollection<Reservation> _reservations;
+        public ObservableCollection<RoomType> _roomTypes;
+
+
         public ObservableCollection<Guest> Guests { get; set; }
-        public ObservableCollection<RoomType> RoomTypes { get; set; }
         public ObservableCollection<Room> AvailableRooms { get; set; }
+
+
+        public ObservableCollection<RoomType> RoomTypes
+        {
+            get => _roomTypes;
+            set
+            {
+                _roomTypes = value;
+                OnPropertyChanged();
+            }
+        }
 
         public Guest SelectedGuest
         {
@@ -73,6 +87,8 @@ namespace HotelManagement.ViewModels
             }
         }
 
+       
+
         public ObservableCollection<Reservation> Reservations
         {
             get => _reservations;
@@ -92,10 +108,11 @@ namespace HotelManagement.ViewModels
             //Guests = new ObservableCollection<Guest>();
             Guests = new GuestsViewModel().Guests;
 
-            RoomTypes = new ObservableCollection<RoomType>(Enum.GetValues(typeof(RoomType)).Cast<RoomType>());
+            //RoomTypes = new ObservableCollection<RoomType>(Enum.GetValues(typeof(RoomType)).Cast<RoomType>());
             AvailableRooms = new RoomsViewModel().Rooms;
 
             LoadReservations();
+            LoadRoomTypes();
 
 
             AddReservationCommand = new RelayCommand(AddReservation, CanAddReservation);
@@ -103,7 +120,7 @@ namespace HotelManagement.ViewModels
         }
 
 
-
+        
         private void UpdateAvailableRooms()
         {
             if (SelectedRoomType != null && CheckInDate.HasValue && CheckOutDate.HasValue)
@@ -111,7 +128,7 @@ namespace HotelManagement.ViewModels
                 using (var context = new HotelManagementContext())
                 {
                     var availableRooms = context.Rooms
-                        .Where(room => room.RoomType == SelectedRoomType)
+                        .Where(room => room.RoomTypeId == SelectedRoomType.RoomTypeId)
                         .Where(room => !context.Reservations.Any(reservation =>
                             reservation.RoomID == room.RoomID &&
                             ((CheckInDate.Value >= reservation.CheckInDate && CheckInDate.Value < reservation.CheckOutDate) ||
@@ -130,7 +147,15 @@ namespace HotelManagement.ViewModels
                 AvailableRooms.Clear();
             }
         }
+        
 
+        private void LoadRoomTypes()
+        {
+            using (var context = new HotelManagementContext())
+            {
+                RoomTypes = new ObservableCollection<RoomType>(context.RoomTypes.ToList());
+            }
+        }
         private bool CanAddReservation(object parameter)
         {
             return SelectedGuest != null && SelectedRoomType != null && CheckInDate.HasValue && CheckOutDate.HasValue && SelectedRoom != null;
@@ -147,7 +172,7 @@ namespace HotelManagement.ViewModels
                     RoomID = SelectedRoom.RoomID,
                     CheckInDate = CheckInDate.Value,
                     CheckOutDate = CheckOutDate.Value,
-                    NumberOfGuests = 2,//-----------------------------------------------------------------------------------POPRAVITI
+                    //NumberOfGuests = 2,//-----------------------------------------------------------------------------------POPRAVITI
                     UserID = 3//--------------------------------------------------------------------------------------------POPRAVITI
                 };
 
@@ -199,10 +224,18 @@ namespace HotelManagement.ViewModels
             Reservations.Remove(reservationToDelete);
         }
 
-
+        /*
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        */
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

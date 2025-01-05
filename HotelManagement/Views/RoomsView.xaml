@@ -20,7 +20,7 @@
                             <DataGridTextColumn Binding="{Binding RoomID}" Header="Room ID" />
                             <DataGridTextColumn Binding="{Binding RoomNumber}" Header="Room Number" />
                             <DataGridTextColumn Binding="{Binding Floor}" Header="Floor" />
-                            <DataGridTextColumn Binding="{Binding RoomType}" Header="Room Type" />
+                            <DataGridTextColumn Binding="{Binding RoomTypeName}" Header="Room Type" />
                             
                         </DataGrid.Columns>
                     </DataGrid>
@@ -43,11 +43,15 @@
                     </ComboBox>
 
 
-                    <ComboBox x:Name="RoomTypeComboBox" Width="200" Foreground="White" Margin="15"
-                            materialDesign:HintAssist.HelperText="Select a room type"
-                            materialDesign:HintAssist.Hint="Room Type"
-                            SelectedItem="{Binding RoomType, UpdateSourceTrigger=PropertyChanged}"
-                            ItemsSource="{Binding RoomTypes}">
+                    <ComboBox x:Name="RoomTypeComboBox" 
+                        Width="200" 
+                        Foreground="White" 
+                        Margin="15"
+                        materialDesign:HintAssist.HelperText="Select a room type"
+                        materialDesign:HintAssist.Hint="Room Type"
+                        SelectedItem="{Binding SelectedRoomType, UpdateSourceTrigger=PropertyChanged}"
+                        ItemsSource="{Binding RoomTypes}"
+                        DisplayMemberPath="Name">
                     </ComboBox>
 
                     <Button
@@ -69,7 +73,7 @@
                             <DataGridTextColumn Binding="{Binding RoomID}" Header="Room ID" IsReadOnly="True" />
                             <DataGridTextColumn Binding="{Binding RoomNumber}" Header="Room Number" />
                             <DataGridTextColumn Binding="{Binding Floor}" Header="Floor" />
-                            <DataGridTextColumn Binding="{Binding RoomType}" Header="Room Type" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding RoomTypeName}" Header="Room Type" IsReadOnly="True"/>
 
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
