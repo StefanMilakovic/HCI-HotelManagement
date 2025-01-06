@@ -1,13 +1,16 @@
-﻿using System;
+﻿using HotelManagement.Models;
+using HotelManagement.Utilities;
+using HotelManagement.Views;
+using System;
 using System.ComponentModel;
+using System.Text;
+using System.Windows;
 using System.Windows.Input;
 
 namespace HotelManagement
 {
-    public class LoginViewModel
+    public class LoginViewModel : INotifyPropertyChanged
     {
-        /*
-        // Username i Password - Binding iz View-a
         private string _username;
         private string _password;
 
@@ -30,61 +33,89 @@ namespace HotelManagement
                 OnPropertyChanged(nameof(Password));
             }
         }
-
-        // Komande za Login i promenu teme
+     
         public ICommand LoginCommand { get; }
-        public ICommand ThemeToggleCommand { get; }
-        public ICommand CloseWindowCommand { get; }
+        public ICommand CloseCommand { get; }
 
         public LoginViewModel()
         {
-            // Kreiranje komandi
-            LoginCommand = new RelayCommand(ExecuteLogin, CanExecuteLogin);
-            ThemeToggleCommand = new RelayCommand(ExecuteThemeToggle);
-            CloseWindowCommand = new RelayCommand(ExecuteCloseWindow);
+            LoginCommand = new RelayCommand(ExecuteLogin);
+            CloseCommand = new RelayCommand(ExecuteClose);
         }
 
-        private void ExecuteLogin(object parameter)
+        private async void ExecuteLogin(object parameter)
         {
-            // Login logika
-            Console.WriteLine($"Username: {Username}, Password: {Password}");
-
-            // Ovde dodaj validaciju ili proveru autentifikacije
-            if (Username == "admin" && Password == "1234")
+            try
             {
-                Console.WriteLine("Login successful");
-                // Možeš ovde otvarati novi prozor ako je potrebno (ne u MVVM direktno, već kroz servis)
+                using (var context = new HotelManagementContext())
+                {
+                    var user = context.Users.FirstOrDefault(u => u.Username == Username);
+                    
+                    if (user == null || !VerifyPassword(Password, user.PasswordHash))
+                    {
+                        MessageBox.Show("Invalid username or password.", "Login Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    CurrentUser.UserID = user.UserId;
+                    CurrentUser.Username = user.Username;
+
+                    switch (user.Role)
+                    {
+                        case Role.Administrator:
+                            OpenAdministratorView();
+                            break;
+
+                        case Role.Receptionist:
+                            OpenReceptionistView();
+                            break;
+
+                        default:
+                            MessageBox.Show("Role not recognized.", "Login Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            break;
+                    }
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Console.WriteLine("Invalid username or password");
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        private bool CanExecuteLogin(object parameter)
+        private bool VerifyPassword(string password, string passwordHash)
         {
-            // Omogućava ili onemogućava dugme na osnovu uslova
-            return !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password);
+            string hashedEnteredPassword = PasswordHelper.HashPassword(password);
+            return hashedEnteredPassword == passwordHash;
         }
 
-        private void ExecuteThemeToggle(object parameter)
+        private void OpenAdministratorView()
         {
-            // Logika za promenu teme (ovo se može povezati sa MaterialDesignThemes API-jem)
-            Console.WriteLine("Theme toggled");
+            var adminView = new AdministratorView();
+            Application.Current.MainWindow.Close();
+            Application.Current.MainWindow = adminView;
+            adminView.Show();
         }
 
-        private void ExecuteCloseWindow(object parameter)
+        private void OpenReceptionistView()
         {
-            // Zatvaranje prozora
-            Application.Current.Shutdown();
+            var receptionistView = new ReceptionistView();
+            Application.Current.MainWindow.Close();
+            Application.Current.MainWindow = receptionistView;
+            receptionistView.Show();
         }
 
-        // INotifyPropertyChanged implementacija
+        private void ExecuteClose(object parameter)
+        {
+            if (Application.Current.MainWindow != null)
+            {
+                Application.Current.MainWindow.Close();
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
+        protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        */
     }
 }

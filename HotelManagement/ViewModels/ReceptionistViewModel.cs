@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Windows;
+﻿using HotelManagement.Models;
 using HotelManagement.Views;
-using HotelManagement.Models;
-using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+
 
 namespace HotelManagement.ViewModels
 {
@@ -33,7 +29,9 @@ namespace HotelManagement.ViewModels
         public ICommand ShowGuestsViewCommand { get; }
         public ICommand ShowServiceReservationCommand { get; }
         public ICommand ShowInvoicesViewCommand { get; }
+        public ICommand ShowCheckInCommand { get; }
         public ICommand CloseCommand { get; }
+        public ICommand LogOutCommand { get; }
 
         public ReceptionistViewModel()
         {
@@ -41,12 +39,20 @@ namespace HotelManagement.ViewModels
             ShowNewReservationCommand = new RelayCommand(o => CurrentView = new NewReservationView());
             ShowServiceReservationCommand = new RelayCommand(o => CurrentView = new ServiceReservationView());
             ShowInvoicesViewCommand = new RelayCommand(o => CurrentView = new InvoicesView());
+            ShowCheckInCommand = new RelayCommand(o => CurrentView = new CheckInView());
 
+            LogOutCommand = new RelayCommand(LogOut);
             CloseCommand = new RelayCommand(o => Application.Current.Shutdown());
 
             CurrentView = new GuestsView();
-            //Reservations = new ObservableCollection<Reservation>();
+        }
 
+        private void LogOut(object parameter)
+        {
+            var logInView = new LoginView();
+            Application.Current.MainWindow.Close();
+            Application.Current.MainWindow = logInView;
+            logInView.Show();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -55,5 +61,6 @@ namespace HotelManagement.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
     }
 }

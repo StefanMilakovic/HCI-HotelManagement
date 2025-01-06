@@ -18,8 +18,8 @@ namespace HotelManagement
         public LoginView()
         {
             InitializeComponent();
+            this.DataContext = new LoginViewModel();
         }
-
 
         private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -37,14 +37,18 @@ namespace HotelManagement
         private void ThemeToggleButton_Click(object sender, RoutedEventArgs e)
         {
             // Dobavljanje trenutne teme
-            
+
         }
 
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
-        { 
-          string username = usernameTextBox.Text;
-          string password = passwordBox.Password; 
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            var passwordBox = (PasswordBox)sender;
+            var viewModel = (LoginViewModel)this.DataContext;
 
-          Console.WriteLine($"Username: {username}, Password: {password}"); }
+            if (viewModel != null)
+            {
+                viewModel.Password = passwordBox.Password;
+            }
         }
+    }
 }

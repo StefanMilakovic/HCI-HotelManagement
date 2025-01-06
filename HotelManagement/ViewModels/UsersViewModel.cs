@@ -1,7 +1,9 @@
 ﻿using HotelManagement.Models;
+using HotelManagement.Utilities;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Input;
 
 namespace HotelManagement.ViewModels
@@ -49,6 +51,9 @@ namespace HotelManagement.ViewModels
 
         private bool CanAddUser(object parameter)
         {
+            
+                // Proveri da li već postoji korisnik sa istim korisničkim imenom
+                
             return !string.IsNullOrEmpty(FirstName) &&
                    !string.IsNullOrEmpty(LastName) &&
                    !string.IsNullOrEmpty(Username) &&
@@ -56,6 +61,7 @@ namespace HotelManagement.ViewModels
                    Role.HasValue;
         }
 
+        /*
         private void AddUser(object parameter)
         {
             using (var context = new HotelManagementContext())
@@ -87,6 +93,49 @@ namespace HotelManagement.ViewModels
                 OnPropertyChanged(nameof(Role));
             }
         }
+        */
+
+        private void AddUser(object parameter)
+        {
+            using (var context = new HotelManagementContext())
+            {
+
+                // Hashuj lozinku pre nego što je sačuvaš
+                string hashedPassword = PasswordHelper.HashPassword(this.PasswordHash);
+
+                // Kreiraj novog korisnika sa hashiranom lozinkom
+                var newUser = new User
+                {
+                    FirstName = this.FirstName,
+                    LastName = this.LastName,
+                    Username = this.Username,
+                    PasswordHash = hashedPassword, // Koristi hash lozinke
+                    Role = this.Role
+                };
+
+                // Dodaj korisnika u bazu podataka
+                context.Users.Add(newUser);
+                context.SaveChanges();
+
+                // Dodaj korisnika u lokalnu kolekciju (ako se koristi za prikaz u UI-ju)
+                Users.Add(newUser);
+
+                // Resetuj vrednosti unosa u UI
+                FirstName = string.Empty;
+                LastName = string.Empty;
+                Username = string.Empty;
+                PasswordHash = string.Empty;
+                Role = null;
+
+                // Obavesti UI da su se vrednosti svojstava promenile
+                OnPropertyChanged(nameof(FirstName));
+                OnPropertyChanged(nameof(LastName));
+                OnPropertyChanged(nameof(Username));
+                OnPropertyChanged(nameof(PasswordHash));
+                OnPropertyChanged(nameof(Role));
+            }
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -14,22 +14,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
-using HotelManagement.Models;
-using HotelManagement.Views;
-using System.ComponentModel;
-
-
 namespace HotelManagement.Views
 {
-    public partial class NavigationBar : UserControl
+    public partial class CheckInView : UserControl
     {
-        public NavigationBar()
+        public CheckInView()
         {
             InitializeComponent();
-            //this.DataContext = new ReceptionistViewModel();
+            this.DataContext = new CheckInViewModel();
         }
 
-       
+        private void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+            tabControl.SelectedIndex = 1;
+        }
     }
 }

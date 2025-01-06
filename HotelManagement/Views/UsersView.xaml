@@ -21,7 +21,6 @@
                             <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" />
                             <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" />
                             <DataGridTextColumn Binding="{Binding Username}" Header="Username" />
-                            <DataGridTextColumn Binding="{Binding PasswordHash}" Header="Password Hash" />
                             <DataGridTextColumn Binding="{Binding Role}" Header="Role" />
                         </DataGrid.Columns>
                     </DataGrid>
@@ -78,7 +77,6 @@
                             <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" />
                             <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" />
                             <DataGridTextColumn Binding="{Binding Username}" Header="Username" />
-                            <DataGridTextColumn Binding="{Binding PasswordHash}" Header="Password Hash" />
                             <DataGridTextColumn Binding="{Binding Role}" Header="Role" IsReadOnly="True"/>
 
                             <DataGridTemplateColumn>

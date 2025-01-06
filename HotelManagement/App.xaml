@@ -8,7 +8,7 @@
 
     
 
-    StartupUri="../Views/ReceptionistView.xaml">
+    StartupUri="../Views/LogInView.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

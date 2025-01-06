@@ -51,7 +51,7 @@ namespace HotelManagement.ViewModels
             {
                 _selectedRoomType = value;
                 OnPropertyChanged(nameof(SelectedRoomType));
-                UpdateAvailableRooms(); // Update available rooms when room type changes
+                UpdateAvailableRooms();
             }
         }
 
@@ -62,7 +62,7 @@ namespace HotelManagement.ViewModels
             {
                 _checkInDate = value;
                 OnPropertyChanged(nameof(CheckInDate));
-                UpdateAvailableRooms();//--------------------------------------------------------------------------
+                UpdateAvailableRooms();
             }
         }
 
@@ -73,7 +73,7 @@ namespace HotelManagement.ViewModels
             {
                 _checkOutDate = value;
                 OnPropertyChanged(nameof(CheckOutDate));
-                UpdateAvailableRooms();//--------------------------------------------------------------------------
+                UpdateAvailableRooms();
             }
         }
 
@@ -172,8 +172,7 @@ namespace HotelManagement.ViewModels
                     RoomID = SelectedRoom.RoomID,
                     CheckInDate = CheckInDate.Value,
                     CheckOutDate = CheckOutDate.Value,
-                    //NumberOfGuests = 2,//-----------------------------------------------------------------------------------POPRAVITI
-                    UserID = 3//--------------------------------------------------------------------------------------------POPRAVITI
+                    UserID = CurrentUser.UserID
                 };
 
                 context.Reservations.Add(newReservation);
@@ -224,14 +223,6 @@ namespace HotelManagement.ViewModels
             Reservations.Remove(reservationToDelete);
         }
 
-        /*
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        */
 
         public event PropertyChangedEventHandler PropertyChanged;
 

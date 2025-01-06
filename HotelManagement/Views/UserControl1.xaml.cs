@@ -1,5 +1,4 @@
-﻿using HotelManagement.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,22 +13,20 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
-using HotelManagement.Models;
-using HotelManagement.Views;
-using System.ComponentModel;
-
-
 namespace HotelManagement.Views
 {
-    public partial class NavigationBar : UserControl
+    /// <summary>
+    /// Interaction logic for UserControl1.xaml
+    /// </summary>
+    public partial class UserControl1 : UserControl
     {
-        public NavigationBar()
+        public UserControl1()
         {
             InitializeComponent();
-            //this.DataContext = new ReceptionistViewModel();
         }
 
-       
+        
+        
+
     }
 }
