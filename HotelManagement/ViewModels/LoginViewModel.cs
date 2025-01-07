@@ -5,6 +5,8 @@ using System;
 using System.ComponentModel;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace HotelManagement
@@ -43,6 +45,7 @@ namespace HotelManagement
             CloseCommand = new RelayCommand(ExecuteClose);
         }
 
+        
         private async void ExecuteLogin(object parameter)
         {
             try

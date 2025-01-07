@@ -6,6 +6,7 @@
         xmlns:views="clr-namespace:HotelManagement.Views"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        Icon="../Resources/hotelIcon.ico"
         MouseDown="Window_MouseDown"
 
     mc:Ignorable="d"

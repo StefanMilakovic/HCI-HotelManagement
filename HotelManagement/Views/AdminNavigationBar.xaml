@@ -98,6 +98,7 @@
             Width="25" Height="25"
             Background="Transparent"
             Style="{StaticResource MaterialDesignFlatButton}"
+            Command="{Binding DataContext.LogOutCommand, RelativeSource={RelativeSource AncestorType=Window}}"
             Padding="0"
             VerticalAlignment="Center">
             <materialDesign:PackIcon Kind="Logout" Width="24" Height="24" Foreground="White" />

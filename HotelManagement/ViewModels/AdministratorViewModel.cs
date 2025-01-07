@@ -34,6 +34,7 @@ namespace HotelManagement.ViewModels
         public ICommand ShowServicesViewCommand { get; }
         public ICommand ShowReportsViewCommand { get; }
         public ICommand ShowGuestsViewCommand { get; }
+        public ICommand LogOutCommand { get; }
         public ICommand CloseCommand { get; }
 
         public AdministratorViewModel()
@@ -42,13 +43,21 @@ namespace HotelManagement.ViewModels
             ShowRoomsViewCommand = new RelayCommand(o => CurrentView = new RoomsViewModel());
             ShowServicesViewCommand = new RelayCommand(o => CurrentView = new ServicesViewModel());
             ShowReportsViewCommand = new RelayCommand(o => CurrentView = new ReportsViewModel());
-            //ShowGuestsViewCommand = new RelayCommand(o => CurrentView = new GuestsViewModel());
             ShowGuestsViewCommand = new RelayCommand(o => CurrentView = new GuestsView());
+            LogOutCommand = new RelayCommand(LogOut);
 
             CloseCommand = new RelayCommand(o => Application.Current.Shutdown());
 
             CurrentView = new UsersViewModel();
 
+        }
+
+        private void LogOut(object parameter)
+        {
+            var logInView = new LoginView();
+            Application.Current.MainWindow.Close();
+            Application.Current.MainWindow = logInView;
+            logInView.Show();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

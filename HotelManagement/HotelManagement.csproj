@@ -33,4 +33,8 @@
     <Resource Include="Resources\loginLogo.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Themes\" />
+  </ItemGroup>
+
 </Project>
