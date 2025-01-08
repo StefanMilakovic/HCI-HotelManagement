@@ -15,30 +15,30 @@
     <Grid>
         <TabControl Margin="0">
 
-            <TabItem Header="Add Guest">
+            <TabItem Header="Add Guest" Background="{DynamicResource BackgroundBrush}">
                 <StackPanel Margin="20">
 
-                    <TextBox x:Name="FirstNameTextBox" Width="200" Foreground="White" Margin="15"
+                    <TextBox x:Name="FirstNameTextBox" Width="200" Foreground="{DynamicResource TextBrush}" Margin="15"
        materialDesign:HintAssist.HelperText="First name must not be empty"
        materialDesign:HintAssist.Hint="First Name"
 Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <TextBox x:Name="LastNameTextBox" Width="200" Foreground="White" Margin="15"
+                    <TextBox x:Name="LastNameTextBox" Width="200" Foreground="{DynamicResource TextBrush}" Margin="15"
 materialDesign:HintAssist.HelperText="Last name must not be empty"
 materialDesign:HintAssist.Hint="Last Name"
 Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <TextBox x:Name="PassportNumberTextBox" Width="200" Foreground="White" Margin="15"
+                    <TextBox x:Name="PassportNumberTextBox" Width="200" Foreground="{DynamicResource TextBrush}" Margin="15"
 materialDesign:HintAssist.HelperText="Passport number must not be empty"
 materialDesign:HintAssist.Hint="Passport Number"
 Text="{Binding PassportNumber, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <TextBox x:Name="EmailTextBox" Width="200" Foreground="White" Margin="15"
+                    <TextBox x:Name="EmailTextBox" Width="200" Foreground="{DynamicResource TextBrush}" Margin="15"
 materialDesign:HintAssist.HelperText="Email must not be empty"
 materialDesign:HintAssist.Hint="Email"
 Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <TextBox x:Name="PhoneNumberTextBox" Width="200" Foreground="White" Margin="15"
+                    <TextBox x:Name="PhoneNumberTextBox" Width="200" Foreground="{DynamicResource TextBrush}" Margin="15"
 materialDesign:HintAssist.HelperText="Phone number must not be empty"
 materialDesign:HintAssist.Hint="Phone Number"
 Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" />

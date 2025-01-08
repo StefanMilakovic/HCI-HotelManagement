@@ -27,12 +27,12 @@
 
             <TabItem Header="Add Service">
                 <StackPanel Margin="20">
-                    <TextBox x:Name="NameTextBox" Width="200" Foreground="White" Margin="15"
+                    <TextBox x:Name="NameTextBox" Width="200" Foreground="{DynamicResource TextBrush}" Margin="15"
                              materialDesign:HintAssist.HelperText="Service name must not be empty"
                              materialDesign:HintAssist.Hint="Service Name"
                              Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <TextBox x:Name="PriceTextBox" Width="200" Foreground="White" Margin="15"
+                    <TextBox x:Name="PriceTextBox" Width="200" Foreground="{DynamicResource TextBrush}" Margin="15"
                              materialDesign:HintAssist.HelperText="Price must not be empty"
                              materialDesign:HintAssist.Hint="Price"
                              Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}" />

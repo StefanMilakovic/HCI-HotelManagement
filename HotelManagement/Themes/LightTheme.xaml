@@ -1,0 +1,20 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="BackgroundColor">#FFFFFF</Color>
+    <Color x:Key="SecondaryColor">#007777</Color>
+    <Color x:Key="TextColor">Black</Color>
+    <Color x:Key="ElementColor">#535353</Color>
+    <Color x:Key="ButtonColor">White</Color>
+    <Color x:Key="ChipColor">#b3b3b3</Color>
+
+    <SolidColorBrush x:Key="BackgroundBrush" Color="{DynamicResource BackgroundColor}" />
+    <SolidColorBrush x:Key="SecondaryBrush" Color="{DynamicResource SecondaryColor}" />
+    <SolidColorBrush x:Key="TextBrush" Color="{DynamicResource TextColor}" />
+    <SolidColorBrush x:Key="ElementBrush" Color="{DynamicResource ElementColor}" />
+    <SolidColorBrush x:Key="ChipBrush" Color="{DynamicResource ChipColor}" />
+    <SolidColorBrush x:Key="ButtonBrush" Color="{DynamicResource ButtonColor}" />
+
+
+</ResourceDictionary>

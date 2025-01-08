@@ -26,12 +26,12 @@
 
                         <!-- Guest Label and ComboBox in same row -->
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Text="Guest:" Foreground="White" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Width="150"/>
+                            <TextBlock Text="Guest:" Foreground="{DynamicResource TextBrush}" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Width="150"/>
 
                             <!-- ComboBox za odabir gosta -->
                             <ComboBox
                                 Width="200"
-                                Foreground="White"
+                                Foreground="{DynamicResource TextBrush}"
                                 SelectedItem="{Binding SelectedGuest}"
                                 ItemsSource="{Binding Guests}"
                                 materialDesign:HintAssist.Hint="Select a Guest"
@@ -54,10 +54,10 @@
 
                         <!-- Room Type Label and ComboBox in same row -->
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Text="Room Type:" Foreground="White" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Width="150"/>
+                            <TextBlock Text="Room Type:" Foreground="{DynamicResource TextBrush}" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Width="150"/>
                             <ComboBox
                                 Width="200"
-                                Foreground="White"
+                                Foreground="{DynamicResource TextBrush}"
                                 SelectedItem="{Binding SelectedRoomType}"
                                 ItemsSource="{Binding RoomTypes}"
                                 materialDesign:HintAssist.Hint="Select Room Type"
@@ -67,10 +67,10 @@
 
                         <!-- Check-In Date Label and DatePicker in same row -->
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Text="Check-In Date:" Foreground="White" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Width="150"/>
+                            <TextBlock Text="Check-In Date:" Foreground="{DynamicResource TextBrush}" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Width="150"/>
                             <DatePicker
                                 Width="200"
-                                Foreground="White"
+                                Foreground="{DynamicResource TextBrush}"
                                 SelectedDate="{Binding CheckInDate}"
                                 materialDesign:HintAssist.Hint="Select Check-In Date"
                                 materialDesign:HintAssist.HelperText="Choose check-in date"
@@ -79,10 +79,10 @@
 
                         <!-- Check-Out Date Label and DatePicker in same row -->
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Text="Check-Out Date:" Foreground="White" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Width="150"/>
+                            <TextBlock Text="Check-Out Date:" Foreground="{DynamicResource TextBrush}" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Width="150"/>
                             <DatePicker
                                 Width="200"
-                                Foreground="White"
+                                Foreground="{DynamicResource TextBrush}"
                                 SelectedDate="{Binding CheckOutDate}"
                                 materialDesign:HintAssist.Hint="Select Check-Out Date"
                                 materialDesign:HintAssist.HelperText="Choose check-out date"
@@ -91,10 +91,10 @@
 
                         <!-- Available Room Label and ComboBox in same row -->
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Text="Available Room:" Foreground="White" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Width="150"/>
+                            <TextBlock Text="Available Room:" Foreground="{DynamicResource TextBrush}" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Width="150"/>
                             <ComboBox
                                 Width="200"
-                                Foreground="White"
+                                Foreground="{DynamicResource TextBrush}"
                                 SelectedItem="{Binding SelectedRoom}"
                                 ItemsSource="{Binding AvailableRooms}"
                                 materialDesign:HintAssist.Hint="Select Available Room"

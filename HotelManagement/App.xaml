@@ -6,17 +6,48 @@
     xmlns:views="clr-namespace:HotelManagement.Views"
     xmlns:viewModels="clr-namespace:HotelManagement.ViewModels"
 
+    StartupUri="../Views/LoginView.xaml">
     
-
-    StartupUri="../Views/LogInView.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            
+            
             <ResourceDictionary.MergedDictionaries>
-                <materialDesign:BundledTheme BaseTheme="Dark" PrimaryColor="Cyan" SecondaryColor="Lime"/>
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="Cyan" SecondaryColor="Lime"/>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            
+
+
+            <ResourceDictionary x:Key="LightTheme">
+                <ResourceDictionary.MergedDictionaries>
+                    <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="Teal" SecondaryColor="Lime" />
+                    <ResourceDictionary Source="Themes/LightTheme.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+
+            <ResourceDictionary x:Key="DarkTheme">
+                <ResourceDictionary.MergedDictionaries>
+                    <materialDesign:BundledTheme BaseTheme="Dark" PrimaryColor="Teal" SecondaryColor="Lime"/>
+                    <ResourceDictionary Source="Themes/DarkTheme.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+
+
+            <ResourceDictionary x:Key="DarkRedTheme">
+                <ResourceDictionary.MergedDictionaries>
+                    <materialDesign:BundledTheme BaseTheme="Dark" PrimaryColor="Red" SecondaryColor="Lime"/>
+                    <ResourceDictionary Source="Themes/DarkRedTheme.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+
+            <ResourceDictionary x:Key="OrangeDarkTheme">
+                <ResourceDictionary.MergedDictionaries>
+                    <materialDesign:BundledTheme BaseTheme="Dark" PrimaryColor="DeepOrange" SecondaryColor="Lime"/>
+                    <ResourceDictionary Source="Themes/OrangeDarkTheme.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+
             <DataTemplate DataType="{x:Type viewModels:UsersViewModel}">
                 <views:UsersView />
             </DataTemplate>

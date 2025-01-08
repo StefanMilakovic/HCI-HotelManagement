@@ -39,12 +39,12 @@
                                                 <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
                                             <StackPanel Grid.Row="0" Margin="8">
-                                                <TextBlock FontWeight="Bold" Text="Reservation ID:" Foreground="White"/>
-                                                <TextBlock Text="{Binding ReservationID}" Foreground="White"/>
+                                                <TextBlock FontWeight="Bold" Text="Reservation ID:" Foreground="{DynamicResource TextBrush}"/>
+                                                <TextBlock Text="{Binding ReservationID}" Foreground="{DynamicResource TextBrush}"/>
                                             </StackPanel>
                                             <StackPanel Grid.Row="1" Margin="8">
-                                                <TextBlock FontWeight="Bold" Text="Guest Name:" Foreground="White"/>
-                                                <TextBlock Text="{Binding GuestName}" Foreground="White"/>
+                                                <TextBlock FontWeight="Bold" Text="Guest Name:" Foreground="{DynamicResource TextBrush}"/>
+                                                <TextBlock Text="{Binding GuestName}" Foreground="{DynamicResource TextBrush}"/>
                                             </StackPanel>
                                             <Button Grid.Row="0"
                                                     Margin="0,0,12,-20"
@@ -64,8 +64,8 @@
                 </Border>
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="30,10,30,10">
-                    <TextBlock FontWeight="Bold" Text="Selected Reservation (ID):" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                    <TextBlock Text="{Binding SelectedReservation.ReservationID}" Foreground="White" VerticalAlignment="Center" />
+                    <TextBlock FontWeight="Bold" Text="Selected Reservation (ID):" Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Text="{Binding SelectedReservation.ReservationID}" Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center" />
                 </StackPanel>
 
                 <Button Width="110"
@@ -105,11 +105,11 @@
                                                 <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
                                             <StackPanel Grid.Row="0" Margin="8">
-                                                <TextBlock FontWeight="Bold" Text="Service ID:" Foreground="White"/>
-                                                <TextBlock Text="{Binding ServiceId}" Foreground="White"/>
+                                                <TextBlock FontWeight="Bold" Text="Service ID:" Foreground="{DynamicResource TextBrush}"/>
+                                                <TextBlock Text="{Binding ServiceId}" Foreground="{DynamicResource TextBrush}"/>
                                             </StackPanel>
                                             <StackPanel Grid.Row="1" Margin="8">
-                                                <TextBlock FontWeight="Bold" Text="{Binding Name}" Foreground="White"/>
+                                                <TextBlock FontWeight="Bold" Text="{Binding Name}" Foreground="{DynamicResource TextBrush}"/>
                                             </StackPanel>
                                             <Button Grid.Row="0"
                                             Margin="0,0,12,-20"
@@ -129,14 +129,14 @@
                 </Border>
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="30,10,30,10">
-                    <TextBlock FontWeight="Bold" Text="Selected Service (ID):" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                    <TextBlock Text="{Binding SelectedService.ServiceId}" Foreground="White" VerticalAlignment="Center" />
+                    <TextBlock FontWeight="Bold" Text="Selected Service (ID):" Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Text="{Binding SelectedService.ServiceId}" Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center" />
                 </StackPanel>
 
 
                 <TextBlock Grid.Row="1" Text="Quantity: " VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,225,0"/>
                 <ComboBox Grid.Row="1" Width="60" Margin="0,0,160,0" HorizontalAlignment="Right" 
-                    
+                    Foreground="{DynamicResource TextBrush}"
                     IsEditable="False"
                     ItemsSource="{Binding QuantityList}">
                     <ComboBox.Text>

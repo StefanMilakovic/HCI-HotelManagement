@@ -6,12 +6,13 @@
         xmlns:views="clr-namespace:HotelManagement.Views"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown"
 
     mc:Ignorable="d"
         Title="HotelManagement" Height="600" Width="900">
 
-    <Border Background="#212121" CornerRadius="10" BorderBrush="#007777" BorderThickness="2">
+    <Border Background="{DynamicResource BackgroundBrush}" CornerRadius="10" BorderBrush="{DynamicResource SecondaryBrush}" BorderThickness="2">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -29,7 +30,7 @@
                 Click="CloseWindow"
                 Margin="0" Padding="0"
                 Grid.Row="0">
-                    <materialDesign:PackIcon Kind="Close" Foreground="#b3b3b3" Width="20" Height="20"/>
+                <materialDesign:PackIcon Kind="Close" Foreground="{DynamicResource ElementBrush}" Width="20" Height="20"/>
             </Button>
 
             <Button Grid.Row="0"
@@ -42,7 +43,7 @@
                 Margin="0" Padding="0"
                 BorderBrush="Transparent" 
                 BorderThickness="0">
-                <materialDesign:PackIcon Kind="ThemeLightDark" Foreground="#b3b3b3" Width="30" Height="30" RenderTransformOrigin="0.5,0.5">
+                <materialDesign:PackIcon Kind="ThemeLightDark" Foreground="{DynamicResource ElementBrush}" Width="30" Height="30" RenderTransformOrigin="0.5,0.5">
                     <materialDesign:PackIcon.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -54,7 +55,7 @@
                 </materialDesign:PackIcon>
             </Button>
 
-            <materialDesign:Chip Content="Administrator" Foreground="White" Background="#535353" Margin="5,5,5,5" IsEnabled="False"/>
+            <materialDesign:Chip Content="Administrator" Foreground="{DynamicResource TextBrush}" Background="{DynamicResource ChipBrush}" Margin="5,5,5,5" IsEnabled="False"/>
 
             <views:AdminNavigationBar Grid.Row="1"/>
 

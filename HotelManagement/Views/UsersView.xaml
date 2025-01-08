@@ -29,28 +29,28 @@
 
             <TabItem Header="Add User">
                 <StackPanel Margin="20">
-                    
-                    <TextBox x:Name="FirstNameTextBox" Width="200" Foreground="White" Margin="15"
+
+                    <TextBox x:Name="FirstNameTextBox" Width="200" Foreground="{DynamicResource TextBrush}" Margin="15"
                              materialDesign:HintAssist.HelperText="First name must not be empty"
                              materialDesign:HintAssist.Hint="First Name"
                              Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <TextBox x:Name="LastNameTextBox" Width="200" Foreground="White" Margin="15"
+                    <TextBox x:Name="LastNameTextBox" Width="200" Foreground="{DynamicResource TextBrush}" Margin="15"
                              materialDesign:HintAssist.HelperText="Last name must not be empty"
                              materialDesign:HintAssist.Hint="Last Name"
                              Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <TextBox x:Name="UsernameTextBox" Width="200" Foreground="White" Margin="15"
+                    <TextBox x:Name="UsernameTextBox" Width="200" Foreground="{DynamicResource TextBrush}" Margin="15"
                              materialDesign:HintAssist.HelperText="Username must not be empty"
                              materialDesign:HintAssist.Hint="Username"
                              Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <TextBox x:Name="PasswordBox" Width="200" Foreground="White" Margin="15"
+                    <TextBox x:Name="PasswordBox" Width="200" Foreground="{DynamicResource TextBrush}" Margin="15"
                              materialDesign:HintAssist.HelperText="Password must not be empty"
                              materialDesign:HintAssist.Hint="Password"
                              Text="{Binding PasswordHash, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <ComboBox x:Name="RoleComboBox" Width="200" Foreground="White" Margin="15"
+                    <ComboBox x:Name="RoleComboBox" Width="200" Foreground="{DynamicResource TextBrush}" Margin="15"
                             materialDesign:HintAssist.HelperText="Select a role"
                             materialDesign:HintAssist.Hint="Role"
                             SelectedItem="{Binding Role, UpdateSourceTrigger=PropertyChanged}"

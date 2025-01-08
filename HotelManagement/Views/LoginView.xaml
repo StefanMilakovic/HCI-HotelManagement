@@ -8,14 +8,15 @@
         mc:Ignorable="d"
         Title="LoginWindow" Height="320" Width="650"
         MouseDown="Window_MouseDown"
-        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        WindowStyle="None" AllowsTransparency="True" 
+        Background="Transparent"
         Icon="../Resources/hotelIcon.ico"
+        
         WindowStartupLocation="CenterScreen">
 
 
-
     <!-- boje #212121, #007777 -->
-    <Border Background="#212121" CornerRadius="10" BorderBrush="#007777" BorderThickness="2">
+    <Border Background="{DynamicResource BackgroundBrush}" CornerRadius="10" BorderBrush="{DynamicResource SecondaryBrush}" BorderThickness="2">
         <Grid>
             <Button x:Name="CloseButton" 
                     Width="30" Height="30"
@@ -26,7 +27,7 @@
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Click="CloseWindow"
                     Margin="10" Padding="0">
-                <materialDesign:PackIcon Kind="Close" Foreground="#b3b3b3" Width="20" Height="20"/>
+                <materialDesign:PackIcon Kind="Close" Foreground="{DynamicResource ElementBrush}" Width="20" Height="20"/>
             </Button>
 
             <Grid>
@@ -41,8 +42,8 @@
                 <Border Grid.Column="0" CornerRadius="10" ClipToBounds="True">
                     <Border.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                            <GradientStop Color="#007777" Offset="-0.5" />
-                            <GradientStop Color="#212121" Offset="1" />
+                            <GradientStop Color="{DynamicResource SecondaryColor}" Offset="-0.5" />
+                            <GradientStop Color="{DynamicResource BackgroundColor}" Offset="1" />
                         </LinearGradientBrush>
                     </Border.Background>
                 </Border>
@@ -54,7 +55,7 @@
                     HorizontalAlignment="Center" VerticalAlignment="Center" />
 
 
-                <Border Grid.Column="1" Width="2" Height="270" Background="#b3b3b3" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="2" />
+                <Border Grid.Column="1" Width="2" Height="270" Background="{DynamicResource ElementBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="2" />
 
                 <Button Grid.Column="2"
                     Width="40" Height="40"
@@ -64,17 +65,15 @@
                     ToolTip="Toggle Theme"
                     Click="ThemeToggleButton_Click"
                     Margin="10" Padding="0"
-                    BorderBrush="Transparent" 
+                    BorderBrush="Transparent"
                     BorderThickness="0">
-                    <materialDesign:PackIcon Kind="ThemeLightDark" Foreground="#b3b3b3" Width="30" Height="30"/>
+                    <materialDesign:PackIcon Kind="ThemeLightDark" Foreground="{DynamicResource ElementBrush}" Width="30" Height="30"/>
                 </Button>
 
                 <StackPanel Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="296" >
-                    <TextBlock Text="Log In" FontSize="25" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" Margin="20,20,20,20" FontFamily="../Resources/GothamBold.otf#Gotham Light"/>
-                    <TextBox x:Name="usernameTextBox" Width="220" Height="50" Margin="0,20,0,0" Style="{StaticResource MaterialDesignOutlinedTextBox}" FontSize="14" Text="{Binding Username, Mode=TwoWay}">
+                    <TextBlock Text="Log In" FontSize="25" Foreground="{DynamicResource TextBrush}" FontWeight="Bold" HorizontalAlignment="Center" Margin="20,20,20,20" FontFamily="../Resources/GothamBold.otf#Gotham Light"/>
+                    <TextBox x:Name="usernameTextBox" Width="220" Height="50" Margin="0,20,0,0" Style="{StaticResource MaterialDesignOutlinedTextBox}" FontSize="14" Text="{Binding Username, Mode=TwoWay}" BorderBrush="{DynamicResource ElementBrush}" Foreground="{DynamicResource ElementBrush}">
                         <materialDesign:HintAssist.Hint>Username</materialDesign:HintAssist.Hint>
-                        <TextBox.Foreground>#b3b3b3</TextBox.Foreground>
-                        <TextBox.BorderBrush>#b3b3b3</TextBox.BorderBrush>
                         <TextBox.Background>Transparent</TextBox.Background>
                     </TextBox>
                     <PasswordBox x:Name="passwordBox" 
@@ -82,11 +81,11 @@
                                  Margin="20" 
                                  Style="{StaticResource MaterialDesignOutlinedPasswordBox}" 
                                  FontSize="14" 
-                                 PasswordChanged="PasswordBox_PasswordChanged">
+                                 PasswordChanged="PasswordBox_PasswordChanged"
+                                 BorderBrush="{DynamicResource ElementBrush}" Foreground="{DynamicResource ElementBrush}">
                         <materialDesign:HintAssist.Hint>Password</materialDesign:HintAssist.Hint>
                         <materialDesign:TextFieldAssist.HasClearButton>True</materialDesign:TextFieldAssist.HasClearButton>
-                        <PasswordBox.Foreground>#b3b3b3</PasswordBox.Foreground>
-                        <PasswordBox.BorderBrush>#b3b3b3</PasswordBox.BorderBrush>
+
                         <PasswordBox.Background>Transparent</PasswordBox.Background>
                     </PasswordBox>
 

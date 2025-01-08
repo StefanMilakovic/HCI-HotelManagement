@@ -30,12 +30,12 @@
             <TabItem Header="Add Room">
                 <StackPanel Margin="20">
 
-                    <TextBox x:Name="RoomNumberTextBox" Width="200" Foreground="White" Margin="15"
+                    <TextBox x:Name="RoomNumberTextBox" Width="200" Foreground="{DynamicResource TextBrush}" Margin="15"
                              materialDesign:HintAssist.HelperText="Room number must not be empty"
                              materialDesign:HintAssist.Hint="Room Number"
                              Text="{Binding RoomNumber, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <ComboBox x:Name="FloorComboBox" Width="200" Foreground="White" Margin="15"
+                    <ComboBox x:Name="FloorComboBox" Width="200" Foreground="{DynamicResource TextBrush}" Margin="15"
                             materialDesign:HintAssist.HelperText="Select a floor"
                             materialDesign:HintAssist.Hint="Floor"
                             SelectedItem="{Binding Floor, UpdateSourceTrigger=PropertyChanged}"
@@ -45,7 +45,7 @@
 
                     <ComboBox x:Name="RoomTypeComboBox" 
                         Width="200" 
-                        Foreground="White" 
+                        Foreground="{DynamicResource TextBrush}" 
                         Margin="15"
                         materialDesign:HintAssist.HelperText="Select a room type"
                         materialDesign:HintAssist.Hint="Room Type"

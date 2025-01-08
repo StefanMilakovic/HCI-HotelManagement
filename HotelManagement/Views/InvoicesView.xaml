@@ -40,12 +40,12 @@
                                                 <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
                                             <StackPanel Grid.Row="0" Margin="8">
-                                                <TextBlock FontWeight="Bold" Text="Reservation ID:" Foreground="White"/>
-                                                <TextBlock Text="{Binding ReservationID}" Foreground="White"/>
+                                                <TextBlock FontWeight="Bold" Text="Reservation ID:" Foreground="{DynamicResource TextBrush}"/>
+                                                <TextBlock Text="{Binding ReservationID}" Foreground="{DynamicResource TextBrush}"/>
                                             </StackPanel>
                                             <StackPanel Grid.Row="1" Margin="8">
-                                                <TextBlock FontWeight="Bold" Text="Guest Name:" Foreground="White"/>
-                                                <TextBlock Text="{Binding GuestName}" Foreground="White"/>
+                                                <TextBlock FontWeight="Bold" Text="Guest Name:" Foreground="{DynamicResource TextBrush}"/>
+                                                <TextBlock Text="{Binding GuestName}" Foreground="{DynamicResource TextBrush}"/>
                                             </StackPanel>
                                             <Button Grid.Row="0"
                                             Margin="0,0,12,-20"
@@ -65,8 +65,8 @@
                 </Border>
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="30,10,30,10">
-                    <TextBlock FontWeight="Bold" Text="Selected Reservation (ID):" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                    <TextBlock Text="{Binding SelectedReservation.ReservationID}" Foreground="White" VerticalAlignment="Center" />
+                    <TextBlock FontWeight="Bold" Text="Selected Reservation (ID):" Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Text="{Binding SelectedReservation.ReservationID}" Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center" />
                 </StackPanel>
 
                 <Button Width="140"
@@ -112,31 +112,31 @@
 
                                             <!-- Invoice ID -->
                                             <StackPanel Grid.Row="0" Margin="8">
-                                                <TextBlock FontWeight="Bold" Text="Invoice ID:" Foreground="White"/>
-                                                <TextBlock Text="{Binding InvoiceID}" Foreground="White"/>
+                                                <TextBlock FontWeight="Bold" Text="Invoice ID:" Foreground="{DynamicResource TextBrush}"/>
+                                                <TextBlock Text="{Binding InvoiceID}" Foreground="{DynamicResource TextBrush}"/>
                                             </StackPanel>
 
                                             <!-- Guest Name -->
                                             <StackPanel Grid.Row="1" Margin="8">
-                                                <TextBlock FontWeight="Bold" Text="Guest Name:" Foreground="White"/>
-                                                <TextBlock Text="{Binding GuestName}" Foreground="White"/>
+                                                <TextBlock FontWeight="Bold" Text="Guest Name:" Foreground="{DynamicResource TextBrush}"/>
+                                                <TextBlock Text="{Binding GuestName}" Foreground="{DynamicResource TextBrush}"/>
                                             </StackPanel>
 
                                             <!-- Issue Date -->
                                             <StackPanel Grid.Row="2" Margin="8">
-                                                <TextBlock FontWeight="Bold" Text="Issue Date:" Foreground="White"/>
-                                                <TextBlock Text="{Binding IssuedDate, StringFormat='dd.MM.yyyy'}" Foreground="White"/>
+                                                <TextBlock FontWeight="Bold" Text="Issue Date:" Foreground="{DynamicResource TextBrush}"/>
+                                                <TextBlock Text="{Binding IssuedDate, StringFormat='dd.MM.yyyy'}" Foreground="{DynamicResource TextBrush}"/>
                                             </StackPanel>
 
                                             <!-- Reservation ID -->
                                             <StackPanel Grid.Row="3" Margin="8">
-                                                <TextBlock FontWeight="Bold" Text="Reservation ID:" Foreground="White"/>
-                                                <TextBlock Text="{Binding ReservationID}" Foreground="White"/>
+                                                <TextBlock FontWeight="Bold" Text="Reservation ID:" Foreground="{DynamicResource TextBrush}"/>
+                                                <TextBlock Text="{Binding ReservationID}" Foreground="{DynamicResource TextBrush}"/>
                                             </StackPanel>
 
                                             <StackPanel Grid.Row="4" Margin="8">
-                                                <TextBlock FontWeight="Bold" Text="Total Amount:" Foreground="White"/>
-                                                <TextBlock Text="{Binding TotalAmount, StringFormat='€ #,0.00'}" Foreground="White"/>
+                                                <TextBlock FontWeight="Bold" Text="Total Amount:" Foreground="{DynamicResource TextBrush}"/>
+                                                <TextBlock Text="{Binding TotalAmount, StringFormat='€ #,0.00'}" Foreground="{DynamicResource TextBrush}"/>
                                                 <!-- Currency format -->
                                             </StackPanel>
                                         </Grid>
