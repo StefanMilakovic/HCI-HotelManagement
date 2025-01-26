@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HotelManagement.Models
+﻿namespace HotelManagement.Models
 {
     public class Invoice
     {
@@ -15,8 +9,6 @@ namespace HotelManagement.Models
         public int GuestID { get; set; }
         public int ReservationID { get; set; }
 
-
-        //novo 
         public string GuestName
         {
             get

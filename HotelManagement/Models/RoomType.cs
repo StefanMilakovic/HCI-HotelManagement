@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HotelManagement.Models
+﻿namespace HotelManagement.Models
 {
     public class RoomType
     {
@@ -12,7 +6,6 @@ namespace HotelManagement.Models
         public string Name { get; set; }
         public double PricePerNight { get; set; }
         public int MaxNumOfGuests { get; set; }
-
 
         public override string ToString()
         {

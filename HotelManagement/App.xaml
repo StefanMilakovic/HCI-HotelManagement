@@ -16,6 +16,9 @@
                 <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="Cyan" SecondaryColor="Lime"/>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+
+                
+
             </ResourceDictionary.MergedDictionaries>
 
 
@@ -23,6 +26,21 @@
                 <ResourceDictionary.MergedDictionaries>
                     <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="Teal" SecondaryColor="Lime" />
                     <ResourceDictionary Source="Themes/LightTheme.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+
+
+            <ResourceDictionary x:Key="Dictionary-EN">
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="/Resources/Dictionary-EN.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+
+            <ResourceDictionary x:Key="Dictionary-SR">
+                <ResourceDictionary.MergedDictionaries>
+                    <!--<ResourceDictionary Source="/Resources/Dictionary-SR.xaml"/>-->
+                    <ResourceDictionary Source="pack://application:,,,/Resources/Dictionary-SR.xaml"/>
+
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
 
@@ -63,6 +81,7 @@
             <DataTemplate DataType="{x:Type viewModels:ReportsViewModel}">
                 <views:ReportsView />
             </DataTemplate>
+
 
         </ResourceDictionary>
     </Application.Resources>

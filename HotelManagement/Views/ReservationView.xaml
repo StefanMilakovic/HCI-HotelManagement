@@ -14,11 +14,26 @@
     
     <Border Grid.Row="0" Margin="20">
         <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding Reservations}">
+            <DataGrid.Style>
+                <Style TargetType="DataGrid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Reservations.Count}" Value="0">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="DataGrid">
+                                        <TextBlock Text="The table is empty." VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Style>
+
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding ReservationID}" Header="Reservation ID" IsReadOnly="True" />
                 <DataGridTextColumn Binding="{Binding CheckInDate, StringFormat='dd.MM.yyyy'}" Header="Check-in Date" />
                 <DataGridTextColumn Binding="{Binding CheckOutDate, StringFormat='dd.MM.yyyy'}" Header="Check-out Date" />
-                <DataGridTextColumn Binding="{Binding NumberOfGuests}" Header="Number of Guests" />
                 <DataGridTextColumn Binding="{Binding GuestID}" Header="Guest ID" />
                 <DataGridTextColumn Binding="{Binding RoomID}" Header="Room ID" />
                 <DataGridTextColumn Binding="{Binding UserID}" Header="User ID" />

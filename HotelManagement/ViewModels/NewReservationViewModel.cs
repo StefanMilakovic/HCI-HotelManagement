@@ -13,11 +13,25 @@ namespace HotelManagement.ViewModels
         private DateTime? _checkInDate;
         private DateTime? _checkOutDate;
         private Room _selectedRoom;
+        private string _searchText;
 
 
 
         private ObservableCollection<Reservation> _reservations;
         public ObservableCollection<RoomType> _roomTypes;
+        private ObservableCollection<Reservation> _filteredReservations;
+
+
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                _searchText = value;
+                OnPropertyChanged();
+                FilterReservations();
+            }
+        }
 
 
         public ObservableCollection<Guest> Guests { get; set; }
@@ -87,8 +101,8 @@ namespace HotelManagement.ViewModels
             }
         }
 
-       
 
+        /*
         public ObservableCollection<Reservation> Reservations
         {
             get => _reservations;
@@ -97,18 +111,35 @@ namespace HotelManagement.ViewModels
                 _reservations = value;
                 OnPropertyChanged(nameof(Reservations));
             }
+        }*/
+
+        public ObservableCollection<Reservation> Reservations
+        {
+            get => _reservations;
+            set
+            {
+                _reservations = value;
+                OnPropertyChanged();
+                FilterReservations(); // Update filtered list when reservations change
+            }
         }
 
-        // Commands
+        public ObservableCollection<Reservation> FilteredReservations
+        {
+            get => _filteredReservations;
+            private set
+            {
+                _filteredReservations = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ICommand AddReservationCommand { get; }
         public ICommand DeleteReservationCommand { get; }
 
         public NewReservationViewModel()
         {
-            //Guests = new ObservableCollection<Guest>();
             Guests = new GuestsViewModel().Guests;
-
-            //RoomTypes = new ObservableCollection<RoomType>(Enum.GetValues(typeof(RoomType)).Cast<RoomType>());
             AvailableRooms = new RoomsViewModel().Rooms;
 
             LoadReservations();
@@ -120,7 +151,23 @@ namespace HotelManagement.ViewModels
         }
 
 
-        
+        private void FilterReservations()
+        {
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                FilteredReservations = new ObservableCollection<Reservation>(_reservations);
+            }
+            else
+            {
+                var filtered = _reservations
+                    .Where(r => r.GuestName.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+                FilteredReservations = new ObservableCollection<Reservation>(filtered);
+            }
+        }
+
+
         private void UpdateAvailableRooms()
         {
             if (SelectedRoomType != null && CheckInDate.HasValue && CheckOutDate.HasValue)
@@ -193,6 +240,9 @@ namespace HotelManagement.ViewModels
                 OnPropertyChanged(nameof(SelectedGuest));
                 OnPropertyChanged(nameof(SelectedRoomType));
                 OnPropertyChanged(nameof(SelectedRoom));
+
+                System.Windows.MessageBox.Show("New reservation added successfully!", "Success", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+
             }
 
         }

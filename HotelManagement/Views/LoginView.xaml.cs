@@ -1,16 +1,7 @@
-﻿using MaterialDesignThemes.Wpf;
-using System.Configuration;
+﻿using HotelManagement.ViewModels;
 using System.Diagnostics;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace HotelManagement
 {
@@ -22,6 +13,7 @@ namespace HotelManagement
             InitializeComponent();
             this.DataContext = new LoginViewModel();
             LoadTheme();
+            LoadLanguage();
         }
 
         private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -36,7 +28,6 @@ namespace HotelManagement
         {
             this.Close();
         }
-        //-----------------------------------------------------------------------------------------------------------------------------------
 
         private void ThemeToggleButton_Click(object sender, RoutedEventArgs e)
         {
@@ -44,28 +35,25 @@ namespace HotelManagement
 
             if (currentTheme == Application.Current.Resources["LightTheme"])
             {
-                // Prebaci na Dark
                 Application.Current.Resources.MergedDictionaries[0] = (ResourceDictionary)Application.Current.Resources["DarkTheme"];
                 SaveTheme("Dark");
             }
             else if (currentTheme == Application.Current.Resources["DarkTheme"])
             {
-                // Prebaci na HighContrast
                 Application.Current.Resources.MergedDictionaries[0] = (ResourceDictionary)Application.Current.Resources["DarkRedTheme"];
                 SaveTheme("DarkRedTheme");
             }
             else if (currentTheme == Application.Current.Resources["DarkRedTheme"])
             {
-                // Prebaci nazad na Light
                 Application.Current.Resources.MergedDictionaries[0] = (ResourceDictionary)Application.Current.Resources["OrangeDarkTheme"];
-                SaveTheme("Light");
+                SaveTheme("OrangeDarkTheme");
             }
             else if (currentTheme == Application.Current.Resources["OrangeDarkTheme"])
             {
-                // Prebaci nazad na Light
                 Application.Current.Resources.MergedDictionaries[0] = (ResourceDictionary)Application.Current.Resources["LightTheme"];
                 SaveTheme("Light");
             }
+
         }
 
 
@@ -78,7 +66,6 @@ namespace HotelManagement
         private void LoadTheme()
         {
             string theme = Properties.Settings.Default.SelectedTheme;
-            Debug.WriteLine($"Loaded theme: {theme}");
 
             if (theme == "Dark")
             {
@@ -88,13 +75,22 @@ namespace HotelManagement
             {
                 Application.Current.Resources.MergedDictionaries[0] = (ResourceDictionary)Application.Current.Resources["LightTheme"];
             }
-            else
+            else if (theme == "DarkRedTheme")
             {
                 Application.Current.Resources.MergedDictionaries[0] = (ResourceDictionary)Application.Current.Resources["DarkRedTheme"];
             }
+            else if (theme == "OrangeDarkTheme")
+            {
+                Application.Current.Resources.MergedDictionaries[0] = (ResourceDictionary)Application.Current.Resources["OrangeDarkTheme"];
+            }
+            else
+            {
+                Debug.WriteLine("Unknown theme, defaulting to LightTheme.");
+                Application.Current.Resources.MergedDictionaries[0] = (ResourceDictionary)Application.Current.Resources["LightTheme"];
+                Properties.Settings.Default.SelectedTheme = "Light";
+                Properties.Settings.Default.Save();
+            }
         }
-
-        //-----------------------------------------------------------------------------------------------------------------------------------
 
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
@@ -104,6 +100,76 @@ namespace HotelManagement
             if (viewModel != null)
             {
                 viewModel.Password = passwordBox.Password;
+            }
+        }
+
+
+        private void LanguageToggleButton_Click(object sender, RoutedEventArgs e)
+        {
+            var languageDictionary = Application.Current.Resources.MergedDictionaries
+        .FirstOrDefault(d => d.Source != null &&
+                             (d.Source.OriginalString.Contains("Dictionary-SR.xaml") ||
+                              d.Source.OriginalString.Contains("Dictionary-EN.xaml")));
+
+            if (languageDictionary != null && languageDictionary.Source.OriginalString.Contains("Dictionary-SR.xaml"))
+            {
+                var newDictionary = new ResourceDictionary { Source = new Uri("Resources/Dictionary-EN.xaml", UriKind.Relative) };
+                Application.Current.Resources.MergedDictionaries.Remove(languageDictionary);
+                Application.Current.Resources.MergedDictionaries.Add(newDictionary);
+                SaveLanguage("EN");
+                ((LoginViewModel)DataContext).LoadLanguageImage("EN");
+            }
+            else if (languageDictionary != null && languageDictionary.Source.OriginalString.Contains("Dictionary-EN.xaml"))
+            {
+                var newDictionary = new ResourceDictionary { Source = new Uri("Resources/Dictionary-SR.xaml", UriKind.Relative) };
+                Application.Current.Resources.MergedDictionaries.Remove(languageDictionary);
+                Application.Current.Resources.MergedDictionaries.Add(newDictionary);
+                SaveLanguage("SR");
+                ((LoginViewModel)DataContext).LoadLanguageImage("SR");
+            }
+        }
+
+        private void SaveLanguage(string language)
+        {
+            Properties.Settings.Default.Language = language;
+            Properties.Settings.Default.Save();
+        }
+
+
+        private void LoadLanguage()
+        {
+            string language = Properties.Settings.Default.Language;
+            Debug.WriteLine($"Loaded language: {language}");
+
+            if (language == "SR")
+            {
+                var currentDictionary = Application.Current.Resources.MergedDictionaries
+                    .FirstOrDefault(d => d.Source != null && d.Source.OriginalString.Contains("Dictionary-SR.xaml"));
+
+                if (currentDictionary == null)
+                {
+                    var dictionarySR = new ResourceDictionary { Source = new Uri("Resources/Dictionary-SR.xaml", UriKind.Relative) };
+                    Application.Current.Resources.MergedDictionaries.Add(dictionarySR);
+                }
+            }
+            else if (language == "EN")
+            {
+                var currentDictionary = Application.Current.Resources.MergedDictionaries
+                    .FirstOrDefault(d => d.Source != null && d.Source.OriginalString.Contains("Dictionary-EN.xaml"));
+
+                if (currentDictionary == null)
+                {
+                    var dictionaryEN = new ResourceDictionary { Source = new Uri("Resources/Dictionary-EN.xaml", UriKind.Relative) };
+                    Application.Current.Resources.MergedDictionaries.Add(dictionaryEN);
+                }
+            }
+            else
+            {
+                Properties.Settings.Default.Language = "EN";
+                Properties.Settings.Default.Save();
+
+                var dictionaryEN = new ResourceDictionary { Source = new Uri("Resources/Dictionary-EN.xaml", UriKind.Relative) };
+                Application.Current.Resources.MergedDictionaries.Add(dictionaryEN);
             }
         }
     }

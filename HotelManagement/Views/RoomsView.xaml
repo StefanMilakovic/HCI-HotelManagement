@@ -13,42 +13,60 @@
 
     <Grid>
         <TabControl Margin="0">
-            <TabItem Header="View Rooms">
-                <Border Grid.Row="0" Margin="20">
-                    <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding Rooms}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding RoomID}" Header="Room ID" />
-                            <DataGridTextColumn Binding="{Binding RoomNumber}" Header="Room Number" />
-                            <DataGridTextColumn Binding="{Binding Floor}" Header="Floor" />
-                            <DataGridTextColumn Binding="{Binding RoomTypeName}" Header="Room Type" />
-                            
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Border>
+            <TabItem Header="{DynamicResource ViewRoomsTabHeader}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Margin="20,20,20,0">
+                        <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding Rooms}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding RoomID}" Header="{DynamicResource RoomIdHeader}" />
+                                <DataGridTextColumn Binding="{Binding RoomNumber}" Header="{DynamicResource RoomNumberHeader}" />
+                                <DataGridTextColumn Binding="{Binding Floor}" Header="{DynamicResource FloorHeader}" />
+                                <DataGridTextColumn Binding="{Binding RoomTypeName}" Header="{DynamicResource RoomTypeHeader}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+
+                    <TextBox 
+                        Grid.Row="1" 
+                        x:Name="SearchTextBox" 
+                        Width="220"
+                        FontSize="13"
+                        Margin="10" 
+                        Padding="15"
+                        VerticalAlignment="Center"
+                        Foreground="{DynamicResource TextBrush}"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                        materialDesign:HintAssist.Hint="{DynamicResource SearchByRoomNumberHint}"
+                        Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
             </TabItem>
 
-            <TabItem Header="Add Room">
+            <TabItem Header="{DynamicResource AddRoomTabHeader}">
                 <StackPanel Margin="20">
 
                     <TextBox x:Name="RoomNumberTextBox" Width="200" Foreground="{DynamicResource TextBrush}" Margin="15"
-                             materialDesign:HintAssist.HelperText="Room number must not be empty"
-                             materialDesign:HintAssist.Hint="Room Number"
+                             materialDesign:HintAssist.HelperText="{DynamicResource RoomNumberHelperText}"
+                             materialDesign:HintAssist.Hint="{DynamicResource RoomNumberHint}"
                              Text="{Binding RoomNumber, UpdateSourceTrigger=PropertyChanged}" />
 
                     <ComboBox x:Name="FloorComboBox" Width="200" Foreground="{DynamicResource TextBrush}" Margin="15"
-                            materialDesign:HintAssist.HelperText="Select a floor"
-                            materialDesign:HintAssist.Hint="Floor"
+                            materialDesign:HintAssist.HelperText="{DynamicResource SelectFloorHelperText}"
+                            materialDesign:HintAssist.Hint="{DynamicResource FloorHint}"
                             SelectedItem="{Binding Floor, UpdateSourceTrigger=PropertyChanged}"
                             ItemsSource="{Binding Floors}">
                     </ComboBox>
-
 
                     <ComboBox x:Name="RoomTypeComboBox" 
                         Width="200" 
                         Foreground="{DynamicResource TextBrush}" 
                         Margin="15"
-                        materialDesign:HintAssist.HelperText="Select a room type"
-                        materialDesign:HintAssist.Hint="Room Type"
+                        materialDesign:HintAssist.HelperText="{DynamicResource SelectRoomTypeHelperText}"
+                        materialDesign:HintAssist.Hint="{DynamicResource RoomTypeHint}"
                         SelectedItem="{Binding SelectedRoomType, UpdateSourceTrigger=PropertyChanged}"
                         ItemsSource="{Binding RoomTypes}"
                         DisplayMemberPath="Name">
@@ -56,44 +74,63 @@
 
                     <Button
                         Width="100"
-                        Content="Add"
+                        Content="{DynamicResource AddButtonText}"
                         Margin="20"
                         Command="{Binding AddRoomCommand}"
                         Style="{StaticResource MaterialDesignFlatSecondaryDarkBgButton}" 
-                        ToolTip="Add Room" />
+                        ToolTip="{DynamicResource AddRoomButtonToolTip}" />
 
                 </StackPanel>
             </TabItem>
 
-            <TabItem Header="Edit Rooms">
-                <Border Grid.Row="0" Margin="20">
-                    <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="False" SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding Rooms}" >
+            <TabItem Header="{DynamicResource EditRoomsTabHeader}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding RoomID}" Header="Room ID" IsReadOnly="True" />
-                            <DataGridTextColumn Binding="{Binding RoomNumber}" Header="Room Number" />
-                            <DataGridTextColumn Binding="{Binding Floor}" Header="Floor" />
-                            <DataGridTextColumn Binding="{Binding RoomTypeName}" Header="Room Type" IsReadOnly="True"/>
+                    <Border Grid.Row="0" Margin="20,20,20,0">
+                        <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="False" SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding Rooms}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding RoomID}" Header="{DynamicResource RoomIdHeader}" IsReadOnly="True" />
+                                <DataGridTextColumn Binding="{Binding RoomNumber}" Header="{DynamicResource RoomNumberHeader}" />
+                                <DataGridTextColumn Binding="{Binding Floor}" Header="{DynamicResource FloorHeader}" />
+                                <DataGridTextColumn Binding="{Binding RoomTypeName}" Header="{DynamicResource RoomTypeHeader}" IsReadOnly="True" />
 
-                            <DataGridTemplateColumn>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Command="{Binding DataContext.DeleteRoomCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                            CommandParameter="{Binding}" 
-                                            Style="{StaticResource MaterialDesignFlatButton}"
-                                            ToolTip="Delete Room" Height="20"
-                                            Foreground="#C70000"
-                                            Margin="0" Padding="0">
-                                            <Button.Content>
-                                                <materialDesign:PackIcon Kind="Delete" Width="16" Height="16" />
-                                            </Button.Content>
-                                        </Button>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Border>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Command="{Binding DataContext.DeleteRoomCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                        CommandParameter="{Binding}" 
+                                        Style="{StaticResource MaterialDesignFlatButton}"
+                                        ToolTip="{DynamicResource DeleteRoomButtonToolTip}" Height="20"
+                                        Foreground="#C70000"
+                                        Margin="0" Padding="0">
+                                                <Button.Content>
+                                                    <materialDesign:PackIcon Kind="Delete" Width="16" Height="16" />
+                                                </Button.Content>
+                                            </Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+
+                    <TextBox 
+                        Grid.Row="1" 
+                        x:Name="SearchTextBox1" 
+                        Width="220"
+                        FontSize="13"
+                        Margin="10" 
+                        Padding="15"
+                        VerticalAlignment="Center"
+                        Foreground="{DynamicResource TextBrush}"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                        materialDesign:HintAssist.Hint="{DynamicResource SearchByRoomNumberHint}"
+                        Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

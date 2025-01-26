@@ -1,0 +1,178 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:System="clr-namespace:System;assembly=System.Runtime">
+
+    <System:String x:Key="ReceptionistChipHeader">Receptionist</System:String> 
+    <!-- **********************************************************************************-->
+    <System:String x:Key="GuestsButtonText">Guests</System:String>
+    <System:String x:Key="ReservationsButtonText">Reservations</System:String>
+    <System:String x:Key="ServicesButtonText">Services</System:String>
+    <System:String x:Key="InvoicesButtonText">Invoices</System:String>
+    <!-- **********************************************************************************-->
+    <System:String x:Key="UsersButtonText">Users</System:String>
+    <System:String x:Key="RoomsButtonText">Rooms</System:String>
+    <System:String x:Key="ReportsButtonText">Reports</System:String>
+    <!-- **********************************************************************************-->
+
+    <System:String x:Key="AddGuestHeader">Add Guest</System:String>
+    <System:String x:Key="AddButton">Add</System:String>
+    
+    <System:String x:Key="FirstNameHelperText">First name must not be empty</System:String>
+    <System:String x:Key="FirstNameHint">First Name</System:String>
+    
+    <System:String x:Key="LastNameHint">Last Name</System:String>
+    <System:String x:Key="LastNameHelperText">Last name must not be empty</System:String>
+    
+    <System:String x:Key="PassportNumberHint">Passport Number</System:String>
+    <System:String x:Key="PassportNumberHelperText">Passport number must not be empty</System:String>
+    
+    <System:String x:Key="EmailHint">Email</System:String>
+    <System:String x:Key="EmailHelperText">Email must not be empty</System:String>
+    
+    <System:String x:Key="PhoneNumberHint">Phone Number</System:String>
+    <System:String x:Key="PhoneNumberHelperText">Phone number must not be empty</System:String>
+    
+    <System:String x:Key="AddGuestToolTip">Add Guest</System:String>
+
+    <System:String x:Key="ViewGuestsHeader">View Guests</System:String>
+    <System:String x:Key="ViewGuestsHelperText">View Guests</System:String>
+    
+    <System:String x:Key="SearchHint">Search By Passport Number</System:String>
+
+    
+    <System:String x:Key="GuestIdHeader">Guest ID</System:String>
+    <System:String x:Key="FirstNameHeader">First Name</System:String>
+    <System:String x:Key="LastNameHeader">Last Name</System:String>
+    <System:String x:Key="PassportNumberHeader">Passport Number</System:String>
+    <System:String x:Key="EmailHeader">Email</System:String>
+    <System:String x:Key="PhoneNumberHeader">Phone Number</System:String>
+    
+    <System:String x:Key="DeleteGuestToolTip">Delete Guest</System:String>
+
+
+    <!-- **********************************************************************************-->
+    <System:String x:Key="NewReservationHeader">New Reservation</System:String>
+    <System:String x:Key="ViewReservationsHeader">Reservations</System:String>
+    
+    <System:String x:Key="NewGuestText">Guest: </System:String>
+    <System:String x:Key="SelectGuestHint">Select a Guest</System:String>
+    <System:String x:Key="SelectGuestHelper">Choose a guest from the list</System:String>
+
+    <System:String x:Key="RoomTypeText">Room Type:</System:String>
+    <System:String x:Key="SelectRoomTypeHint">Select Room Type</System:String>
+    <System:String x:Key="SelectRoomTypeHelperText">Choose the room type</System:String>
+
+
+    <System:String x:Key="CheckInDateText">Check-In Date:</System:String>
+    <System:String x:Key="CheckInDateHint">Select Check-In Date</System:String>
+    <System:String x:Key="CheckInDateHelperText">Choose check-in date</System:String>
+
+    <System:String x:Key="CheckOutDateText">Check-Out Date:</System:String>
+    <System:String x:Key="CheckOutDateHint">Select Check-Out Date</System:String>
+    <System:String x:Key="CheckOutDateHelperText">Choose check-out date</System:String>
+
+    <System:String x:Key="AvailableRoomText">Available Room:</System:String>
+    <System:String x:Key="AvailableRoomHint">Select Available Room</System:String>
+    <System:String x:Key="AvailableRoomHelperText">Choose an available room</System:String>
+
+    <System:String x:Key="AddButtonText">Add</System:String>
+    <System:String x:Key="AddButtonToolTip">Add Reservation</System:String>
+
+    <System:String x:Key="SearchByGuestNameHint">Search By Guest Name</System:String>
+
+    <System:String x:Key="ReservationIDHeader">Reservation ID</System:String>
+    <System:String x:Key="CheckInDateHeader">Check-in Date</System:String>
+    <System:String x:Key="CheckOutDateHeader">Check-out Date</System:String>
+    <System:String x:Key="GuestNameHeader">Guest Name</System:String>
+    <System:String x:Key="RoomIDHeader">Room ID</System:String>
+    <System:String x:Key="ReceptionistHeader">Receptionist</System:String>
+
+    <System:String x:Key="DeleteButtonToolTip">Delete</System:String>
+
+    <!-- **********************************************************************************-->
+    <System:String x:Key="SelectReservationHeader">Select Reservation</System:String>
+    <System:String x:Key="ReservationIDText">Reservation ID:</System:String>
+    <System:String x:Key="GuestNameText">Guest Name:</System:String>
+    <System:String x:Key="SelectedReservationText">Selected Reservation (ID):</System:String>
+    <System:String x:Key="SearchReservationHint">Search By Guest Name</System:String>
+    <System:String x:Key="NextButtonText">Next</System:String>
+
+    <System:String x:Key="SelectServiceHeader">Select Service</System:String>
+    <System:String x:Key="ServiceIDText">Service ID:</System:String>
+    <System:String x:Key="ServiceNameText">Service Name:</System:String>
+    <System:String x:Key="SelectedServiceText">Selected Service (ID):</System:String>
+    <System:String x:Key="QuantityText">Quantity:</System:String>
+    <System:String x:Key="AddServiceButtonText">Add Service</System:String>
+    <System:String x:Key="AddServiceButtonToolTip">Add</System:String>
+    <!-- **********************************************************************************-->
+
+    <System:String x:Key="GenerateInvoiceButtonText">Generate Invoice</System:String>
+
+    <System:String x:Key="ViewInvoicesHeader">View Invoices</System:String>
+    <System:String x:Key="SearchInvoiceHint">Search By Guest Name</System:String>
+    <System:String x:Key="InvoiceIDText">Invoice ID:</System:String>
+    <System:String x:Key="IssueDateText">Issue Date:</System:String>
+    <System:String x:Key="ReservationIDForInvoiceText">Reservation ID:</System:String>
+    <System:String x:Key="TotalAmountText">Total Amount:</System:String>
+
+
+    <!-- **********************************************************************************-->
+    <!--Administrator-->
+    <System:String x:Key="ViewUsersTabHeader">View Users</System:String>
+    <System:String x:Key="AddUserTabHeader">Add User</System:String>
+    <System:String x:Key="EditUsersTabHeader">Edit Users</System:String>
+
+    <System:String x:Key="UserIdHeader">User ID</System:String>
+    <System:String x:Key="UsernameHeader">Username</System:String>
+    <System:String x:Key="RoleHeader">Role</System:String>
+
+    <System:String x:Key="SearchByUsernameHint">Search By Username</System:String>
+
+    <System:String x:Key="UsernameHelperText">Username must not be empty</System:String>
+    <System:String x:Key="UsernameHint">Username</System:String>
+    <System:String x:Key="PasswordHelperText">Password must not be empty</System:String>
+    <System:String x:Key="PasswordHint">Password</System:String>
+    <System:String x:Key="SelectRoleHelperText">Select a role</System:String>
+    <System:String x:Key="RoleHint">Role</System:String>
+    <!-- **********************************************************************************-->
+    <System:String x:Key="ViewRoomsTabHeader">View Rooms</System:String>
+    <System:String x:Key="AddRoomTabHeader">Add Room</System:String>
+    <System:String x:Key="EditRoomsTabHeader">Edit Rooms</System:String>
+
+    <System:String x:Key="RoomIdHeader">Room ID</System:String>
+    <System:String x:Key="RoomNumberHeader">Room Number</System:String>
+    <System:String x:Key="FloorHeader">Floor</System:String>
+    <System:String x:Key="RoomTypeHeader">Room Type</System:String>
+
+    <System:String x:Key="SearchByRoomNumberHint">Search By Room Number</System:String>
+
+    <System:String x:Key="RoomNumberHelperText">Room number must not be empty</System:String>
+    <System:String x:Key="RoomNumberHint">Room Number</System:String>
+    <System:String x:Key="SelectFloorHelperText">Select a floor</System:String>
+    <System:String x:Key="FloorHint">Floor</System:String>
+    <!-- **********************************************************************************-->
+    <System:String x:Key="ViewServicesTabHeader">View Services</System:String>
+    <System:String x:Key="AddServiceTabHeader">Add Service</System:String>
+    <System:String x:Key="EditServicesTabHeader">Edit Services</System:String>
+
+    <System:String x:Key="ServiceIdHeader">Service ID</System:String>
+    <System:String x:Key="ServiceNameHeader">Service Name</System:String>
+    <System:String x:Key="ServicePriceHeader">Price</System:String>
+    <System:String x:Key="ServiceNameHelperText">Service name must not be empty</System:String>
+    <System:String x:Key="ServiceNameHint">Service Name</System:String>
+    <System:String x:Key="ServicePriceHelperText">Price must not be empty</System:String>
+    <System:String x:Key="ServicePriceHint">Price</System:String>
+    <!-- **********************************************************************************-->
+    <System:String x:Key="ReservationsTabHeader">Reservations</System:String>
+    <System:String x:Key="InvoicesTabHeader">Invoices</System:String>
+
+    <System:String x:Key="InvoiceIDHeader">Invoice ID</System:String>
+    <System:String x:Key="TotalAmountHeader">Total Amount</System:String>
+    <System:String x:Key="IssuedDateHeader">Issued Date</System:String>
+    <!-- **********************************************************************************-->
+    <System:String x:Key="LoginText">Login</System:String>
+    <System:String x:Key="UsernameText">Username</System:String>
+    <System:String x:Key="PasswordText">Password</System:String>
+    <System:String x:Key="LoginButtonText">Login</System:String>
+
+</ResourceDictionary>

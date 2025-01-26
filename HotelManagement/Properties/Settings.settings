@@ -5,5 +5,8 @@
     <Setting Name="SelectedTheme" Type="System.String" Scope="User">
       <Value Profile="(Default)">DarkTheme</Value>
     </Setting>
+    <Setting Name="Language" Type="System.String" Scope="User">
+      <Value Profile="(Default)">en</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

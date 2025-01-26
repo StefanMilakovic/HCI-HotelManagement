@@ -31,7 +31,6 @@ namespace HotelManagement
 
         public ReservationsViewModel()
         {
-            //AddReservationCommand = new RelayCommand(AddReservation, CanAddReservation);
             DeleteReservationCommand = new RelayCommand(DeleteReservation, CanDeleteReservation);
 
             LoadReservations();
@@ -51,42 +50,8 @@ namespace HotelManagement
                    CheckOutDate != default &&
                    NumberOfGuests > 0 &&
                    RoomID > 0 &&
-                   CheckInDate < CheckOutDate; // Validacija: Check-in pre Check-out
+                   CheckInDate < CheckOutDate;
         }
-
-
-
-        /*
-        private void AddReservation(object parameter)
-        {
-            using (var context = new HotelManagementContext())
-            {
-                var newReservation = new Reservation
-                {
-                    CheckInDate = this.CheckInDate,
-                    CheckOutDate = this.CheckOutDate,
-                    NumberOfGuests = this.NumberOfGuests,
-                    RoomID = this.RoomID
-                };
-
-                context.Reservations.Add(newReservation);
-                context.SaveChanges();
-
-                Reservations.Add(newReservation);
-
-                CheckInDate = default;
-                CheckOutDate = default;
-                NumberOfGuests = 0;
-                RoomID = 0;
-
-                OnPropertyChanged(nameof(CheckInDate));
-                OnPropertyChanged(nameof(CheckOutDate));
-                OnPropertyChanged(nameof(NumberOfGuests));
-                OnPropertyChanged(nameof(RoomID));
-            }
-        }
-        */
-
 
         private void DeleteReservation(object parameter)
         {
@@ -104,7 +69,7 @@ namespace HotelManagement
 
         private bool CanDeleteReservation(object parameter)
         {
-            return parameter is Reservation; // Osiguraj da je validan parametar
+            return parameter is Reservation;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

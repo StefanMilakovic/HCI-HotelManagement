@@ -1,13 +1,8 @@
 ﻿using GalaSoft.MvvmLight.CommandWpf;
 using HotelManagement.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 
@@ -20,6 +15,89 @@ namespace HotelManagement.ViewModels
         private ObservableCollection<Reservation> _reservations;
         private Reservation _selectedReservation;
         private bool _isGenerateButtonEnabled;
+
+        private ObservableCollection<Reservation> _filteredReservations;
+        private string _searchReservationText;
+        private ObservableCollection<Invoice> _filteredInvoices;
+        private string _searchInvoiceText;
+
+
+        public ObservableCollection<Invoice> FilteredInvoices
+        {
+            get => _filteredInvoices;
+            set
+            {
+                _filteredInvoices = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string SearchInvoiceText
+        {
+            get => _searchInvoiceText;
+            set
+            {
+                if (_searchInvoiceText != value)
+                {
+                    _searchInvoiceText = value;
+                    OnPropertyChanged();
+                    FilterInvoices();
+                }
+            }
+        }
+
+
+        public ObservableCollection<Reservation> FilteredReservations
+        {
+            get => _filteredReservations;
+            set
+            {
+                _filteredReservations = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string SearchReservationText
+        {
+            get => _searchReservationText;
+            set
+            {
+                if (_searchReservationText != value)
+                {
+                    _searchReservationText = value;
+                    OnPropertyChanged();
+                    FilterReservations();
+                }
+            }
+        }
+
+        private void FilterReservations()
+        {
+            if (string.IsNullOrEmpty(SearchReservationText))
+            {
+                FilteredReservations = Reservations;
+            }
+            else
+            {
+                FilteredReservations = new ObservableCollection<Reservation>(
+                    Reservations.Where(r => r.GuestName.StartsWith(SearchReservationText, StringComparison.InvariantCultureIgnoreCase))
+                );
+            }
+        }
+
+        private void FilterInvoices()
+        {
+            if (string.IsNullOrWhiteSpace(SearchInvoiceText))
+            {
+                FilteredInvoices = Invoices;
+            }
+            else
+            {
+                FilteredInvoices = new ObservableCollection<Invoice>(
+                    Invoices.Where(i => i.GuestName.Contains(SearchInvoiceText, StringComparison.InvariantCultureIgnoreCase))
+                );
+            }
+        }
         public ObservableCollection<Invoice> Invoices
         {
             get => _invoices;
@@ -84,7 +162,7 @@ namespace HotelManagement.ViewModels
         }
 
 
-        
+        /*
         private void LoadInvoices()
         {
             using (var context = new HotelManagementContext())
@@ -92,24 +170,47 @@ namespace HotelManagement.ViewModels
                 Invoices = new ObservableCollection<Invoice>(context.Invoices.ToList());
             }
         }
+        */
+
+        private void LoadInvoices()
+        {
+            using (var context = new HotelManagementContext())
+            {
+                var invoices = context.Invoices.ToList();
+                Invoices = new ObservableCollection<Invoice>(invoices);
+                FilteredInvoices = Invoices;
+            }
+        }
+
+        /*
+        private void LoadReservations()
+        {
+            using (var context = new HotelManagementContext())
+            {
+                var invoices = context.Invoices.ToList();
+                var reservations = context.Reservations.ToList();
+
+                var filteredReservations = reservations
+                    .Where(reservation => !invoices.Any(invoice => invoice.ReservationID == reservation.ReservationID))
+                    .ToList();
+
+                Reservations = new ObservableCollection<Reservation>(filteredReservations);
+            }
+        }*/
 
         private void LoadReservations()
         {
             using (var context = new HotelManagementContext())
             {
-                // Dohvati sve račune (Invoices) iz baze
-                var invoices = context.Invoices.ToList(); // Dohvatanje svih računa u memoriju
+                var invoices = context.Invoices.ToList();
+                var reservations = context.Reservations.ToList();
 
-                // Dohvati sve rezervacije (Reservations) iz baze
-                var reservations = context.Reservations.ToList(); // Dohvatanje svih rezervacija u memoriju
-
-                // Filtriraj rezervacije koje nemaju povezane račune
                 var filteredReservations = reservations
                     .Where(reservation => !invoices.Any(invoice => invoice.ReservationID == reservation.ReservationID))
-                    .ToList(); // Filtriranje u memoriji
+                    .ToList();
 
-                // Postavi filtrirane rezervacije u ObservableCollection
-                Reservations = new ObservableCollection<Reservation>(filteredReservations);
+                _reservations = new ObservableCollection<Reservation>(filteredReservations);
+                _filteredReservations = _reservations;
             }
         }
 
@@ -125,7 +226,7 @@ namespace HotelManagement.ViewModels
             return Date != default &&
                    TotalAmount > 0 &&
                    GuestID > 0 &&
-                   ReservationID > 0; // Validacija unosa
+                   ReservationID > 0;
         }
 
         private void AddInvoice(object parameter)
@@ -145,7 +246,6 @@ namespace HotelManagement.ViewModels
 
                 Invoices.Add(newInvoice);
 
-                // Reset unosa
                 Date = default;
                 TotalAmount = 0;
                 GuestID = 0;
@@ -155,6 +255,7 @@ namespace HotelManagement.ViewModels
                 OnPropertyChanged(nameof(TotalAmount));
                 OnPropertyChanged(nameof(GuestID));
                 OnPropertyChanged(nameof(ReservationID));
+
             }
         }
 
@@ -201,7 +302,7 @@ namespace HotelManagement.ViewModels
                     throw new InvalidOperationException("Invalid reservation dates.");
                 }
 
-                // Cena sobe na osnovu broja noćenja
+                // Cijena sobe na osnovu broja noćenja
                 var roomPrice = totalNights * (decimal)roomType.PricePerNight;
 
                 // Pronađi dodatne servise povezane sa rezervacijom
@@ -209,10 +310,10 @@ namespace HotelManagement.ViewModels
                     .Where(rhs => rhs.ReservationId == reservation.ReservationID)
                     .ToList();
 
-                // Izračunaj ukupnu cenu servisa
+                // Izračunaj ukupnu cijenu servisa
                 var servicesPrice = reservationServices.Sum(service => service.TotalPrice);
 
-                // Ukupna cena (soba + servisi)
+                // Ukupna cijena (soba + servisi)
                 var totalPrice = roomPrice + servicesPrice;
 
                 // Kreiraj novi račun (Invoice)
@@ -224,15 +325,14 @@ namespace HotelManagement.ViewModels
                     ReservationID = reservation.ReservationID
                 };
 
-                // Sačuvaj račun u bazi podataka
                 context.Invoices.Add(newInvoice);
                 context.SaveChanges();
 
-                // Dodaj račun u kolekciju
                 Invoices.Add(newInvoice);
-
-                // Osveži listu dostupnih rezervacija
                 LoadReservations();
+                LoadInvoices();
+                System.Windows.MessageBox.Show("New invoice created successfully!", "Success", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+
 
             }
         }
@@ -249,11 +349,12 @@ namespace HotelManagement.ViewModels
             }
 
             Invoices.Remove(invoiceToDelete);
+            FilterInvoices();
         }
 
         private bool CanDeleteInvoice(object parameter)
         {
-            return parameter is Invoice; // Osiguraj da je validan parametar
+            return parameter is Invoice;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

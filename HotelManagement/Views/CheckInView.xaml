@@ -84,23 +84,23 @@
         <TabItem Header="Add Guests">
             <Border BorderThickness="1" BorderBrush="#535353" Margin="20,20,20,0" Padding="10" CornerRadius="10">
                 <Grid>
-                    <!-- Definišemo dve kolone, jednu za levi deo, a drugu za desni -->
+                    
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
-                        <!-- Leva kolona -->
+
                         <ColumnDefinition Width="*" />
                         
-                        <!-- Desna kolona -->
+
                     </Grid.ColumnDefinitions>
 
-                    <!-- Levi deo -->
+
                     <StackPanel Grid.Column="0" Margin="10">
                         <TextBlock Padding="20" Text="Select a guest:" Foreground="White" FontSize="16" VerticalAlignment="Center" Margin="0,0,10,0"/>
                         <StackPanel Margin="20" Orientation="Horizontal" VerticalAlignment="Center">
                             <TextBlock Text="Guest:" Foreground="White" FontSize="16" VerticalAlignment="Center" Margin="0,0,10,0"/>
 
-                            <!-- ComboBox za odabir gosta -->
+
                             <ComboBox
                                 Width="200"
                                 Foreground="White"
@@ -114,10 +114,10 @@
 
                     <Border Grid.Column="1" Width="6"  Background="#535353" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
-                    <!-- Desni deo -->
+
                     <StackPanel Grid.Column="2" Margin="10">
                         <TextBlock Text="Additional Information" FontWeight="Bold" Foreground="Black" />
-                        <!-- Ovdje ide sadržaj za desni deo -->
+
                         <TextBox Width="200" Margin="5" />
                     </StackPanel>
                 </Grid>

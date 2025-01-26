@@ -47,50 +47,50 @@
             VerticalAlignment="Center" />
 
         <Button
-            Grid.Column="2"
-            Margin="10"
-            Content="Users"
-            Command="{Binding DataContext.ShowUsersViewCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-            VerticalAlignment="Center"
-            Style="{StaticResource CustomButtonStyle}">
-
+    Grid.Column="2"
+    Margin="10"
+    Content="{DynamicResource UsersButtonText}"
+    Command="{Binding DataContext.ShowUsersViewCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+    VerticalAlignment="Center"
+    Style="{StaticResource CustomButtonStyle}">
         </Button>
 
         <Button
-            Grid.Column="3"
-            Margin="10"
-            Content="Rooms"
-            Command="{Binding DataContext.ShowRoomsViewCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-            VerticalAlignment="Center"
-            Style="{StaticResource CustomButtonStyle}">
-        </Button>
-        
-        <Button
-            Grid.Column="4"
-            Margin="10"
-            Content="Guests"
-            Command="{Binding DataContext.ShowGuestsViewCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-            VerticalAlignment="Center"
-            Style="{StaticResource CustomButtonStyle}">
+    Grid.Column="3"
+    Margin="10"
+    Content="{DynamicResource RoomsButtonText}"
+    Command="{Binding DataContext.ShowRoomsViewCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+    VerticalAlignment="Center"
+    Style="{StaticResource CustomButtonStyle}">
         </Button>
 
         <Button
-            Grid.Column="5"
-            Margin="10"
-            Content="Services"
-            Command="{Binding DataContext.ShowServicesViewCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-            VerticalAlignment="Center"
-            Style="{StaticResource CustomButtonStyle}">
+    Grid.Column="4"
+    Margin="10"
+    Content="{DynamicResource GuestsButtonText}"
+    Command="{Binding DataContext.ShowGuestsViewCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+    VerticalAlignment="Center"
+    Style="{StaticResource CustomButtonStyle}">
         </Button>
 
         <Button
-            Grid.Column="6"
-            Margin="10"
-            Content="Reports"
-            Command="{Binding DataContext.ShowReportsViewCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-            VerticalAlignment="Center"
-            Style="{StaticResource CustomButtonStyle}">
+    Grid.Column="5"
+    Margin="10"
+    Content="{DynamicResource ServicesButtonText}"
+    Command="{Binding DataContext.ShowServicesViewCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+    VerticalAlignment="Center"
+    Style="{StaticResource CustomButtonStyle}">
         </Button>
+
+        <Button
+    Grid.Column="6"
+    Margin="10"
+    Content="{DynamicResource ReportsButtonText}"
+    Command="{Binding DataContext.ShowReportsViewCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+    VerticalAlignment="Center"
+    Style="{StaticResource CustomButtonStyle}">
+        </Button>
+
 
         <Button
             Grid.Column="7"

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Configuration;
-using Microsoft.EntityFrameworkCore;
-using Pomelo.EntityFrameworkCore.MySql.Scaffolding.Internal;
 
 namespace HotelManagement.Models
 {
@@ -138,13 +135,6 @@ namespace HotelManagement.Models
                     .HasColumnType("DATETIME")
                     .IsRequired();
                 
-
-                entity.Property(r => r.NumberOfGuests)
-                    .HasColumnName("Number_Of_Guests")
-                    .HasColumnType("INT")
-                    .IsRequired();
-                
-
                 entity.Property(r => r.GuestID)
                     .HasColumnName("GuestID")
                     .HasColumnType("INT")
@@ -159,31 +149,7 @@ namespace HotelManagement.Models
                     .HasColumnName("UserID")
                     .HasColumnType("INT")
                     .IsRequired();
-
-
-                /*
-                // Definisanje odnosa sa Room entitetom
-                entity.HasOne<Room>()
-                    .WithMany()
-                    .HasForeignKey(r => r.RoomID)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_Reservation_Room");
-
-                // Definisanje odnosa sa User entitetom
-                entity.HasOne<User>()
-                    .WithMany()
-                    .HasForeignKey(r => r.UserID)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_Reservation_User");
-
-                // Opcionalno, definisanje odnosa sa Guest entitetom (ako postoji)
-                entity.HasOne<Guest>()
-                    .WithMany()
-                    .HasForeignKey(r => r.GuestID)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_Reservation_Guest");
-
-                */
+               
             });
             modelBuilder.Entity<Invoice>(entity =>
             {
@@ -216,21 +182,6 @@ namespace HotelManagement.Models
                     .HasColumnType("INT")
                     .IsRequired();
 
-                /*
-                // Definisanje odnosa sa tabelom Reservation
-                entity.HasOne<Reservation>()
-                    .WithMany()
-                    .HasForeignKey(i => i.ReservationID)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_Invoice_Reservation");
-
-                // Definisanje odnosa sa tabelom Guest (ako postoji)
-                entity.HasOne<Guest>()
-                    .WithMany()
-                    .HasForeignKey(i => i.GuestID)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_Invoice_Guest");
-                */
             });
 
 
@@ -302,21 +253,6 @@ namespace HotelManagement.Models
                     .HasColumnType("DECIMAL(10,2)")
                     .IsRequired();
 
-                /*
-                // Define relationships
-                entity.HasOne<Service>()
-                    .WithMany()
-                    .HasForeignKey(rh => rh.ServiceId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_ReservationHasService_Service");
-
-                entity.HasOne<Reservation>()
-                    .WithMany()
-                    .HasForeignKey(rh => rh.ReservationId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_ReservationHasService_Reservation");
-
-                */
             });
 
 

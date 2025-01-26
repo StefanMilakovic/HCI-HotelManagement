@@ -1,7 +1,6 @@
 ﻿using HotelManagement.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
-using static MaterialDesignThemes.Wpf.Theme;
 
 namespace HotelManagement.Views
 {

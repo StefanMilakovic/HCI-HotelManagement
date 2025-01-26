@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Linq;
 using System.Windows.Input;
 
 namespace HotelManagement.ViewModels
@@ -68,6 +67,9 @@ namespace HotelManagement.ViewModels
 
                 OnPropertyChanged(nameof(Name));
                 OnPropertyChanged(nameof(Price));
+
+                System.Windows.MessageBox.Show("New service added successfully!", "Success", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+
             }
         }
 
@@ -87,7 +89,7 @@ namespace HotelManagement.ViewModels
 
         private bool CanDeleteService(object parameter)
         {
-            return parameter is Service;  // Ensure that there is a valid service to delete
+            return parameter is Service;
         }
 
 

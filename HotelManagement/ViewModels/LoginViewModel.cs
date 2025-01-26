@@ -1,12 +1,9 @@
 ﻿using HotelManagement.Models;
 using HotelManagement.Utilities;
 using HotelManagement.Views;
-using System;
 using System.ComponentModel;
-using System.Text;
+using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 
 namespace HotelManagement
@@ -35,12 +32,37 @@ namespace HotelManagement
                 OnPropertyChanged(nameof(Password));
             }
         }
-     
+
+        private string _languageImage;
+
+        public string LanguageImage
+        {
+            get => _languageImage;
+            set
+            {
+                _languageImage = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public void LoadLanguageImage(string language)
+        {
+            if (language == "SR")
+            {
+                LanguageImage = "../Resources/sr.png";
+            }
+            else
+            {
+                LanguageImage = "../Resources/en.png";
+            }
+        }
+
         public ICommand LoginCommand { get; }
         public ICommand CloseCommand { get; }
 
         public LoginViewModel()
         {
+            LoadLanguageImage(Properties.Settings.Default.Language);
             LoginCommand = new RelayCommand(ExecuteLogin);
             CloseCommand = new RelayCommand(ExecuteClose);
         }
@@ -116,7 +138,7 @@ namespace HotelManagement
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

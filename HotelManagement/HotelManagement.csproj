@@ -9,12 +9,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\en.png" />
     <None Remove="Resources\font.otf" />
     <None Remove="Resources\GothamBold.otf" />
     <None Remove="Resources\GothamLight.otf" />
     <None Remove="Resources\hotelIcon.ico" />
     <None Remove="Resources\hotelIcon.png" />
     <None Remove="Resources\loginLogo.png" />
+    <None Remove="Resources\sr.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Resources\Dictionary-SR.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,11 +32,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Dictionary-SR.xaml" />
+    <Resource Include="Resources\en.png" />
     <Resource Include="Resources\GothamBold.otf" />
     <Resource Include="Resources\GothamLight.otf" />
     <Resource Include="Resources\hotelIcon.ico" />
     <Resource Include="Resources\hotelIcon.png" />
     <Resource Include="Resources\loginLogo.png" />
+    <Resource Include="Resources\sr.png" />
   </ItemGroup>
 
   <ItemGroup>

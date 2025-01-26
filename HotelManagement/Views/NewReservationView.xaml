@@ -13,145 +13,140 @@
     xmlns:viewModels="clr-namespace:HotelManagement.ViewModels"
     xmlns:views="clr-namespace:HotelManagement.Views">
 
-
-
     <Grid>
         <TabControl Margin="0">
 
-            <TabItem Header="New Reservation" FontSize="15" x:Name="NewReservationTab">
+            <TabItem Header="{DynamicResource NewReservationHeader}" FontSize="15" x:Name="NewReservationTab">
                 <Grid Margin="20">
-
-                    <!-- StackPanel for Reservation Form -->
                     <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center" >
-
-                        <!-- Guest Label and ComboBox in same row -->
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Text="Guest:" Foreground="{DynamicResource TextBrush}" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Width="150"/>
-
-                            <!-- ComboBox za odabir gosta -->
+                            <TextBlock Text="{DynamicResource NewGuestText}" Foreground="{DynamicResource TextBrush}" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Width="150"/>
                             <ComboBox
                                 Width="200"
                                 Foreground="{DynamicResource TextBrush}"
                                 SelectedItem="{Binding SelectedGuest}"
                                 ItemsSource="{Binding Guests}"
-                                materialDesign:HintAssist.Hint="Select a Guest"
-                                materialDesign:HintAssist.HelperText="Choose a guest from the list"
+                                materialDesign:HintAssist.Hint="{DynamicResource SelectGuestHint}"
+                                materialDesign:HintAssist.HelperText="{DynamicResource SelectGuestHelper}"
                                 Margin="10,0,0,0" />
 
-                            <!-- Okruglo dugme za dodavanje novog gosta -->
                             <Button
                                 Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}"
                                 Padding="0" Margin="20,0,0,0"
                                 Width="30" Height="30"
-                                ToolTip="MaterialDesignFloatingActionSecondaryDarkButton"
-                                Command="{Binding DataContext.ShowGuestsViewCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                >
+                                ToolTip="{DynamicResource AddButtonToolTip}"
+                                Command="{Binding DataContext.ShowGuestsViewCommand, RelativeSource={RelativeSource AncestorType=Window}}">
 
                                 <materialDesign:PackIcon Width="20" Height="20" Kind="Add" />
                             </Button>
-
                         </StackPanel>
 
-                        <!-- Room Type Label and ComboBox in same row -->
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Text="Room Type:" Foreground="{DynamicResource TextBrush}" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Width="150"/>
+                            <TextBlock Text="{DynamicResource RoomTypeText}" Foreground="{DynamicResource TextBrush}" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Width="150"/>
                             <ComboBox
                                 Width="200"
                                 Foreground="{DynamicResource TextBrush}"
                                 SelectedItem="{Binding SelectedRoomType}"
                                 ItemsSource="{Binding RoomTypes}"
-                                materialDesign:HintAssist.Hint="Select Room Type"
-                                materialDesign:HintAssist.HelperText="Choose the room type"
+                                materialDesign:HintAssist.Hint="{DynamicResource SelectRoomTypeHint}"
+                                materialDesign:HintAssist.HelperText="{DynamicResource SelectRoomTypeHelperText}"
                                 Margin="10,0,0,0"/>
                         </StackPanel>
 
-                        <!-- Check-In Date Label and DatePicker in same row -->
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Text="Check-In Date:" Foreground="{DynamicResource TextBrush}" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Width="150"/>
+                            <TextBlock Text="{DynamicResource CheckInDateText}" Foreground="{DynamicResource TextBrush}" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Width="150"/>
                             <DatePicker
                                 Width="200"
                                 Foreground="{DynamicResource TextBrush}"
                                 SelectedDate="{Binding CheckInDate}"
-                                materialDesign:HintAssist.Hint="Select Check-In Date"
-                                materialDesign:HintAssist.HelperText="Choose check-in date"
+                                materialDesign:HintAssist.Hint="{DynamicResource CheckInDateHint}"
+                                materialDesign:HintAssist.HelperText="{DynamicResource CheckInDateHelperText}"
                                 Margin="10,0,0,0" />
                         </StackPanel>
 
-                        <!-- Check-Out Date Label and DatePicker in same row -->
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Text="Check-Out Date:" Foreground="{DynamicResource TextBrush}" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Width="150"/>
+                            <TextBlock Text="{DynamicResource CheckOutDateText}" Foreground="{DynamicResource TextBrush}" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Width="150"/>
                             <DatePicker
                                 Width="200"
                                 Foreground="{DynamicResource TextBrush}"
                                 SelectedDate="{Binding CheckOutDate}"
-                                materialDesign:HintAssist.Hint="Select Check-Out Date"
-                                materialDesign:HintAssist.HelperText="Choose check-out date"
+                                materialDesign:HintAssist.Hint="{DynamicResource CheckOutDateHint}"
+                                materialDesign:HintAssist.HelperText="{DynamicResource CheckOutDateHelperText}"
                                 Margin="10,0,0,0" />
                         </StackPanel>
 
-                        <!-- Available Room Label and ComboBox in same row -->
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Text="Available Room:" Foreground="{DynamicResource TextBrush}" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Width="150"/>
+                            <TextBlock Text="{DynamicResource AvailableRoomText}" Foreground="{DynamicResource TextBrush}" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Width="150"/>
                             <ComboBox
                                 Width="200"
                                 Foreground="{DynamicResource TextBrush}"
                                 SelectedItem="{Binding SelectedRoom}"
                                 ItemsSource="{Binding AvailableRooms}"
-                                materialDesign:HintAssist.Hint="Select Available Room"
-                                materialDesign:HintAssist.HelperText="Choose an available room"
+                                materialDesign:HintAssist.Hint="{DynamicResource AvailableRoomHint}"
+                                materialDesign:HintAssist.HelperText="{DynamicResource AvailableRoomHelperText}"
                                 Margin="10,0,0,0" />
                         </StackPanel>
 
-                        <!-- Add Button -->
                         <Button
                             Width="100"
-                            Content="Add"
+                            Content="{DynamicResource AddButtonText}"
                             Command="{Binding AddReservationCommand}"
                             Style="{StaticResource MaterialDesignFlatSecondaryDarkBgButton}"
-                            ToolTip="Add Reservation"
+                            ToolTip="{DynamicResource AddButtonToolTip}"
                             HorizontalAlignment="Center"
                             Margin="0,20,0,0" />
                     </StackPanel>
                 </Grid>
             </TabItem>
 
+            <TabItem Header="{DynamicResource ViewReservationsHeader}">
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
+                    <DataGrid Grid.Row="0" AutoGenerateColumns="False" CanUserAddRows="False" 
+                        IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow" 
+                        ItemsSource="{Binding FilteredReservations}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding ReservationID}" Header="{DynamicResource ReservationIDHeader}" IsReadOnly="True" />
+                            <DataGridTextColumn Binding="{Binding CheckInDate, StringFormat='dd.MM.yyyy'}" Header="{DynamicResource CheckInDateHeader}" />
+                            <DataGridTextColumn Binding="{Binding CheckOutDate, StringFormat='dd.MM.yyyy'}" Header="{DynamicResource CheckOutDateHeader}" />
+                            <DataGridTextColumn Binding="{Binding GuestName}" Header="{DynamicResource GuestNameHeader}" />
+                            <DataGridTextColumn Binding="{Binding RoomID}" Header="{DynamicResource RoomIDHeader}" />
+                            <DataGridTextColumn Binding="{Binding UserName}" Header="{DynamicResource ReceptionistHeader}" />
 
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Command="{Binding DataContext.DeleteReservationCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding}" 
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                ToolTip="{DynamicResource DeleteButtonToolTip}" Height="20"
+                                                Foreground="#C70000" Margin="0" Padding="0">
+                                            <Button.Content>
+                                                <materialDesign:PackIcon Kind="Delete" Width="16" Height="16" />
+                                            </Button.Content>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
 
-
-
-            <TabItem Header="Reservations">
-                <!--radi, ignorisati error-->
-                <DataGrid  Margin="20" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding Reservations}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding ReservationID}" Header="Reservation ID" IsReadOnly="True" />
-                        <DataGridTextColumn Binding="{Binding CheckInDate, StringFormat='dd.MM.yyyy'}" Header="Check-in Date" />
-                        <DataGridTextColumn Binding="{Binding CheckOutDate, StringFormat='dd.MM.yyyy'}" Header="Check-out Date" />
-                        <DataGridTextColumn Binding="{Binding NumberOfGuests}" Header="Number of Guests" />
-                        <DataGridTextColumn Binding="{Binding GuestID}" Header="Guest ID" />
-                        <DataGridTextColumn Binding="{Binding RoomID}" Header="Room ID" />
-                        <DataGridTextColumn Binding="{Binding UserID}" Header="User ID" />
-
-                        <DataGridTemplateColumn>
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Command="{Binding DataContext.DeleteReservationCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                    CommandParameter="{Binding}" 
-                    Style="{StaticResource MaterialDesignFlatButton}"
-                    ToolTip="Delete" Height="20"
-                    Foreground="#C70000"
-                    Margin="0" Padding="0">
-                                        <Button.Content>
-                                            <materialDesign:PackIcon Kind="Delete" Width="16" Height="16" />
-                                        </Button.Content>
-                                    </Button>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                    <TextBox Grid.Row="1" x:Name="SearchTextBox" 
+                             Width="220"
+                             FontSize="13"
+                             Margin="0,15,0,0" 
+                             Padding="15"
+                             VerticalAlignment="Center"
+                             Foreground="{DynamicResource TextBrush}"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                             materialDesign:HintAssist.Hint="{DynamicResource SearchByGuestNameHint}"
+                             Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
             </TabItem>
-
         </TabControl>
     </Grid>
 </UserControl>

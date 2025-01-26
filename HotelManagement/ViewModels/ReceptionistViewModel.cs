@@ -1,8 +1,7 @@
-﻿using HotelManagement.Models;
-using HotelManagement.Views;
+﻿using HotelManagement.Views;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 
@@ -25,6 +24,30 @@ namespace HotelManagement.ViewModels
             }
         }
 
+        private string _languageImage;
+
+        public string LanguageImage
+        {
+            get => _languageImage;
+            set
+            {
+                _languageImage = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public void LoadLanguageImage(string language)
+        {
+            if (language == "SR")
+            {
+                LanguageImage = "../Resources/sr.png";
+            }
+            else
+            {
+                LanguageImage = "../Resources/en.png";
+            }
+        }
+
         public ICommand ShowNewReservationCommand { get; }
         public ICommand ShowGuestsViewCommand { get; }
         public ICommand ShowServiceReservationCommand { get; }
@@ -35,6 +58,8 @@ namespace HotelManagement.ViewModels
 
         public ReceptionistViewModel()
         {
+            LoadLanguageImage(Properties.Settings.Default.Language);
+
             ShowGuestsViewCommand = new RelayCommand(o => CurrentView = new GuestsView());
             ShowNewReservationCommand = new RelayCommand(o => CurrentView = new NewReservationView());
             ShowServiceReservationCommand = new RelayCommand(o => CurrentView = new ServiceReservationView());
@@ -56,8 +81,7 @@ namespace HotelManagement.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string propertyName)
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

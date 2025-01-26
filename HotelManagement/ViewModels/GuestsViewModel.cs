@@ -1,12 +1,7 @@
 ﻿using HotelManagement.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace HotelManagement.ViewModels
@@ -14,13 +9,32 @@ namespace HotelManagement.ViewModels
     public class GuestsViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<Guest> _guests;
+        private ObservableCollection<Guest> _filteredGuests;
+        private string _searchText;
+
+
+
         public ObservableCollection<Guest> Guests
         {
-            get => _guests;
+            get => _filteredGuests;
             set
             {
-                _guests = value;
+                _filteredGuests = value;
                 OnPropertyChanged();
+            }
+        }
+
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                if (_searchText != value)
+                {
+                    _searchText = value;
+                    OnPropertyChanged();
+                    FilterGuests();
+                }
             }
         }
 
@@ -44,9 +58,26 @@ namespace HotelManagement.ViewModels
         {
             using (var context = new HotelManagementContext())
             {
-                Guests = new ObservableCollection<Guest>(context.Guests.ToList());
+                _guests = new ObservableCollection<Guest>(context.Guests.ToList());
+                _filteredGuests = _guests;
             }
         }
+
+
+        private void FilterGuests()
+        {
+            if (string.IsNullOrEmpty(SearchText))
+            {
+                _filteredGuests = _guests;
+            }
+            else
+            {
+                _filteredGuests = new ObservableCollection<Guest>(_guests.Where(g =>
+            g.PassportNumber.StartsWith(SearchText, StringComparison.InvariantCultureIgnoreCase)));
+            }
+            OnPropertyChanged(nameof(Guests));
+        }
+
 
         private bool CanAddGuest(object parameter)
         {
@@ -74,6 +105,8 @@ namespace HotelManagement.ViewModels
                 context.SaveChanges();
 
                 Guests.Add(newGuest);
+                //novo
+                FilterGuests();
 
                 FirstName = string.Empty;
                 LastName = string.Empty;
@@ -86,6 +119,9 @@ namespace HotelManagement.ViewModels
                 OnPropertyChanged(nameof(PassportNumber));
                 OnPropertyChanged(nameof(Email));
                 OnPropertyChanged(nameof(PhoneNumber));
+
+                System.Windows.MessageBox.Show("New guest added successfully!", "Success", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+
             }
         }
 
@@ -108,6 +144,8 @@ namespace HotelManagement.ViewModels
             }
 
             Guests.Remove(guestToDelete);
+            //novo
+            FilterGuests();
         }
 
         private bool CanDeleteGuest(object parameter)

@@ -10,13 +10,31 @@ namespace HotelManagement.ViewModels
     {
         public ObservableCollection<Room> _rooms;
         public ObservableCollection<RoomType> _roomTypes;
+        private ObservableCollection<Room> _filteredRooms;
+        private string _searchText;
+
+
         public ObservableCollection<Room> Rooms
         {
-            get => _rooms;
+            get => _filteredRooms;
             set
             {
-                _rooms = value;
+                _filteredRooms = value;
                 OnPropertyChanged();
+            }
+        }
+
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                if (_searchText != value)
+                {
+                    _searchText = value;
+                    OnPropertyChanged();
+                    FilterRooms();
+                }
             }
         }
 
@@ -53,8 +71,23 @@ namespace HotelManagement.ViewModels
         {
             using (var context = new HotelManagementContext())
             {
-                Rooms = new ObservableCollection<Room>(context.Rooms.ToList());
+                _rooms = new ObservableCollection<Room>(context.Rooms.ToList());
+                _filteredRooms = _rooms;
             }
+        }
+
+        private void FilterRooms()
+        {
+            if (string.IsNullOrEmpty(SearchText))
+            {
+                _filteredRooms = _rooms;
+            }
+            else
+            {
+                _filteredRooms = new ObservableCollection<Room>(_rooms.Where(r =>
+                    r.RoomNumber.ToString().StartsWith(SearchText)));
+            }
+            OnPropertyChanged(nameof(Rooms));
         }
 
 
@@ -97,6 +130,9 @@ namespace HotelManagement.ViewModels
                 OnPropertyChanged(nameof(RoomNumber));
                 OnPropertyChanged(nameof(Floor));
                 OnPropertyChanged(nameof(SelectedRoomType));
+
+                System.Windows.MessageBox.Show("New room added successfully!", "Success", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+
             }
         }
 

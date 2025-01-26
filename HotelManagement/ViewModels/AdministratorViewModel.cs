@@ -1,13 +1,8 @@
-﻿
-using System;
-using System.Collections.Generic;
+﻿using HotelManagement.Views;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+using System.Runtime.CompilerServices;
 using System.Windows;
-using HotelManagement.Views;
+using System.Windows.Input;
 
 
 namespace HotelManagement.ViewModels
@@ -29,6 +24,30 @@ namespace HotelManagement.ViewModels
             }
         }
 
+        private string _languageImage;
+
+        public string LanguageImage
+        {
+            get => _languageImage;
+            set
+            {
+                _languageImage = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public void LoadLanguageImage(string language)
+        {
+            if (language == "SR")
+            {
+                LanguageImage = "../Resources/sr.png";
+            }
+            else
+            {
+                LanguageImage = "../Resources/en.png";
+            }
+        }
+
         public ICommand ShowUsersViewCommand { get; }
         public ICommand ShowRoomsViewCommand { get; }
         public ICommand ShowServicesViewCommand { get; }
@@ -39,6 +58,7 @@ namespace HotelManagement.ViewModels
 
         public AdministratorViewModel()
         {
+            LoadLanguageImage(Properties.Settings.Default.Language);
             ShowUsersViewCommand = new RelayCommand(o => CurrentView = new UsersViewModel());
             ShowRoomsViewCommand = new RelayCommand(o => CurrentView = new RoomsViewModel());
             ShowServicesViewCommand = new RelayCommand(o => CurrentView = new ServicesViewModel());
@@ -62,7 +82,7 @@ namespace HotelManagement.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChanged(string propertyName)
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

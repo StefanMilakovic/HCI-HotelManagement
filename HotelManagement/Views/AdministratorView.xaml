@@ -56,6 +56,25 @@
             </Button>
 
             <materialDesign:Chip Content="Administrator" Foreground="{DynamicResource TextBrush}" Background="{DynamicResource ChipBrush}" Margin="5,5,5,5" IsEnabled="False"/>
+            <Button Width="25" Height="25"
+                    HorizontalAlignment="Left"
+                    Margin="115,0,0,0"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Click="LanguageToggleButton_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <Ellipse Fill="{TemplateBinding Background}" />
+                                <Ellipse>
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="{Binding LanguageImage}" Stretch="UniformToFill" />
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+            </Button>
 
             <views:AdminNavigationBar Grid.Row="1"/>
 

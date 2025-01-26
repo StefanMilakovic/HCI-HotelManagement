@@ -71,10 +71,16 @@
                 </Button>
 
                 <StackPanel Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="296" >
-                    <TextBlock Text="Log In" FontSize="25" Foreground="{DynamicResource TextBrush}" FontWeight="Bold" HorizontalAlignment="Center" Margin="20,20,20,20" FontFamily="../Resources/GothamBold.otf#Gotham Light"/>
-                    <TextBox x:Name="usernameTextBox" Width="220" Height="50" Margin="0,20,0,0" Style="{StaticResource MaterialDesignOutlinedTextBox}" FontSize="14" Text="{Binding Username, Mode=TwoWay}" BorderBrush="{DynamicResource ElementBrush}" Foreground="{DynamicResource ElementBrush}">
-                        <materialDesign:HintAssist.Hint>Username</materialDesign:HintAssist.Hint>
-                        <TextBox.Background>Transparent</TextBox.Background>
+                    <TextBlock Text="{DynamicResource LoginText}" FontSize="25" Foreground="{DynamicResource TextBrush}" FontWeight="Bold" HorizontalAlignment="Center" Margin="20,20,20,20" FontFamily="../Resources/GothamBold.otf#Gotham Light"/>
+                    <TextBox x:Name="usernameTextBox" 
+                             Width="220" Height="50" 
+                             Margin="0,20,0,0" 
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                             FontSize="14" Text="{Binding Username, Mode=TwoWay}" 
+                             BorderBrush="{DynamicResource ElementBrush}" 
+                             Foreground="{DynamicResource ElementBrush}"
+                             Background="Transparent"
+                             materialDesign:HintAssist.Hint="{DynamicResource UsernameText}">
                     </TextBox>
                     <PasswordBox x:Name="passwordBox" 
                                  Width="220" Height="50" 
@@ -82,16 +88,16 @@
                                  Style="{StaticResource MaterialDesignOutlinedPasswordBox}" 
                                  FontSize="14" 
                                  PasswordChanged="PasswordBox_PasswordChanged"
-                                 BorderBrush="{DynamicResource ElementBrush}" Foreground="{DynamicResource ElementBrush}">
-                        <materialDesign:HintAssist.Hint>Password</materialDesign:HintAssist.Hint>
+                                 BorderBrush="{DynamicResource ElementBrush}" 
+                                 Foreground="{DynamicResource ElementBrush}"
+                                 Background="Transparent"
+                                 materialDesign:HintAssist.Hint="{DynamicResource PasswordText}">
                         <materialDesign:TextFieldAssist.HasClearButton>True</materialDesign:TextFieldAssist.HasClearButton>
-
-                        <PasswordBox.Background>Transparent</PasswordBox.Background>
                     </PasswordBox>
 
                     <Button 
-                        Width="90" 
-                        Content="Login" 
+                        Width="105" 
+                        Content="{DynamicResource LoginButtonText}" 
                         Margin="20,0,20,20" 
                         Command="{Binding LoginCommand}"
                         FontFamily="../Resources/GothamLight.otf#Gotham Light" 
@@ -99,7 +105,31 @@
                         Style="{StaticResource MaterialDesignFlatSecondaryDarkBgButton}"
                         ToolTip="MaterialDesignFlatSecondaryDarkBgButton"
                         />
+
+
+                    
                 </StackPanel>
+                
+                <Button Grid.Column="2" Width="25" Height="25"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Margin="20,0,0,18"
+                        Click="LanguageToggleButton_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Grid>
+                                    <Ellipse Fill="{TemplateBinding Background}" />
+                                    <Ellipse>
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="{Binding LanguageImage}" Stretch="UniformToFill" />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                </Grid>
+                            </ControlTemplate>
+                    </Button.Template>
+                </Button>
             </Grid>
         </Grid>
     </Border>

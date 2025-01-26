@@ -63,18 +63,13 @@ namespace HotelManagement.ViewModels
         {
             using (var context = new HotelManagementContext())
             {
-                // Dohvati sve račune (Invoices) iz baze
-                var invoices = context.Invoices.ToList(); // Dohvatanje svih računa u memoriju
+                var invoices = context.Invoices.ToList();
+                var reservations = context.Reservations.ToList();
 
-                // Dohvati sve rezervacije (Reservations) iz baze
-                var reservations = context.Reservations.ToList(); // Dohvatanje svih rezervacija u memoriju
-
-                // Filtriraj rezervacije koje nemaju povezane račune
                 var filteredReservations = reservations
                     .Where(reservation => !invoices.Any(invoice => invoice.ReservationID == reservation.ReservationID))
-                    .ToList(); // Filtriranje u memoriji
+                    .ToList();
 
-                // Postavi filtrirane rezervacije u ObservableCollection
                 Reservations = new ObservableCollection<Reservation>(filteredReservations);
             }
         }

@@ -13,91 +13,129 @@
 
     <Grid>
         <TabControl Margin="0">
-            <TabItem Header="View Users">
-                <Border Grid.Row="0" Margin="20">
-                    <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding Users}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding UserId}" Header="User ID" />
-                            <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" />
-                            <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" />
-                            <DataGridTextColumn Binding="{Binding Username}" Header="Username" />
-                            <DataGridTextColumn Binding="{Binding Role}" Header="Role" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Border>
+            <TabItem Header="{DynamicResource ViewUsersTabHeader}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Margin="20,20,20,0">
+                        <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding Users}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding UserId}" Header="{DynamicResource UserIdHeader}" />
+                                <DataGridTextColumn Binding="{Binding FirstName}" Header="{DynamicResource FirstNameHeader}" />
+                                <DataGridTextColumn Binding="{Binding LastName}" Header="{DynamicResource LastNameHeader}" />
+                                <DataGridTextColumn Binding="{Binding Username}" Header="{DynamicResource UsernameHeader}" />
+                                <DataGridTextColumn Binding="{Binding Role}" Header="{DynamicResource RoleHeader}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+
+                    <TextBox 
+                        Grid.Row="1" 
+                        x:Name="SearchTextBox" 
+                        Width="220"
+                        FontSize="13"
+                        Margin="10" 
+                        Padding="15"
+                        VerticalAlignment="Center"
+                        Foreground="{DynamicResource TextBrush}"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                        materialDesign:HintAssist.Hint="{DynamicResource SearchByUsernameHint}"
+                        Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
             </TabItem>
 
-            <TabItem Header="Add User">
+            <TabItem Header="{DynamicResource AddUserTabHeader}">
                 <StackPanel Margin="20">
 
                     <TextBox x:Name="FirstNameTextBox" Width="200" Foreground="{DynamicResource TextBrush}" Margin="15"
-                             materialDesign:HintAssist.HelperText="First name must not be empty"
-                             materialDesign:HintAssist.Hint="First Name"
+                             materialDesign:HintAssist.HelperText="{DynamicResource FirstNameHelperText}"
+                             materialDesign:HintAssist.Hint="{DynamicResource FirstNameHint}"
                              Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" />
 
                     <TextBox x:Name="LastNameTextBox" Width="200" Foreground="{DynamicResource TextBrush}" Margin="15"
-                             materialDesign:HintAssist.HelperText="Last name must not be empty"
-                             materialDesign:HintAssist.Hint="Last Name"
+                             materialDesign:HintAssist.HelperText="{DynamicResource LastNameHelperText}"
+                             materialDesign:HintAssist.Hint="{DynamicResource LastNameHint}"
                              Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
 
                     <TextBox x:Name="UsernameTextBox" Width="200" Foreground="{DynamicResource TextBrush}" Margin="15"
-                             materialDesign:HintAssist.HelperText="Username must not be empty"
-                             materialDesign:HintAssist.Hint="Username"
+                             materialDesign:HintAssist.HelperText="{DynamicResource UsernameHelperText}"
+                             materialDesign:HintAssist.Hint="{DynamicResource UsernameHint}"
                              Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
 
                     <TextBox x:Name="PasswordBox" Width="200" Foreground="{DynamicResource TextBrush}" Margin="15"
-                             materialDesign:HintAssist.HelperText="Password must not be empty"
-                             materialDesign:HintAssist.Hint="Password"
+                             materialDesign:HintAssist.HelperText="{DynamicResource PasswordHelperText}"
+                             materialDesign:HintAssist.Hint="{DynamicResource PasswordHint}"
                              Text="{Binding PasswordHash, UpdateSourceTrigger=PropertyChanged}" />
 
                     <ComboBox x:Name="RoleComboBox" Width="200" Foreground="{DynamicResource TextBrush}" Margin="15"
-                            materialDesign:HintAssist.HelperText="Select a role"
-                            materialDesign:HintAssist.Hint="Role"
+                            materialDesign:HintAssist.HelperText="{DynamicResource SelectRoleHelperText}"
+                            materialDesign:HintAssist.Hint="{DynamicResource RoleHint}"
                             SelectedItem="{Binding Role, UpdateSourceTrigger=PropertyChanged}"
                             ItemsSource="{Binding Roles}">
                     </ComboBox>
 
                     <Button
                         Width="100"
-                        Content="Add"
+                        Content="{DynamicResource AddButtonText}"
                         Margin="20"
                         Command="{Binding AddUserCommand}"
                         Style="{StaticResource MaterialDesignFlatSecondaryDarkBgButton}" 
-                        ToolTip="Add User" />
-
+                        ToolTip="{DynamicResource AddButtonToolTip}" />
                 </StackPanel>
             </TabItem>
 
-            <TabItem Header="Edit Users">
-                <Border Grid.Row="0" Margin="20">
-                    <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="False" SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding Users}" >
-                        
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding UserId}" Header="User ID" IsReadOnly="True" />
-                            <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" />
-                            <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" />
-                            <DataGridTextColumn Binding="{Binding Username}" Header="Username" />
-                            <DataGridTextColumn Binding="{Binding Role}" Header="Role" IsReadOnly="True"/>
+            <TabItem Header="{DynamicResource EditUsersTabHeader}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
-                            <DataGridTemplateColumn>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Command="{Binding DataContext.DeleteUserCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                            CommandParameter="{Binding}" 
-                                            Style="{StaticResource MaterialDesignFlatButton}"
-                                            ToolTip="Delete User" Height="20"
-                                            Foreground="#C70000"
-                                            Margin="0" Padding="0">
-                                            <Button.Content>
-                                                <materialDesign:PackIcon Kind="Delete" Width="16" Height="16" />
-                                            </Button.Content>
-                                        </Button>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Border>
+                    <Border Grid.Row="0" Margin="20,20,20,0">
+                        <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="False" SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding Users}" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding UserId}" Header="{DynamicResource UserIdHeader}" IsReadOnly="True" />
+                                <DataGridTextColumn Binding="{Binding FirstName}" Header="{DynamicResource FirstNameHeader}" />
+                                <DataGridTextColumn Binding="{Binding LastName}" Header="{DynamicResource LastNameHeader}" />
+                                <DataGridTextColumn Binding="{Binding Username}" Header="{DynamicResource UsernameHeader}" />
+                                <DataGridTextColumn Binding="{Binding Role}" Header="{DynamicResource RoleHeader}" IsReadOnly="True"/>
+
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Command="{Binding DataContext.DeleteUserCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                    CommandParameter="{Binding}" 
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    ToolTip="{DynamicResource DeleteButtonToolTip}" Height="20"
+                                    Foreground="#C70000"
+                                    Margin="0" Padding="0">
+                                                <Button.Content>
+                                                    <materialDesign:PackIcon Kind="Delete" Width="16" Height="16" />
+                                                </Button.Content>
+                                            </Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+
+                    <TextBox 
+                        Grid.Row="1" 
+                        x:Name="SearchTextBox1" 
+                        Width="220"
+                        FontSize="13"
+                        Margin="10" 
+                        Padding="15"
+                        VerticalAlignment="Center"
+                        Foreground="{DynamicResource TextBrush}"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                        materialDesign:HintAssist.Hint="{DynamicResource SearchByUsernameHint}"
+                        Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

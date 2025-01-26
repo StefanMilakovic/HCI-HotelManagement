@@ -1,25 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HotelManagement.Models
+﻿namespace HotelManagement.Models
 {
     public class Reservation
     {
         public int ReservationID { get; set; }
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
-        public int NumberOfGuests { get; set; }
-
-        // Strane ključevi (foreign keys)
         public int GuestID { get; set; }
         public int RoomID { get; set; }
         public int UserID { get; set; }
 
-
-        //novo 
         public string GuestName
         {
             get
@@ -31,6 +20,23 @@ namespace HotelManagement.Models
                 }
             }
         }
+
+        public string UserName
+        {
+            get
+            {
+                using (var context = new HotelManagementContext())
+                {
+                    var user = context.Users.FirstOrDefault(u => u.UserId == UserID);
+                    return user != null ? $"{user.FirstName} {user.LastName}" : "Unknown";
+                }
+            }
+        }
+
+
+
+        //public string GuestName { get; set; } // Populated in ViewModel
+        //public string UserName { get; set; } // Populated in ViewModel
 
     }
 }

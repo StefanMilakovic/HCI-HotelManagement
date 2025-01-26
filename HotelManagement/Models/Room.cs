@@ -1,9 +1,4 @@
 ﻿using HotelManagement.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelManagement.Models
 {
@@ -14,8 +9,6 @@ namespace HotelManagement.Models
         public int Floor { get; set; }
         public int RoomTypeId { get; set; }
 
-
-        //novo 
         public string RoomTypeName
         {
             get
@@ -30,11 +23,5 @@ namespace HotelManagement.Models
             return $"{RoomNumber}";
         }
     }
-
-
-
-
-
-
 
 }

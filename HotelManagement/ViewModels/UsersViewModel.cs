@@ -3,7 +3,6 @@ using HotelManagement.Utilities;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows;
 using System.Windows.Input;
 
 namespace HotelManagement.ViewModels
@@ -11,15 +10,32 @@ namespace HotelManagement.ViewModels
     public class UsersViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<User> _users;
+        private ObservableCollection<User> _filteredUsers;
+        private string _searchText;
         public ObservableCollection<User> Users
         {
-            get => _users;
+            get => _filteredUsers;
             set
             {
-                _users = value;
+                _filteredUsers = value;
                 OnPropertyChanged();
             }
         }
+
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                if (_searchText != value)
+                {
+                    _searchText = value;
+                    OnPropertyChanged();
+                    FilterUsers();
+                }
+            }
+        }
+
 
         public ICommand AddUserCommand { get; }
         public ICommand DeleteUserCommand { get; }
@@ -41,19 +57,33 @@ namespace HotelManagement.ViewModels
             LoadUsers();
         }
 
+        private void FilterUsers()
+        {
+            if (string.IsNullOrEmpty(SearchText))
+            {
+                _filteredUsers = _users;
+            }
+            else
+            {
+                _filteredUsers = new ObservableCollection<User>(_users.Where(u =>
+                    u.FirstName.StartsWith(SearchText, StringComparison.InvariantCultureIgnoreCase) ||
+                    u.LastName.StartsWith(SearchText, StringComparison.InvariantCultureIgnoreCase) ||
+                    u.Username.StartsWith(SearchText, StringComparison.InvariantCultureIgnoreCase)));
+            }
+            OnPropertyChanged(nameof(Users));
+        }
+
         private void LoadUsers()
         {
             using (var context = new HotelManagementContext())
             {
-                Users = new ObservableCollection<User>(context.Users.ToList());
+                _users = new ObservableCollection<User>(context.Users.ToList());
+                _filteredUsers = _users;
             }
         }
 
         private bool CanAddUser(object parameter)
         {
-            
-                // Proveri da li već postoji korisnik sa istim korisničkim imenom
-                
             return !string.IsNullOrEmpty(FirstName) &&
                    !string.IsNullOrEmpty(LastName) &&
                    !string.IsNullOrEmpty(Username) &&
@@ -61,78 +91,41 @@ namespace HotelManagement.ViewModels
                    Role.HasValue;
         }
 
-        /*
+        
         private void AddUser(object parameter)
         {
             using (var context = new HotelManagementContext())
             {
-                var newUser = new User
-                {
-                    FirstName = this.FirstName,
-                    LastName = this.LastName,
-                    Username = this.Username,
-                    PasswordHash = this.PasswordHash,
-                    Role = this.Role
-                };
-
-                context.Users.Add(newUser);
-                context.SaveChanges();
-
-                Users.Add(newUser);
-
-                FirstName = string.Empty;
-                LastName = string.Empty;
-                Username = string.Empty;
-                PasswordHash = string.Empty;
-                Role = null;
-
-                OnPropertyChanged(nameof(FirstName));
-                OnPropertyChanged(nameof(LastName));
-                OnPropertyChanged(nameof(Username));
-                OnPropertyChanged(nameof(PasswordHash));
-                OnPropertyChanged(nameof(Role));
-            }
-        }
-        */
-
-        private void AddUser(object parameter)
-        {
-            using (var context = new HotelManagementContext())
-            {
-
-                // Hashuj lozinku pre nego što je sačuvaš
                 string hashedPassword = PasswordHelper.HashPassword(this.PasswordHash);
 
-                // Kreiraj novog korisnika sa hashiranom lozinkom
                 var newUser = new User
                 {
                     FirstName = this.FirstName,
                     LastName = this.LastName,
                     Username = this.Username,
-                    PasswordHash = hashedPassword, // Koristi hash lozinke
+                    PasswordHash = hashedPassword,
                     Role = this.Role
                 };
 
-                // Dodaj korisnika u bazu podataka
                 context.Users.Add(newUser);
                 context.SaveChanges();
-
-                // Dodaj korisnika u lokalnu kolekciju (ako se koristi za prikaz u UI-ju)
                 Users.Add(newUser);
 
-                // Resetuj vrednosti unosa u UI
+                FilterUsers();
+
                 FirstName = string.Empty;
                 LastName = string.Empty;
                 Username = string.Empty;
                 PasswordHash = string.Empty;
                 Role = null;
 
-                // Obavesti UI da su se vrednosti svojstava promenile
                 OnPropertyChanged(nameof(FirstName));
                 OnPropertyChanged(nameof(LastName));
                 OnPropertyChanged(nameof(Username));
                 OnPropertyChanged(nameof(PasswordHash));
                 OnPropertyChanged(nameof(Role));
+                System.Windows.MessageBox.Show("New user added successfully!", "Success", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+
             }
         }
 
@@ -156,6 +149,7 @@ namespace HotelManagement.ViewModels
             }
 
             Users.Remove(userToDelete);
+            FilterUsers();
         }
 
         private bool CanDeleteUser(object parameter)

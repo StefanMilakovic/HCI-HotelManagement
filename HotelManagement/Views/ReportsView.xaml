@@ -13,72 +13,103 @@
 
     <Grid>
         <TabControl Margin="0">
+            <TabItem Header="{DynamicResource ReservationsTabHeader}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Margin="20,20,20,0">
+                        <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding FilteredReservations}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding ReservationID}" Header="{DynamicResource ReservationIDHeader}" IsReadOnly="True" />
+                                <DataGridTextColumn Binding="{Binding CheckInDate, StringFormat='dd.MM.yyyy'}" Header="{DynamicResource CheckInDateHeader}" />
+                                <DataGridTextColumn Binding="{Binding CheckOutDate, StringFormat='dd.MM.yyyy'}" Header="{DynamicResource CheckOutDateHeader}" />
+                                <DataGridTextColumn Binding="{Binding GuestName}" Header="{DynamicResource GuestNameHeader}" />
+                                <DataGridTextColumn Binding="{Binding RoomID}" Header="{DynamicResource RoomIDHeader}" />
+                                <DataGridTextColumn Binding="{Binding UserName}" Header="{DynamicResource ReceptionistHeader}" />
 
-            <!-- Pregled Rezervacija -->
-            <TabItem Header="Reservations">
-                <Border Grid.Row="0" Margin="20">
-                    <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding Reservations}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding ReservationID}" Header="Reservation ID" IsReadOnly="True" />
-                            <DataGridTextColumn Binding="{Binding CheckInDate, StringFormat='dd.MM.yyyy'}" Header="Check-in Date" />
-                            <DataGridTextColumn Binding="{Binding CheckOutDate, StringFormat='dd.MM.yyyy'}" Header="Check-out Date" />
-                            <DataGridTextColumn Binding="{Binding GuestName}" Header="Guest Name" />
-                            <DataGridTextColumn Binding="{Binding RoomID}" Header="Room ID" />
-                            <DataGridTextColumn Binding="{Binding UserID}" Header="Receptionist" />
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Command="{Binding DataContext.DeleteReservationCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}" 
+                                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                                    ToolTip="{DynamicResource DeleteButtonToolTip}" Height="20"
+                                                    Foreground="#C70000"
+                                                    Margin="0" Padding="0">
+                                                <Button.Content>
+                                                    <materialDesign:PackIcon Kind="Delete" Width="16" Height="16" />
+                                                </Button.Content>
+                                            </Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
 
-                            <DataGridTemplateColumn>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Command="{Binding DataContext.DeleteReservationCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                            CommandParameter="{Binding}" 
-                                            Style="{StaticResource MaterialDesignFlatButton}"
-                                            ToolTip="Delete" Height="20"
-                                            Foreground="#C70000"
-                                            Margin="0" Padding="0">
-                                            <Button.Content>
-                                                <materialDesign:PackIcon Kind="Delete" Width="16" Height="16" />
-                                            </Button.Content>
-                                        </Button>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Border>
+                    <TextBox Grid.Row="1" 
+                             x:Name="SearchTextBoxReservations" 
+                             Width="220"
+                             FontSize="13"
+                             Margin="10" 
+                             Padding="15"
+                             VerticalAlignment="Center"
+                             Foreground="{DynamicResource TextBrush}"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                             materialDesign:HintAssist.Hint="{DynamicResource SearchByGuestNameHint}"
+                             Text="{Binding SearchReservationText, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
             </TabItem>
 
-            <!-- Pregled Računa -->
-            <TabItem Header="Invoices">
-                <Border Grid.Row="0" Margin="20">
-                    <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding Invoices}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding InvoiceID}" Header="Invoice ID" IsReadOnly="True" />
-                            <DataGridTextColumn Binding="{Binding TotalAmount,StringFormat='€ #,0.00'}" Header="Total Amount" />
-                            <DataGridTextColumn Binding="{Binding IssuedDate,StringFormat='dd.MM.yyyy'}" Header="Issued Date" />
-                            <DataGridTextColumn Binding="{Binding GuestID}" Header="Guest ID" />
-                            <DataGridTextColumn Binding="{Binding ReservationID}" Header="Reservation ID" />
-                            
-                            
-                            <DataGridTemplateColumn>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Command="{Binding DataContext.DeleteInvoiceCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                            CommandParameter="{Binding}" 
-                                            Style="{StaticResource MaterialDesignFlatButton}"
-                                            ToolTip="Delete" Height="20"
-                                            Foreground="#C70000"
-                                            Margin="0" Padding="0">
-                                            <Button.Content>
-                                                <materialDesign:PackIcon Kind="Delete" Width="16" Height="16" />
-                                            </Button.Content>
-                                        </Button>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Border>
+            <TabItem Header="{DynamicResource InvoicesTabHeader}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Margin="20,20,20,0">
+                        <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding FilteredInvoices}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding InvoiceID}" Header="{DynamicResource InvoiceIDHeader}" IsReadOnly="True" />
+                                <DataGridTextColumn Binding="{Binding TotalAmount,StringFormat='€ #,0.00'}" Header="{DynamicResource TotalAmountHeader}" />
+                                <DataGridTextColumn Binding="{Binding IssuedDate,StringFormat='dd.MM.yyyy'}" Header="{DynamicResource IssuedDateHeader}" />
+                                <DataGridTextColumn Binding="{Binding GuestName}" Header="{DynamicResource GuestNameHeader}" />
+                                <DataGridTextColumn Binding="{Binding ReservationID}" Header="{DynamicResource ReservationIDHeader}" />
+
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Command="{Binding DataContext.DeleteInvoiceCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}" 
+                                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                                    ToolTip="{DynamicResource DeleteButtonToolTip}" Height="20"
+                                                    Foreground="#C70000"
+                                                    Margin="0" Padding="0">
+                                                <Button.Content>
+                                                    <materialDesign:PackIcon Kind="Delete" Width="16" Height="16" />
+                                                </Button.Content>
+                                            </Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+
+                    <TextBox Grid.Row="1" 
+                             x:Name="SearchTextBoxInvoices" 
+                             Width="220"
+                             FontSize="13"
+                             Margin="10" 
+                             Padding="15"
+                             VerticalAlignment="Center"
+                             Foreground="{DynamicResource TextBrush}"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                             materialDesign:HintAssist.Hint="{DynamicResource SearchByGuestNameHint}"
+                             Text="{Binding SearchInvoiceText, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
             </TabItem>
 
         </TabControl>

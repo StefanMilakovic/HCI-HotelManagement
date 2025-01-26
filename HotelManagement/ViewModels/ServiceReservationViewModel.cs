@@ -2,6 +2,7 @@
 using HotelManagement.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace HotelManagement.ViewModels
@@ -16,6 +17,48 @@ namespace HotelManagement.ViewModels
         private bool _isAddServiceButtonEnabled;
         private ObservableCollection<int> _quantityList;
         private int _selectedQuantity;
+
+        private ObservableCollection<Reservation> _filteredReservations;
+        private string _searchReservationText;
+
+
+        public ObservableCollection<Reservation> FilteredReservations
+        {
+            get => _filteredReservations;
+            set
+            {
+                _filteredReservations = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string SearchReservationText
+        {
+            get => _searchReservationText;
+            set
+            {
+                if (_searchReservationText != value)
+                {
+                    _searchReservationText = value;
+                    OnPropertyChanged();
+                    FilterReservations();
+                }
+            }
+        }
+
+        private void FilterReservations()
+        {
+            if (string.IsNullOrEmpty(SearchReservationText))
+            {
+                FilteredReservations = Reservations;
+            }
+            else
+            {
+                FilteredReservations = new ObservableCollection<Reservation>(
+                    Reservations.Where(r => r.GuestName.StartsWith(SearchReservationText, StringComparison.InvariantCultureIgnoreCase))
+                );
+            }
+        }
 
 
 
@@ -93,7 +136,7 @@ namespace HotelManagement.ViewModels
 
 
             QuantityList = new ObservableCollection<int> {1,2,3,4,5,6};
-            SelectedQuantity = 1; // Postavi podrazumijevanu vrijednost
+            SelectedQuantity = 1;
 
 
             LoadReservations();
@@ -132,7 +175,14 @@ namespace HotelManagement.ViewModels
         {
             using (var context = new HotelManagementContext())
             {
-                Reservations = new ObservableCollection<Reservation>(context.Reservations.ToList());
+                var invoices = context.Invoices.ToList();
+                var reservations = context.Reservations.ToList();
+
+                var filteredReservations = reservations
+                    .Where(reservation => !invoices.Any(invoice => invoice.ReservationID == reservation.ReservationID))
+                    .ToList();
+
+                Reservations = new ObservableCollection<Reservation>(filteredReservations);
             }
         }*/
 
@@ -141,19 +191,15 @@ namespace HotelManagement.ViewModels
         {
             using (var context = new HotelManagementContext())
             {
-                // Dohvati sve račune (Invoices) iz baze
-                var invoices = context.Invoices.ToList(); // Dohvatanje svih računa u memoriju
+                var invoices = context.Invoices.ToList();
+                var reservations = context.Reservations.ToList();
 
-                // Dohvati sve rezervacije (Reservations) iz baze
-                var reservations = context.Reservations.ToList(); // Dohvatanje svih rezervacija u memoriju
-
-                // Filtriraj rezervacije koje nemaju povezane račune
                 var filteredReservations = reservations
                     .Where(reservation => !invoices.Any(invoice => invoice.ReservationID == reservation.ReservationID))
-                    .ToList(); // Filtriranje u memoriji
+                    .ToList();
 
-                // Postavi filtrirane rezervacije u ObservableCollection
-                Reservations = new ObservableCollection<Reservation>(filteredReservations);
+                _reservations = new ObservableCollection<Reservation>(filteredReservations);
+                _filteredReservations = _reservations;
             }
         }
 
@@ -192,7 +238,8 @@ namespace HotelManagement.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

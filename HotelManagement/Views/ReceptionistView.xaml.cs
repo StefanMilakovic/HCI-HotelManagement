@@ -1,29 +1,25 @@
 ﻿using HotelManagement.ViewModels;
-using System;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using static MaterialDesignThemes.Wpf.Theme;
 
 namespace HotelManagement.Views
 {
     public partial class ReceptionistView : Window
     {
+        
         public ReceptionistView()
         {
             InitializeComponent();
             DataContext = new ReceptionistViewModel();
             LoadTheme();
+            LoadLanguage();
         }
+
+        
 
         private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -44,35 +40,34 @@ namespace HotelManagement.Views
 
             if (currentTheme == Application.Current.Resources["LightTheme"])
             {
-                // Prebaci na Dark
                 Application.Current.Resources.MergedDictionaries[0] = (ResourceDictionary)Application.Current.Resources["DarkTheme"];
                 SaveTheme("Dark");
             }
             else if (currentTheme == Application.Current.Resources["DarkTheme"])
             {
-                // Prebaci na HighContrast
                 Application.Current.Resources.MergedDictionaries[0] = (ResourceDictionary)Application.Current.Resources["DarkRedTheme"];
                 SaveTheme("DarkRedTheme");
             }
-            else if(currentTheme == Application.Current.Resources["DarkRedTheme"])
+            else if (currentTheme == Application.Current.Resources["DarkRedTheme"])
             {
-                // Prebaci nazad na Light
                 Application.Current.Resources.MergedDictionaries[0] = (ResourceDictionary)Application.Current.Resources["OrangeDarkTheme"];
-                SaveTheme("Light");
+                SaveTheme("OrangeDarkTheme");
             }
             else if (currentTheme == Application.Current.Resources["OrangeDarkTheme"])
             {
-                // Prebaci nazad na Light
                 Application.Current.Resources.MergedDictionaries[0] = (ResourceDictionary)Application.Current.Resources["LightTheme"];
                 SaveTheme("Light");
             }
+            
         }
+
 
         private void SaveTheme(string theme)
         {
             Properties.Settings.Default.SelectedTheme = theme;
             Properties.Settings.Default.Save();
         }
+
 
         private void LoadTheme()
         {
@@ -87,12 +82,99 @@ namespace HotelManagement.Views
             {
                 Application.Current.Resources.MergedDictionaries[0] = (ResourceDictionary)Application.Current.Resources["LightTheme"];
             }
-            else
+            else if (theme == "DarkRedTheme")
             {
                 Application.Current.Resources.MergedDictionaries[0] = (ResourceDictionary)Application.Current.Resources["DarkRedTheme"];
+            }
+            else if (theme == "OrangeDarkTheme")
+            {
+                Application.Current.Resources.MergedDictionaries[0] = (ResourceDictionary)Application.Current.Resources["OrangeDarkTheme"];
+            }
+            else
+            {
+                Debug.WriteLine("Unknown theme, defaulting to LightTheme.");
+                Application.Current.Resources.MergedDictionaries[0] = (ResourceDictionary)Application.Current.Resources["LightTheme"];
+                Properties.Settings.Default.SelectedTheme = "Light";
+                Properties.Settings.Default.Save();
             }
         }
 
 
+
+
+
+        private void LanguageToggleButton_Click(object sender, RoutedEventArgs e)
+        {
+            var languageDictionary = Application.Current.Resources.MergedDictionaries
+        .FirstOrDefault(d => d.Source != null &&
+                             (d.Source.OriginalString.Contains("Dictionary-SR.xaml") ||
+                              d.Source.OriginalString.Contains("Dictionary-EN.xaml")));
+
+            if (languageDictionary != null && languageDictionary.Source.OriginalString.Contains("Dictionary-SR.xaml"))
+            {
+                var newDictionary = new ResourceDictionary { Source = new Uri("Resources/Dictionary-EN.xaml", UriKind.Relative) };
+                Application.Current.Resources.MergedDictionaries.Remove(languageDictionary);
+                Application.Current.Resources.MergedDictionaries.Add(newDictionary);
+                SaveLanguage("EN");
+                ((ReceptionistViewModel)DataContext).LoadLanguageImage("EN");
+            }
+            else if (languageDictionary != null && languageDictionary.Source.OriginalString.Contains("Dictionary-EN.xaml"))
+            {
+                var newDictionary = new ResourceDictionary { Source = new Uri("Resources/Dictionary-SR.xaml", UriKind.Relative) };
+                Application.Current.Resources.MergedDictionaries.Remove(languageDictionary);
+                Application.Current.Resources.MergedDictionaries.Add(newDictionary);
+                SaveLanguage("SR");
+                ((ReceptionistViewModel)DataContext).LoadLanguageImage("SR");
+            }
+        }
+
+        private void SaveLanguage(string language)
+        {
+            Properties.Settings.Default.Language = language;
+            Properties.Settings.Default.Save();
+        }
+
+
+        private void LoadLanguage()
+        {
+            string language = Properties.Settings.Default.Language;
+            Debug.WriteLine($"Loaded language: {language}");
+
+            if (language == "SR")
+            {
+                var currentDictionary = Application.Current.Resources.MergedDictionaries
+                    .FirstOrDefault(d => d.Source != null && d.Source.OriginalString.Contains("Dictionary-SR.xaml"));
+
+                if (currentDictionary == null)
+                {
+                    var dictionarySR = new ResourceDictionary { Source = new Uri("Resources/Dictionary-SR.xaml", UriKind.Relative) };
+                    Application.Current.Resources.MergedDictionaries.Add(dictionarySR);
+                }
+            }
+            else if (language == "EN")
+            {
+                var currentDictionary = Application.Current.Resources.MergedDictionaries
+                    .FirstOrDefault(d => d.Source != null && d.Source.OriginalString.Contains("Dictionary-EN.xaml"));
+
+                if (currentDictionary == null)
+                {
+                    var dictionaryEN = new ResourceDictionary { Source = new Uri("Resources/Dictionary-EN.xaml", UriKind.Relative) };
+                    Application.Current.Resources.MergedDictionaries.Add(dictionaryEN);
+                }
+            }
+            else
+            {
+                Properties.Settings.Default.Language = "EN";
+                Properties.Settings.Default.Save();
+
+                var dictionaryEN = new ResourceDictionary { Source = new Uri("Resources/Dictionary-EN.xaml", UriKind.Relative) };
+                Application.Current.Resources.MergedDictionaries.Add(dictionaryEN);
+            }
+        }
+
+
+        
+
     }
 }
+
