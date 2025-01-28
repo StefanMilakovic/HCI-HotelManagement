@@ -3,6 +3,7 @@ using System.Windows;
 
 namespace HotelManagement.Languages
 {
+    /*
     public class LanguageManager : INotifyPropertyChanged
     {
         private static LanguageManager _instance;
@@ -18,7 +19,6 @@ namespace HotelManagement.Languages
                 OnPropertyChanged(nameof(CurrentDictionary));
                 OnPropertyChanged(nameof(GuestIdHeader));
                 OnPropertyChanged(nameof(FirstNameHeader));
-                // Dodajte sva svojstva za Header-e.
             }
         }
 
@@ -43,7 +43,7 @@ namespace HotelManagement.Languages
 
         private LanguageManager()
         {
-            LoadLanguage("SR"); // Podrazumevani jezik
+            LoadLanguage("SR");
         }
 
         public void LoadLanguage(string language)
@@ -55,5 +55,5 @@ namespace HotelManagement.Languages
             CurrentDictionary = new ResourceDictionary { Source = new Uri(dictionaryPath, UriKind.Relative) };
         }
     }
-
+    */
 }

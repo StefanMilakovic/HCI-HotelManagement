@@ -38,9 +38,7 @@
 
             <ResourceDictionary x:Key="Dictionary-SR">
                 <ResourceDictionary.MergedDictionaries>
-                    <!--<ResourceDictionary Source="/Resources/Dictionary-SR.xaml"/>-->
-                    <ResourceDictionary Source="pack://application:,,,/Resources/Dictionary-SR.xaml"/>
-
+                    <ResourceDictionary Source="/Resources/Dictionary-SR.xaml"/>
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
 

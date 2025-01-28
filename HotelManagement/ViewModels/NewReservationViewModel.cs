@@ -101,18 +101,6 @@ namespace HotelManagement.ViewModels
             }
         }
 
-
-        /*
-        public ObservableCollection<Reservation> Reservations
-        {
-            get => _reservations;
-            set
-            {
-                _reservations = value;
-                OnPropertyChanged(nameof(Reservations));
-            }
-        }*/
-
         public ObservableCollection<Reservation> Reservations
         {
             get => _reservations;
@@ -120,7 +108,7 @@ namespace HotelManagement.ViewModels
             {
                 _reservations = value;
                 OnPropertyChanged();
-                FilterReservations(); // Update filtered list when reservations change
+                FilterReservations();
             }
         }
 

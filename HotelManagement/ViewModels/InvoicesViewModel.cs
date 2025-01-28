@@ -161,17 +161,6 @@ namespace HotelManagement.ViewModels
             LoadReservations();
         }
 
-
-        /*
-        private void LoadInvoices()
-        {
-            using (var context = new HotelManagementContext())
-            {
-                Invoices = new ObservableCollection<Invoice>(context.Invoices.ToList());
-            }
-        }
-        */
-
         private void LoadInvoices()
         {
             using (var context = new HotelManagementContext())
@@ -181,22 +170,6 @@ namespace HotelManagement.ViewModels
                 FilteredInvoices = Invoices;
             }
         }
-
-        /*
-        private void LoadReservations()
-        {
-            using (var context = new HotelManagementContext())
-            {
-                var invoices = context.Invoices.ToList();
-                var reservations = context.Reservations.ToList();
-
-                var filteredReservations = reservations
-                    .Where(reservation => !invoices.Any(invoice => invoice.ReservationID == reservation.ReservationID))
-                    .ToList();
-
-                Reservations = new ObservableCollection<Reservation>(filteredReservations);
-            }
-        }*/
 
         private void LoadReservations()
         {

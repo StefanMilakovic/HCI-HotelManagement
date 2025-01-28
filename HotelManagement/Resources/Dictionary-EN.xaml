@@ -173,6 +173,6 @@
     <System:String x:Key="LoginText">Login</System:String>
     <System:String x:Key="UsernameText">Username</System:String>
     <System:String x:Key="PasswordText">Password</System:String>
-    <System:String x:Key="LoginButtonText">Login</System:String>
+    <System:String x:Key="LoginButtonText">Log In</System:String>
 
 </ResourceDictionary>

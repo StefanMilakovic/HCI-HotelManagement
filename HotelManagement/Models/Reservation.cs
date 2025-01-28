@@ -32,11 +32,5 @@
                 }
             }
         }
-
-
-
-        //public string GuestName { get; set; } // Populated in ViewModel
-        //public string UserName { get; set; } // Populated in ViewModel
-
     }
 }
