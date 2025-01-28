@@ -134,6 +134,8 @@ Administrator u ovom slučaju ima iste mogućnosti kao i recepcioner.
 ---
 ## Korisnička podešavanja
 Aplikacija omogućava promjenu jezika i teme. Podržani jezici su engleski i srpski. Dugmad za promjenu jezika i teme su dostupna u svakom trenutku korištenja aplikacije.
+
+<img align="center" src="https://github.com/StefanMilakovic/HCI-HotelManagement/blob/master/Screenshots/TemaJezik.png?raw=true" alt="TemaJezik" width="500">
    
 ## Tehnologije
 
