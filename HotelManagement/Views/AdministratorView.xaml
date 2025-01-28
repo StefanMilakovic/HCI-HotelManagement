@@ -19,6 +19,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
+            
 
             <Button x:Name="CloseButton" 
                 Width="30" Height="30"
