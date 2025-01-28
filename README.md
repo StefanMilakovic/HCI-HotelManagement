@@ -35,7 +35,7 @@ Ova opcija se sastoji od dva taba:
   
   <img src="https://github.com/StefanMilakovic/HCI-HotelManagement/blob/master/Screenshots/DodajgGosta.png?raw=true" alt="DodajGosta" width="500">
 
-  Pregled gostiju: Ovaj tab omogućava tabelarni prikaz svih gostiju unesenih u bazu podataka hotela, sa svim relevantnim informacijama. Pored svakog gosta, nalazi se dugme za brisanje, čime je moguće ukloniti gosta iz sistema. Takođe, na dnu prozora nalazi se search box koji omogućava pretragu gostiju prema broju pasoša. Korišćenjem ovog pretraživača, lista gostiju će se automatski ažurirati kako korisnik kuca.
+  Pregled gostiju: Ovaj tab omogućava tabelarni prikaz svih gostiju unesenih u bazu podataka hotela, sa svim relevantnim informacijama. Pored svakog gosta, nalazi se dugme za brisanje, čime je moguće ukloniti gosta iz sistema. Takođe, na dnu prozora nalazi se search box koji omogućava pretragu gostiju prema broju pasoša. Korištenjem ovog pretraživača, lista gostiju će se automatski ažurirati kako korisnik kuca.
   
   <img src="https://github.com/StefanMilakovic/HCI-HotelManagement/blob/master/Screenshots/PregledGostiju.png?raw=true" alt="PregledGostiju" width="500">
   
@@ -53,11 +53,11 @@ Ova opcija se sastoji od dva taba:
 - **Upravljanje servisima**  
 Ova opcija se sastoji od dva taba: 
 
-    Odabir rezervacije: U prvom tabu, rezervacije su prikazane u obliku kartica, sa dugmetom za odabir pored svake kartice. Da bi dodijelio servis rezervaciji, recepcioner mora odabrati jednu rezervaciju. Nakon odabira, u donjem levom uglu prikazuje se ID odabrane rezervacije, a takođe je dostupna i opcija pretrage rezervacija prema imenu gosta putem search box-a.
+    Odabir rezervacije: U prvom tabu, rezervacije su prikazane u obliku kartica, sa dugmetom za odabir pored svake kartice. Da bi dodijelio servis rezervaciji, recepcioner mora odabrati jednu rezervaciju. Nakon odabira, u donjem lijevom uglu prikazuje se ID odabrane rezervacije, a takođe je dostupna i opcija pretrage rezervacija prema imenu gosta putem search box-a.
 
   <img src="https://github.com/StefanMilakovic/HCI-HotelManagement/blob/master/Screenshots/IzaberiRezervaciju.png?raw=true" alt="IzaberiRezervaciju" width="500">
 
-    Odabir servisa: Nakon što je rezervacija odabrana, recepcioner prelazi na drugi tab, gdje se prikazuju svi dostupni servisi u bazi podataka hotela. Servisi su prikazani u obliku kartica. Da bi se servis dodelio rezervaciji, potrebno je odabrati željeni servis, unijeti količinu (broj puta koji će gost koristiti uslugu) i pritisnuti dugme Dodaj.
+    Odabir servisa: Nakon što je rezervacija odabrana, recepcioner prelazi na drugi tab, gdje se prikazuju svi dostupni servisi u bazi podataka hotela. Servisi su prikazani u obliku kartica. Da bi se servis dodijelio rezervaciji, potrebno je odabrati željeni servis, unijeti količinu (broj puta koji će gost koristiti uslugu) i pritisnuti dugme Dodaj.
 
   <img src="https://github.com/StefanMilakovic/HCI-HotelManagement/blob/master/Screenshots/IzaberiServis.png?raw=true" alt="IzaberiServis" width="500">
 
