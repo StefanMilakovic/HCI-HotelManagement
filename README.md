@@ -1,4 +1,4 @@
-# Hotel Management System - Korisničko uputstvo
+# Hotel Management System
 
 ## Opis
 
