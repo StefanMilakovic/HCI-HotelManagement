@@ -4,11 +4,7 @@
 
 Ova aplikacija je razvijena u sklopu projekta na predmetu Interakcija Čovjek-Računar na Elektrotehničkom fakultetu u Banjoj Luci. Aplikacija omogućava upravljanje osnovnim operacijama hotela, kao što su upravljanje gostima, rezervacijama, servisima i računima.
 
----
 Aplikacija je dizajnirana tako da omogućava rad sa dva tipa korisnika: recepcionerima i administratorima. Aplikacija se sastoji od tri prozora: prozor za prijavu, prozor za recepcionera i prozor za administratora. U prozorima za administratora i recepcionera, u gornjem dijelu prozora nalazi se navigacioni bar. Na desnom kraju navigacione trake se nalazi dugme za odjavu. 
-
-
-
 
 ---
 Sadržaj:
